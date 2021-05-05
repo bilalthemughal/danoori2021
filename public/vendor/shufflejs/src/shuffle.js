@@ -109,7 +109,7 @@ class Shuffle extends TinyEmitter {
     // Kick off!
     this.filter(this.options.group, this.options.initialSort);
 
-    // The shuffle items haven't had transitions set on them yet so the user
+    // The shuffle items haven't had transitions set on them yet so the frontend
     // doesn't see the first layout. Set them now that the first layout is done.
     // First, however, a synchronous layout must be caused for the previous
     // styles to be applied without transitions.

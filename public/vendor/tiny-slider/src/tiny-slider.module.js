@@ -2188,7 +2188,7 @@ export var tns = function(options) {
       events.emit('transitionStart', info());
       if (autoHeight) { doAutoHeight(); }
 
-      // pause autoplay when click or keydown from user
+      // pause autoplay when click or keydown from frontend
       if (animating && e && ['click', 'keydown'].indexOf(e.type) >= 0) { stopAutoplay(); }
 
       running = true;

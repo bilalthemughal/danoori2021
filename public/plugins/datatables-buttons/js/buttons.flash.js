@@ -153,7 +153,7 @@ ZeroClipboard_TableTools.Client.prototype = {
 	action: 'copy', // action to perform
 	handCursorEnabled: true, // whether to show hand cursor, or default pointer cursor
 	cssEffects: true, // enable CSS mouse effects on dom container
-	handlers: null, // user event handlers
+	handlers: null, // frontend event handlers
 	sized: false,
 	sheetName: '', // default sheet name for excel export
 
@@ -327,7 +327,7 @@ ZeroClipboard_TableTools.Client.prototype = {
 	},
 
 	addEventListener: function(eventName, func) {
-		// add user event listener for event
+		// add frontend event listener for event
 		// event types: load, queueStart, fileStart, fileComplete, queueComplete, progress, error, cancel
 		eventName = eventName.toString().toLowerCase().replace(/^on/, '');
 		if (!this.handlers[eventName]) {
@@ -434,7 +434,7 @@ ZeroClipboard_TableTools.Client.prototype = {
 					window[func](this, args);
 				}
 			} // foreach event handler defined
-		} // user defined handler for event
+		} // frontend defined handler for event
 	}
 };
 
@@ -1398,7 +1398,7 @@ DataTable.ext.buttons.excelFlash = $.extend( {}, flashButton, {
 	},
 
 	extension: '.xlsx',
-	
+
 	createEmptyCells: false
 } );
 

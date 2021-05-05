@@ -757,7 +757,7 @@
 
       InsertModeKey: InsertModeKey,
       map: function(lhs, rhs, ctx) {
-        // Add user defined key bindings.
+        // Add frontend defined key bindings.
         exCommandDispatcher.map(lhs, rhs, ctx);
       },
       unmap: function(lhs, ctx) {
@@ -801,9 +801,9 @@
         }
         // TODO: Create non-recursive keyToKey mappings for the unmapped contexts once those exist.
       },
-      // Remove all user-defined mappings for the provided context.
+      // Remove all frontend-defined mappings for the provided context.
       mapclear: function(ctx) {
-        // Partition the existing keymap into user-defined and true defaults.
+        // Partition the existing keymap into frontend-defined and true defaults.
         var actualLength = defaultKeymap.length,
             origLength = defaultKeymapLength;
         var userKeymap = defaultKeymap.slice(0, actualLength - origLength);
@@ -1204,7 +1204,7 @@
         this.initialPrefix = null;
     }
     HistoryController.prototype = {
-      // the input argument here acts a user entered prefix for a small time
+      // the input argument here acts a frontend entered prefix for a small time
       // until we start autocompletion in which case it is the autocompleted.
       nextMatch: function (input, up) {
         var historyBuffer = this.historyBuffer;
@@ -1219,7 +1219,7 @@
             }
           }
         }
-        // should return the user input in case we reach the end of buffer.
+        // should return the frontend input in case we reach the end of buffer.
         if (i >= historyBuffer.length) {
           this.iterator = historyBuffer.length;
           return this.initialPrefix;
@@ -1525,7 +1525,7 @@
           }
         }
         if (command.type == 'keyToEx') {
-          // Handle user defined Ex to Ex mappings
+          // Handle frontend defined Ex to Ex mappings
           exCommandDispatcher.processCommand(cm, command.exArgs.input);
         } else {
           if (vim.visualMode) {
@@ -1559,7 +1559,7 @@
         }
         if (inputState.repeatOverride !== undefined) {
           // If repeatOverride is specified, that takes precedence over the
-          // input state's repeat. Used by Ex mode and can be user defined.
+          // input state's repeat. Used by Ex mode and can be frontend defined.
           repeat = inputState.repeatOverride;
         } else {
           repeat = inputState.getRepeat();
@@ -4629,7 +4629,7 @@
         try {
           exCommands[commandName](cm, params);
           // Possibly asynchronous commands (e.g. substitute, which might have a
-          // user confirmation), are responsible for calling the callback when
+          // frontend confirmation), are responsible for calling the callback when
           // done. All others have it taken care of for them here.
           if ((!command || !command.possiblyAsync) && params.callback) {
             params.callback();
@@ -4666,7 +4666,7 @@
         var numberMatch = inputStream.match(/^(\d+)/);
         if (numberMatch) {
           // Absolute line number plus offset (N+M or N-M) is probably a typo,
-          // not something the user actually wanted. (NB: vim does allow this.)
+          // not something the frontend actually wanted. (NB: vim does allow this.)
           return parseInt(numberMatch[1], 10) - 1;
         }
         switch (inputStream.next()) {
@@ -5656,7 +5656,7 @@
      * while action commands are read from lastEditActionCommand.
      *
      * If repeatForInsert is true, then the function was called by
-     * exitInsertMode to repeat the insert mode changes the user just made. The
+     * exitInsertMode to repeat the insert mode changes the frontend just made. The
      * corresponding enterInsertMode call was made with a count.
      */
     function repeatLastEdit(cm, vim, repeat, repeatForInsert) {

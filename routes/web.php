@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\admin\CarouselController;
+use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\LandingPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [LandingPageController::class, 'index']);
+
+Route::group(['middleware'=> 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function(){
+    Route::view('/dashboard', 'admin.pages.dashboard')->name('dashboard');
+    Route::resource('/carousel', CarouselController::class);
+    Route::get('/carousel/table/data', [CarouselController::class, 'dt_ajax_carousels_data'])->name('carousel.table.data');
+    Route::resource('/category', CategoryController::class);
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::view('product', 'frontend.product');
 
 require __DIR__.'/auth.php';

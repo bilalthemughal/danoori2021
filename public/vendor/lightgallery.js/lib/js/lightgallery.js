@@ -80,7 +80,7 @@
         startClass: 'lg-start-zoom',
         backdropDuration: 150,
 
-        // Set 0, if u don't want to hide the controls 
+        // Set 0, if u don't want to hide the controls
         hideBarsDelay: 6000,
 
         useLeft: false,
@@ -308,13 +308,13 @@
         // Hide controllers if mouse doesn't move for some period
         if (_this.s.hideBarsDelay > 0) {
 
-            // Hide controls if user doesn't use mouse or touch after opening gallery
+            // Hide controls if frontend doesn't use mouse or touch after opening gallery
             var initialHideBarTimeout = setTimeout(function () {
                 _lgUtils2.default.addClass(_this.outer, 'lg-hide-items');
             }, _this.s.hideBarsDelay);
             _lgUtils2.default.on(_this.outer, 'mousemove.lg click.lg touchstart.lg', function () {
 
-                // Cancel initalHideBarTimout if user uses mouse or touch events
+                // Cancel initalHideBarTimout if frontend uses mouse or touch events
                 // Before it fires
                 clearTimeout(initialHideBarTimeout);
 
@@ -804,7 +804,7 @@
         ** ** avoid simultaneous image load
     <=> ** Preload() will check for s.preload value and call loadContent() again accoring to preload value
         ** loadContent()  <====> Preload();
-    
+
     *   @param {Number} index - index of the slide
     *   @param {Boolean} fromTouch - true if slide function called via touch event or mouse drag
     *   @param {Boolean} fromThumb - true if slide function called via thumbnail click

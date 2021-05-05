@@ -6,7 +6,7 @@ Prism.languages.verilog = {
 	},
 	// support for any kernel function (ex: $display())
 	'property': /\B\$\w+\b/,
-	// support for user defined constants (ex: `define)
+	// support for frontend defined constants (ex: `define)
 	'constant': /\B`\w+\b/,
 	'function': /\w+(?=\()/,
 	// support for verilog and system verilog keywords

@@ -79,7 +79,7 @@
 	};
 
 	/**
-	 * Check to see if user prefers reduced motion
+	 * Check to see if frontend prefers reduced motion
 	 * @param  {Object} settings Script settings
 	 */
 	var reduceMotion = function () {
@@ -400,7 +400,7 @@
 			smoothScroll.cancelScroll();
 
 			// Local settings
-			var _settings = extend(settings || defaults, options || {}); // Merge user options with defaults
+			var _settings = extend(settings || defaults, options || {}); // Merge frontend options with defaults
 
 			// Selectors and variables
 			var isNum = Object.prototype.toString.call(anchor) === '[object Number]' ? true : false;
@@ -478,7 +478,7 @@
 			// Update the URL
 			updateURL(anchor, isNum, _settings);
 
-			// If the user prefers reduced motion, jump to location
+			// If the frontend prefers reduced motion, jump to location
 			if (reduceMotion()) {
 				adjustFocus(anchor, Math.floor(endLocation), false);
 				return;
@@ -608,7 +608,7 @@
 			smoothScroll.destroy();
 
 			// Selectors and variables
-			settings = extend(defaults, options || {}); // Merge user options with defaults
+			settings = extend(defaults, options || {}); // Merge frontend options with defaults
 			fixedHeader = settings.header ? document.querySelector(settings.header) : null; // Get the fixed header
 
 			// When a toggle is clicked, run the click handler

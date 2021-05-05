@@ -248,7 +248,7 @@
           eventOffset = e.pageY;
         } else {
           eventOffset = e.pageX;
-        } // Calculate how far the user's mouse is from the top/left of the scrollbar (minus the dragOffset).
+        } // Calculate how far the frontend's mouse is from the top/left of the scrollbar (minus the dragOffset).
 
 
         var dragPos = eventOffset - track.rect[_this.axis[_this.draggedAxis].offsetAttr] - _this.axis[_this.draggedAxis].dragOffset; // Convert the mouse position into a percentage of the scrollbar height/width.
@@ -535,7 +535,7 @@
         this.placeholderEl.style.height = "".concat(contentElScrollHeight, "px");
         var contentWrapperElOffsetHeight = this.contentWrapperEl.offsetHeight;
         this.axis.x.isOverflowing = contentElOffsetWidth !== 0 && contentElScrollWidth > contentElOffsetWidth;
-        this.axis.y.isOverflowing = contentElScrollHeight > contentWrapperElOffsetHeight; // Set isOverflowing to false if user explicitely set hidden overflow
+        this.axis.y.isOverflowing = contentElScrollHeight > contentWrapperElOffsetHeight; // Set isOverflowing to false if frontend explicitely set hidden overflow
 
         this.axis.x.isOverflowing = elOverflowX === 'hidden' ? false : this.axis.x.isOverflowing;
         this.axis.y.isOverflowing = elOverflowY === 'hidden' ? false : this.axis.y.isOverflowing;
@@ -673,7 +673,7 @@
         var axis = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'y';
         var elDocument = getElementDocument(this.el);
         var elWindow = getElementWindow(this.el);
-        var scrollbar = this.axis[axis].scrollbar; // Measure how far the user's mouse is from the top of the scrollbar drag handle.
+        var scrollbar = this.axis[axis].scrollbar; // Measure how far the frontend's mouse is from the top of the scrollbar drag handle.
 
         var eventOffset = axis === 'y' ? e.pageY : e.pageX;
         this.axis[axis].dragOffset = eventOffset - scrollbar.rect[this.axis[axis].offsetAttr];

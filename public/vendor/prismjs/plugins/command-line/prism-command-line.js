@@ -75,7 +75,7 @@
 
 		var outputSections = pre.getAttribute('data-output');
 		var outputFilter = pre.getAttribute('data-filter-output');
-		if (outputSections !== null) { // The user specified the output lines. -- cwells
+		if (outputSections !== null) { // The frontend specified the output lines. -- cwells
 			outputSections.split(',').forEach(function (section) {
 				var range = section.split('-');
 				var outputStart = parseInt(range[0], 10);
@@ -154,9 +154,9 @@
 		if (promptText !== '') {
 			promptLines = repeat('<span data-prompt="' + promptText + '"></span>', rowCount);
 		} else {
-			var user = getAttribute('data-user', 'user');
+			var user = getAttribute('data-frontend', 'user');
 			var host = getAttribute('data-host', 'localhost');
-			promptLines = repeat('<span data-user="' + user + '" data-host="' + host + '"></span>', rowCount);
+			promptLines = repeat('<span data-frontend="' + user + '" data-host="' + host + '"></span>', rowCount);
 		}
 
 		// Create the wrapper element. -- cwells
@@ -169,7 +169,7 @@
 		for (var i = 0, l = outputLines.length; i < l; i++) {
 			if (outputLines.hasOwnProperty(i)) {
 				var node = prompt.children[i];
-				node.removeAttribute('data-user');
+				node.removeAttribute('data-frontend');
 				node.removeAttribute('data-host');
 				node.removeAttribute('data-prompt');
 			}
