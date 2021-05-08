@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Carousels</h1>
+                    <h1 class="m-0">Products</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -32,10 +32,10 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header float-right">
-                    <a class="btn btn-primary" href="{{ route('admin.carousel.create') }}">Create Carousel</a>
+                    <a class="btn btn-primary" href="{{ route('admin.product.create') }}">Create Product</a>
                 </div>
                 <div class="card-body table-responsive">
-                    <table class="table" id="carousels-table">
+                    <table class="table" id="products-table">
                     </table>
                 </div>
             </div>
@@ -43,7 +43,6 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-
 @endsection
 
 @include('admin.pages.partials.image-popup')
@@ -53,20 +52,22 @@
     <script src="{{asset('plugins/datatables/jquery.dataTables.js')}}"></script>
     <script src="{{asset('page-level/js/image-popup.js')}}"></script>
 
+
     <script>
-        $('#carousels-table').DataTable({
+        $('#products-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ route('admin.carousel.table.data') }}',
+            ajax: '{{ route('admin.product.table.data') }}',
             columns: [
                 {data: 'id', title: 'ID'},
-                {data: 'background_color', title: 'B Color'},
-                {data: 'status', title: 'Status'},
-                {data: 'link', title: 'Link'},
-                {data: 'h3_tag', title: 'H3 Tag'},
-                {data: 'h2_tag', title: 'H2 Tag'},
-                {data: 'p_tag', title: 'P Tag'},
+                {data: 'name', title: 'Name'},
+                {data: 'category.name', title: 'Category'},
+                {data: 'stock', title: 'Stock'},
                 {data: 'image', title: 'Image'},
+                {data: 'slug', title: 'Slug'},
+                {data: 'status', title: 'Active'},
+                {data: 'price', title: 'Price'},
+                {data: 'discounted_price', title: 'Discounted Price'},
                 {data: 'action', title: 'Action'},
             ]
         });

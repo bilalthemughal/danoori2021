@@ -1,5 +1,10 @@
 @extends('admin.layout')
 
+@section('extra-css')
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+    <link rel="stylesheet" href="{{ asset('page-level/dropzone-5.7.0/dist/dropzone.css') }}">
+@endsection
+
 @section('content')
 
     <!-- Content Header (Page header) -->
@@ -7,7 +12,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h3 class="m-0">Create Category</h3>
+                    <h3 class="m-0">Create Product</h3>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -32,7 +37,7 @@
                     </ul>
                 </div>
             @endif
-            <form method="post" action="{{ route('admin.category.store') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('admin.product.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -48,17 +53,49 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="is_active">Category</label>
+                    <select name="category_id" required value="{{ old('category_id') }}" class="form-control" id="category_id">
+                        @forelse($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @empty
+                            <option value="">No record found</option>
+                        @endforelse
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label for="slug">Slug</label>
                     <input name="slug" required value="{{ old('slug') }}" type="text" class="form-control" id="slug" placeholder="Enter Slug">
                 </div>
 
                 <div class="form-group">
+                    <label for="stock">Stock</label>
+                    <input name="stock" required value="{{ old('stock') }}" type="number" class="form-control" id="stock" placeholder="Enter Stock">
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input name="price" required value="{{ old('price') }}" type="text" class="form-control" id="price" placeholder="Enter Price">
+                </div>
+
+                <div class="form-group">
+                    <label for="discounted_price">Discounted Price</label>
+                    <input name="discounted_price" required value="{{ old('discounted_price') }}" type="text" class="form-control" id="discounted_price" placeholder="Enter Discounted Price">
+                </div>
+
+                <div class="form-group">
                     <label for="upload-image">Upload Image</label>
-                    <input name="image" required type="file" class="form-control" id="upload-image" accept="image/png, image/jpeg, image/jpg">
+                    <input name="image" required type="file" class="form-control" id="upload-image" accept="image/png, image/jpeg, image/jpg, image/webp">
+                </div>
+
+                <div class="form-group">
+                    <label for="product_info">Product Information</label>
+                    <textarea id="product-info-editor" name="product_info">{{ old('product_info') }}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
+
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -67,6 +104,12 @@
 
 @section('extra-js')
     <script>
+        ClassicEditor
+            .create( document.querySelector( '#product-info-editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+
         $(function() {
             $('#slug').on('keypress', function(e) {
                 if (e.which == 32){
@@ -74,7 +117,9 @@
                 }
             });
         });
+
     </script>
-    @endsection
+    <script src="{{ asset('page-level/dropzone-5.7.0/dist/dropzone.js') }}"></script>
+@endsection
 
 

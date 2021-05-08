@@ -64,11 +64,13 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-info btn-xs" href="{{ route('admin.category.edit', $category) }}"><i class="fa fa-edit"></i></a>
-                                    <form class="d-inline" action="{{ route('admin.category.destroy', $category->id) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
-                                    </form>
+                                    @if($category->products_count === 0)
+                                        <form class="d-inline" action="{{ route('admin.category.destroy', $category) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" onclick="confirm('Do you really want to delete this ?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @empty

@@ -26,8 +26,8 @@ class CategoryUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'image' => ['nullable', 'mimes:jpeg,jpg,png', 'dimensions:width=720,height=650'],
-            'slug' => ['required',
+            'image' => ['nullable', 'image', 'dimensions:width=700,height=714'],
+            'slug' => ['required', 'alpha_dash',
                 Rule::unique('categories')->ignore($this->category),
             ],
             'is_active' => 'required'

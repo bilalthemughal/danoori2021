@@ -32,6 +32,12 @@
                         <p>Categories</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.product.index') }}" class="nav-link {{ Request::routeIs('admin.product.*') ? 'active' : '' }}">
+                        <i class="fa fa-tachometer-alt nav-icon"></i>
+                        <p>Products</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

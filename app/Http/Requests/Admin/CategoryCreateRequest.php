@@ -25,8 +25,8 @@ class CategoryCreateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'image' => ['required', 'mimes:jpeg,jpg,png', 'dimensions:width=720,height=650'],
-            'slug' => ['required', 'unique:categories'],
+            'image' => ['required', 'image', 'dimensions:width=700,height=714'],
+            'slug' => ['required', 'unique:categories', 'alpha_dash'],
             'is_active' => 'required'
         ];
     }

@@ -25,12 +25,12 @@ class CarouselUpdateRequest extends FormRequest
     {
         return [
             'background_color' => ['required'],
-            'link' => ['required'],
+            'link' => ['required', 'alpha_dash'],
             'h3_tag' => ['required'],
             'h2_tag' => ['required'],
             'p_tag' => ['required'],
             'is_active' => ['required'],
-            'image' => ['nullable', 'mimes:jpeg,jpg,png', 'dimensions:width=963,height=700'],
+            'image' => ['nullable', 'image', 'dimensions:width=963,height=700'],
         ];
     }
 }

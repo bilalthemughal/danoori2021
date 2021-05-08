@@ -23,7 +23,7 @@
                 </nav>
             </div>
             <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-                <h1 class="h3 text-light mb-0">Sports Hooded Sweatshirt</h1>
+                <h1 class="h3 text-light mb-0">{{ $product->name }}</h1>
             </div>
         </div>
     </div>
@@ -36,48 +36,56 @@
                     <div class="col-lg-7 pe-lg-0 pt-lg-4">
                         <div class="product-gallery">
                             <div class="product-gallery-preview order-sm-2">
-                                <div class="product-gallery-preview-item active" id="first"><img class="image-zoom" src="img/shop/single/gallery/01.jpg" data-zoom="img/shop/single/gallery/01.jpg" alt="Product image">
-                                    <div class="image-zoom-pane"></div>
-                                </div>
-                                <div class="product-gallery-preview-item" id="second"><img class="image-zoom" src="img/shop/single/gallery/02.jpg" data-zoom="img/shop/single/gallery/02.jpg" alt="Product image">
-                                    <div class="image-zoom-pane"></div>
-                                </div>
-                                <div class="product-gallery-preview-item" id="third"><img class="image-zoom" src="img/shop/single/gallery/03.jpg" data-zoom="img/shop/single/gallery/03.jpg" alt="Product image">
-                                    <div class="image-zoom-pane"></div>
-                                </div>
-                                <div class="product-gallery-preview-item" id="fourth"><img class="image-zoom" src="img/shop/single/gallery/04.jpg" data-zoom="img/shop/single/gallery/04.jpg" alt="Product image">
+                                <div class="product-gallery-preview-item active" id="first">
+                                    <img class="image-zoom" src="{{ asset($product->image) }}" data-zoom="img/shop/single/gallery/01.jpg" alt="Product image">
                                     <div class="image-zoom-pane"></div>
                                 </div>
                             </div>
-                            <div class="product-gallery-thumblist order-sm-1"><a class="product-gallery-thumblist-item active" href="#first"><img src="img/shop/single/gallery/th01.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#second"><img src="img/shop/single/gallery/th02.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#third"><img src="img/shop/single/gallery/th03.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#fourth"><img src="img/shop/single/gallery/th04.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item video-item" href="https://www.youtube.com/watch?v=1vrXpMLLK14" lg-uid="lg0">
-                                    <div class="product-gallery-thumblist-item-text"><i class="ci-video"></i>Video</div></a></div>
+                            <div class="product-gallery-thumblist order-sm-1">
+                                <a class="product-gallery-thumblist-item active" href="#first">
+                                    <img src="{{ asset($product->image) }}" alt="Product thumb">
+                                </a>
+{{--                                <a class="product-gallery-thumblist-item" href="#second"><img src="img/shop/single/gallery/th02.jpg" alt="Product thumb"></a>--}}
+{{--                                <a class="product-gallery-thumblist-item" href="#third"><img src="img/shop/single/gallery/th03.jpg" alt="Product thumb"></a>--}}
+{{--                                <a class="product-gallery-thumblist-item" href="#fourth"><img src="img/shop/single/gallery/th04.jpg" alt="Product thumb"></a>--}}
+                            </div>
                         </div>
                     </div>
                     <!-- Product details-->
                     <div class="col-lg-5 pt-4 pt-lg-0">
                         <div class="product-details ms-auto pb-3">
-                            <div class="mb-3"><span class="h3 fw-normal text-accent me-1">$18.<small>99</small></span>
-                                <del class="text-muted fs-lg me-3">$25.<small>00</small></del><span class="badge bg-danger badge-shadow align-middle mt-n2">Sale</span>
+                            <div class="mb-3">
+                                <span class="h3 fw-normal text-accent me-1">{{ $product->price }}<small> PKR</small>
+                                </span>
+                                <del class="text-muted fs-lg me-3">{{ $product->discounted_price }}<small> PKR</small></del>
+                                <span class="badge bg-danger badge-shadow align-middle mt-n2">Sale</span>
                             </div>
                             <div class="position-relative me-n4 mb-5">
                                 <div class="product-badge product-available mt-n1"><i class="ci-security-check"></i>Product available</div>
                             </div>
+
+                            <div class="d-flex align-items-center pt-2 pb-4">
+                                <select class="form-select me-3" style="width: 5rem;">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <button class="btn btn-primary btn-shadow d-block w-100" type="button"><i class="ci-cart fs-lg me-2"></i>Add to Cart</button>
+                            </div>
                             <!-- Product panels-->
                             <div class="accordion mb-4" id="productPanels">
                                 <div class="accordion-item">
-                                    <h3 class="accordion-header"><a class="accordion-button" href="#productInfo" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="productInfo"><i class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>Product info</a></h3>
+                                    <h3 class="accordion-header">
+                                        <a class="accordion-button" href="#productInfo" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="productInfo">
+                                            <i class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2">
+                                            </i>Product info
+                                        </a>
+                                    </h3>
                                     <div class="accordion-collapse collapse show" id="productInfo" data-bs-parent="#productPanels" style="">
                                         <div class="accordion-body">
-                                            <h6 class="fs-sm mb-2">Composition</h6>
-                                            <ul class="fs-sm ps-4">
-                                                <li>Elastic rib: Cotton 95%, Elastane 5%</li>
-                                                <li>Lining: Cotton 100%</li>
-                                                <li>Cotton 80%, Polyester 20%</li>
-                                            </ul>
-                                            <h6 class="fs-sm mb-2">Art. No.</h6>
-                                            <ul class="fs-sm ps-4 mb-0">
-                                                <li>183260098</li>
-                                            </ul>
+                                            {!! $product->product_info !!}
                                         </div>
                                     </div>
                                 </div>

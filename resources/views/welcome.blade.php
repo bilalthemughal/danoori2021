@@ -43,12 +43,15 @@
                 <div class="card border-0 shadow-lg">
                     <div class="card-body px-3 pt-grid-gutter pb-0">
                         <div class="row g-0 ps-1">
-                            <div class="col-sm-4 px-2 mb-grid-gutter"><a class="d-block text-center text-decoration-none me-1" href="shop-grid-ls.html"><img class="d-block rounded mb-3" src="{{asset('images/categories/category2.jpg')}}" alt="Men">
-                                    <h3 class="fs-base pt-1 mb-0">Luxury Collection</h3></a></div>
-                            <div class="col-sm-4 px-2 mb-grid-gutter"><a class="d-block text-center text-decoration-none me-1" href="shop-grid-ls.html"><img class="d-block rounded mb-3" src="{{asset('images/categories/category.webp')}}" alt="Women">
-                                    <h3 class="fs-base pt-1 mb-0">Velvet Collection</h3></a></div>
-                            <div class="col-sm-4 px-2 mb-grid-gutter"><a class="d-block text-center text-decoration-none me-1" href="shop-grid-ls.html"><img class="d-block rounded mb-3" src="{{asset('images/categories/category3.jpg')}}" alt="Kids">
-                                    <h3 class="fs-base pt-1 mb-0">Best Sellings</h3></a></div>
+                            @forelse($categories as $category)
+                                <div class="col-sm-4 px-2 mb-grid-gutter">
+                                    <a class="d-block text-center text-decoration-none me-1" href="{{ $category->slug }}">
+                                        <img class="d-block rounded mb-3" src="{{ asset($category->image) }}" alt="Men">
+                                        <h3 class="fs-base pt-1 mb-0">{{ $category->name }}</h3>
+                                    </a>
+                                </div>
+                            @empty
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -57,125 +60,25 @@
     </section>
     <section class="container pt-md-3 pb-5 mb-md-3">
         <div class="row pt-4 mx-n2">
+            @foreach($products as $product)
             <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                 <div class="card product-card card-static">
                     <span class="badge bg-danger badge-shadow">Sale</span>
-                    <a class="card-img-top d-block overflow-hidden" href="#">
-                        <img src="https://cdn.shopify.com/s/files/1/0424/3872/1696/products/354153415453315_600x.jpg" alt="Product">
-                    </a>
-                    <div class="card-body py-2">
-                        <h3 class="product-title fs-sm"><a href="#">Cotton T-shirt Regular Fit</a></h3>
-                        <div class="d-flex justify-content-between">
-                            <div class="product-price">
-                                <span class="text-accent">$9.<small>50</small></span>
-                                <del class="fs-sm text-muted">$11.<small>50</small></del>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-                <div class="card product-card card-static">
-                    <span class="badge bg-danger badge-shadow">Sale</span>
-                    <a class="card-img-top d-block overflow-hidden" href="#">
+                    <a class="card-img-top d-block overflow-hidden" href="{{ $product->category->slug.'/'.$product->slug }}">
                         <img src="https://cdn.shopify.com/s/files/1/0424/3872/1696/products/4131341563431_600x.jpg" alt="Product">
                     </a>
                     <div class="card-body py-2">
-                        <h3 class="product-title fs-sm"><a href="#">Cotton T-shirt Regular Fit</a></h3>
+                        <h3 class="product-title fs-sm"><a href="{{ $product->category->slug.'/'.$product->slug }}">{{ $product->name }}</a></h3>
                         <div class="d-flex justify-content-between">
                             <div class="product-price">
-                                <span class="text-accent">$9.<small>50</small></span>
-                                <del class="fs-sm text-muted">$11.<small>50</small></del>
+                                <div class="bg-faded-accent text-accent rounded-1 py-1 px-2 d-inline">{{ $product->price }}<small> PKR</small></div>
+                                <del class="fs-sm text-muted">11<small> PKR</small></del>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-                <div class="card product-card card-static">
-                    <span class="badge bg-danger badge-shadow">Sale</span>
-                    <a class="card-img-top d-block overflow-hidden" href="#">
-                        <img src="https://cdn.shopify.com/s/files/1/0424/3872/1696/products/354153415453315_600x.jpg" alt="Product">
-                    </a>
-                    <div class="card-body py-2">
-                        <h3 class="product-title fs-sm"><a href="#">Cotton T-shirt Regular Fit</a></h3>
-                        <div class="d-flex justify-content-between">
-                            <div class="product-price">
-                                <span class="text-accent">$9.<small>50</small></span>
-                                <del class="fs-sm text-muted">$11.<small>50</small></del>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-                <div class="card product-card card-static">
-                    <span class="badge bg-danger badge-shadow">Sale</span>
-                    <a class="card-img-top d-block overflow-hidden" href="#">
-                        <img src="https://cdn.shopify.com/s/files/1/0424/3872/1696/products/354153415453315_600x.jpg" alt="Product">
-                    </a>
-                    <div class="card-body py-2">
-                        <h3 class="product-title fs-sm"><a href="#">Cotton T-shirt Regular Fit</a></h3>
-                        <div class="d-flex justify-content-between">
-                            <div class="product-price">
-                                <span class="text-accent">$9.<small>50</small></span>
-                                <del class="fs-sm text-muted">$11.<small>50</small></del>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-                <div class="card product-card card-static">
-                    <span class="badge bg-danger badge-shadow">Sale</span>
-                    <a class="card-img-top d-block overflow-hidden" href="#">
-                        <img src="https://cdn.shopify.com/s/files/1/0424/3872/1696/products/354153415453315_600x.jpg" alt="Product">
-                    </a>
-                    <div class="card-body py-2">
-                        <h3 class="product-title fs-sm"><a href="#">Cotton T-shirt Regular Fit</a></h3>
-                        <div class="d-flex justify-content-between">
-                            <div class="product-price">
-                                <span class="text-accent">$9.<small>50</small></span>
-                                <del class="fs-sm text-muted">$11.<small>50</small></del>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-                <div class="card product-card card-static">
-                    <span class="badge bg-danger badge-shadow">Sale</span>
-                    <a class="card-img-top d-block overflow-hidden" href="#">
-                        <img src="https://cdn.shopify.com/s/files/1/0424/3872/1696/products/354153415453315_600x.jpg" alt="Product">
-                    </a>
-                    <div class="card-body py-2">
-                        <h3 class="product-title fs-sm"><a href="#">Cotton T-shirt Regular Fit</a></h3>
-                        <div class="d-flex justify-content-between">
-                            <div class="product-price">
-                                <span class="text-accent">$9.<small>50</small></span>
-                                <del class="fs-sm text-muted">$11.<small>50</small></del>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-                <div class="card product-card card-static">
-                    <span class="badge bg-danger badge-shadow">Sale</span>
-                    <a class="card-img-top d-block overflow-hidden" href="#">
-                        <img src="https://cdn.shopify.com/s/files/1/0424/3872/1696/products/354153415453315_600x.jpg" alt="Product">
-                    </a>
-                    <div class="card-body py-2">
-                        <h3 class="product-title fs-sm"><a href="#">Cotton T-shirt Regular Fit</a></h3>
-                        <div class="d-flex justify-content-between">
-                            <div class="product-price">
-                                <span class="text-accent">$9.<small>50</small></span>
-                                <del class="fs-sm text-muted">$11.<small>50</small></del>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                @endforeach
         </div>
     </section>
 
