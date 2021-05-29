@@ -23,6 +23,8 @@
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{{asset('css/theme.min.css')}}">
 
+    @livewireStyles
+
     @yield('extra-css')
 </head>
 <!-- Body-->
@@ -113,6 +115,7 @@
 <script src="{{asset('vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js')}}"></script>
 <!-- Main theme script-->
 <script src="{{asset('js/theme.min.js')}}"></script>
+@livewireScripts
 
 @yield('extra-js')
 </body>

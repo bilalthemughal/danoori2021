@@ -72,7 +72,7 @@
                                     <option value="4">4</option>
                                     <option value="5">5</option>
                                 </select>
-                                <button class="btn btn-primary btn-shadow d-block w-100" type="button"><i class="ci-cart fs-lg me-2"></i>Add to Cart</button>
+                                @livewire('add-to-cart', ['product_id' => $product->id])
                             </div>
                             <!-- Product panels-->
                             <div class="accordion mb-4" id="productPanels">
