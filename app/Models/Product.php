@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class Product extends Model
 {
@@ -21,7 +22,8 @@ class Product extends Model
         'stock'
     ];
 
-    public function getImagePathAttribute(){
+    public function getImagePathAttribute()
+    {
         return asset($this->image);
     }
 
@@ -30,4 +32,8 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function getImage()
+    {
+        return "https://res.cloudinary.com/danoori/image/upload/v1/$this->image";
+    }
 }

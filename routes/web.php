@@ -1,14 +1,16 @@
 <?php
 
 
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\OrderController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\user\PagesController; 
+use App\Http\Controllers\admin\CouponController;
+use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\CarouselController;
 use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\admin\ProductController;
-use App\Http\Controllers\LandingPageController;
-use App\Http\Controllers\user\PagesController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\user\CheckoutController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -29,19 +31,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route:: get('/carousel/table/data', [CarouselController::class, 'dt_ajax_carousels_data'])->name('carousel.table.data');
     Route:: resource('/category', CategoryController::class);
     Route:: resource('/product', ProductController::class);
+    Route:: resource('/coupon', CouponController::class);
+    Route:: resource('/order', OrderController::class);
     Route:: get('/product/table/data', [ProductController::class, 'dt_ajax_products_data'])->name('product.table.data');
+    Route:: get('/order/table/data', [OrderController::class, 'dt_ajax_orders_data'])->name('order.table.data');
 });
 
-Route::get('{category_slug}/{product_slug}', [PagesController::class, 'product']);
+Route::get('{category_slug}/{product_slug}', [PagesController::class, 'product'])->name('category.product');
+Route::get('/cart', [PagesController::class,'cart'])->name('cart');
+Route::get('/checkout', [PagesController::class,'checkout'])->name('checkout');
+Route::post('/checkout', [CheckoutController::class,'checkout'])->name('checkout');
 
-Route::get('/test', function () {
-
-    return Session::has('cart') ? 'Exists' : 'Not exists';
-});
-
-Route::get('/test1', function () {
-
-    Session::put('cart', 1);
-});
 
 require __DIR__ . '/auth.php';

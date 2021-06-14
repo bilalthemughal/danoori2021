@@ -8,7 +8,7 @@
             @forelse($carousels as $carousel)
                 <div class="px-lg-5" style="background-color: {{ $carousel->background_color }}">
                     <div class="d-lg-flex justify-content-between align-items-center ps-lg-4">
-                        <img class="d-block order-lg-2 me-lg-n5 flex-shrink-0" width="963px" height="700px" src="{{ asset($carousel->image) }}" alt="Women Sportswear">
+                        <img class="d-block order-lg-2 me-lg-n5 flex-shrink-0" width="963px" height="700px" src="{{ asset($carousel->getImage()) }}" alt="Women Sportswear">
                         <div class="position-relative mx-auto me-lg-n5 py-5 px-4 mb-lg-5 order-lg-1" style="max-width: 42rem; z-index: 10;">
                             <div class="pb-lg-5 mb-lg-5 text-center text-lg-start text-lg-nowrap">
                                 <h3 class="h2 text-light fw-light pb-1 from-bottom">{{ $carousel->h3_tag }}</h3>
@@ -47,7 +47,7 @@
                             @forelse($categories as $category)
                                 <div class="col-sm-4 px-2 mb-grid-gutter">
                                     <a class="d-block text-center text-decoration-none me-1" href="{{ $category->slug }}">
-                                        <img class="d-block rounded mb-3" width="700px" height="714px" src="{{ asset($category->image) }}" alt="Men">
+                                        <img class="d-block rounded mb-3" width="700px" height="714px" src="{{ asset($category->getImage()) }}" alt="Men">
                                         <h3 class="fs-base pt-1 mb-0">{{ $category->name }}</h3>
                                     </a>
                                 </div>
@@ -65,8 +65,8 @@
             <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                 <div class="card product-card card-static">
                     <span class="badge bg-danger badge-shadow">Sale</span>
-                    <a class="card-img-top d-block overflow-hidden" href="{{ $product->category->slug.'/'.$product->slug }}">
-                        <img loading="lazy" width="600px" height="900px" src="{{ asset($product->image) }}" alt="Product">
+                    <a class="card-img-top d-block overflow-hidden" href="{{ route('category.product',[$product->category->slug, $product->slug]) }}">
+                        <img loading="lazy" width="600px" height="900px" src="{{ $product->getImage() }}" alt="Product">
                     </a>
                     <div class="card-body py-2">
                         <h3 class="product-title fs-sm"><a href="{{ $product->category->slug.'/'.$product->slug }}">{{ $product->name }}</a></h3>

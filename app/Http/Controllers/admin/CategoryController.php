@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CategoryCreateRequest;
-use App\Http\Requests\Admin\CategoryUpdateRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Admin\CategoryCreateRequest;
+use App\Http\Requests\Admin\CategoryUpdateRequest;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class CategoryController extends Controller
 {
@@ -36,11 +37,11 @@ class CategoryController extends Controller
             return back();
         }
 
-        $image_name = time(). '.' . $image_file->getClientOriginalExtension();
-        $image_file->storeAs('public/images/categories', $image_name);
-
         $params = $request->validated();
-        $params['image'] = 'storage/images/categories/'.$image_name;
+
+        $params['image'] = Cloudinary::upload($request->file('image')->getRealPath(),[
+            'folder' => 'Categories'
+        ])->getPublicId();
 
         Category::create($params);
         return redirect()->route('admin.category.index');
@@ -74,13 +75,11 @@ class CategoryController extends Controller
                 return back();
             }
 
-            unlink(public_path($category->image));
+            Cloudinary::destroy($category->image);
 
-
-            $image_name = time(). '.' . $image_file->getClientOriginalExtension();
-            $image_file->storeAs('public/images/categories', $image_name);
-
-            $params['image'] = 'storage/images/categories/'.$image_name;
+            $params['image'] = Cloudinary::upload($request->file('image')->getRealPath(),[
+                'folder' => 'Categories'
+            ])->getPublicId();
         }
 
         $category->update($params);
@@ -91,7 +90,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        unlink(public_path($category->image));
+        Cloudinary::destroy($category->image);
         $category->delete();
         return redirect()->route('admin.category.index');
     }

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class Carousel extends Model
 {
@@ -28,5 +29,10 @@ class Carousel extends Model
 
     public function scopeActive($query){
         return $query->where('is_active', 1);
+    }
+
+    public function getImage()
+    {
+        return Cloudinary::getImage($this->image);
     }
 }

@@ -38,6 +38,18 @@
                         <p>Products</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.coupon.index') }}" class="nav-link {{ Request::routeIs('admin.coupon.*') ? 'active' : '' }}">
+                        <i class="fa fa-tachometer-alt nav-icon"></i>
+                        <p>Coupons</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.order.index') }}" class="nav-link {{ Request::routeIs('admin.order.*') ? 'active' : '' }}">
+                        <i class="fa fa-tachometer-alt nav-icon"></i>
+                        <p>Orders</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

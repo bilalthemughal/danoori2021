@@ -60,7 +60,7 @@
                                 </td>
                                 <td>{{ $category->slug }}</td>
                                 <td>
-                                    <img class="img-popup" width="50px" height="50px" src="{{ asset($category->image) }}" alt="">
+                                    <img class="img-popup" width="50px" height="50px" src="{{ asset($category->getImage()) }}" alt="">
                                 </td>
                                 <td>
                                     <a class="btn btn-info btn-xs" href="{{ route('admin.category.edit', $category) }}"><i class="fa fa-edit"></i></a>
