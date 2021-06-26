@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\DB;
 
 class LandingPageController extends Controller
 {
-    function index(){
+    function index()
+    {
         $carousels = Carousel::active()
             ->inRandomOrder()
             ->limit(4)
@@ -21,14 +22,11 @@ class LandingPageController extends Controller
             ->limit(3)
             ->get();
 
-        $products = Product::query()
-            ->inRandomOrder()
-            ->limit(12)
-            ->with('category:id,slug')
-            ->get();
 
 
 
-        return view('welcome', compact('carousels', 'categories','products'));
+
+
+        return view('welcome', compact('carousels', 'categories'));
     }
 }

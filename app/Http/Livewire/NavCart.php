@@ -16,27 +16,32 @@ class NavCart extends Component
 
     protected $listeners = ['productAdded' => 'mount'];
 
-    public function mount(){
+    public function mount()
+    {
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        if($oldCart){
+        if ($oldCart) {
             $this->products = $cart->items;
         }
 
         $this->totalItems = $cart->totalQty;
         $this->totalPrice = $cart->totalPrice;
+
     }
-
-    public function remove($id){
-        $product = Product::findOrFail($id);
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->delete($product, $product->id);
     
-        Session::put('cart', $cart);
 
-        $this->emit('productAdded');
+    public function remove($id)
+    {
+        if ($this->totalItems > 0) {
+            $product = Product::findOrFail($id);
+            $oldCart = Session::has('cart') ? Session::get('cart') : null;
+            $cart = new Cart($oldCart);
+            $cart->delete($product, $product->id);
 
+            Session::put('cart', $cart);
+
+            $this->emit('productAdded');
+        }
     }
 
     public function render()

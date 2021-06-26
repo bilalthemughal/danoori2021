@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Orders</h1>
+                    <h1 class="m-0">{{ $status === 0 ? 'Pedning Orders' : ($status === 1 ? 'Completed Orders' : 'Cancelled Orders') }}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -31,9 +31,10 @@
     <div class="content">
         <div class="container-fluid">
             <div class="card">
-                {{-- <div class="card-header float-right">
-                    <a class="btn btn-primary" href="{{ route('admin.carousel.create') }}">Create Carousel</a>
-                </div> --}}
+                <div class="card-header float-right">
+                    <a class="btn btn-success" href="{{ route('admin.order.completed') }}">Successfull Orders</a>
+                    <a class="btn btn-danger" href="{{ route('admin.order.cancelled') }}">Cancelled Orders</a>
+                </div>
                 <div class="card-body table-responsive">
                     <table class="table" id="orders-table">
                     </table>
@@ -54,17 +55,14 @@
         $('#orders-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ route('admin.order.table.data') }}',
+            ajax: '{{ route('admin.order.table.data', ['id' => $status]) }}',
             columns: [
-                {data: 'id', title: 'ID'},
+                {data: 'order_id', title: 'ID'},
                 {data: 'name', title: 'Name'},
-                {data: 'email', title: 'Email'},
                 {data: 'sub_total', title: 'Sub'},
                 {data: 'total', title: 'Total'},
                 {data: 'phone_number', title: 'Number'},
                 {data: 'coupon', title: 'Coupon'},
-                {data: 'address', title: 'Address'},
-                {data: 'city', title: 'City'},
                 {data: 'total_products', title: '#'},
                 {data: 'action', title: 'Action'},
             ]

@@ -66,7 +66,7 @@
                 {data: 'image', title: 'Image'},
                 {data: 'slug', title: 'Slug'},
                 {data: 'status', title: 'Active'},
-                {data: 'price', title: 'Price'},
+                {data: 'original_price', title: 'Price'},
                 {data: 'discounted_price', title: 'Discounted Price'},
                 {data: 'action', title: 'Action'},
             ]

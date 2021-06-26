@@ -13,9 +13,13 @@ class Product extends Model
     protected $fillable = [
         'name',
         'slug',
-        'image',
+        'main_image',
+        'nav_image',
+        'canvas_thumbnail',
+        'canvas_image',
+        'cart_image',
         'is_active',
-        'price',
+        'original_price',
         'discounted_price',
         'product_info',
         'category_id',
@@ -32,8 +36,7 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function getImage()
-    {
-        return "https://res.cloudinary.com/danoori/image/upload/v1/$this->image";
+    public function images(){
+        return $this->hasMany(Image::class);
     }
 }

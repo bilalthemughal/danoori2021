@@ -74,8 +74,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="price">Price</label>
-                    <input name="price" required value="{{ old('price') }}" type="text" class="form-control" id="price" placeholder="Enter Price">
+                    <label for="original_price">Original Price</label>
+                    <input name="original_price" required value="{{ old('original_price') }}" type="text" class="form-control" id="original_price" placeholder="Enter Original Price">
                 </div>
 
                 <div class="form-group">

@@ -29,13 +29,16 @@ class Cart
 
     public function add($item, $id, $quantity = 1)
     {
+
+        $price = $item->discounted_price ?: $item->original_price;
         $storedItem = [
             'id' => $item->id,
             'name' => $item->name,
-            'price' => $item->price,
+            'price' =>  $price,
             'qty' => 0,
             'total_price' => $item->price,
-            'image' => $item->getImage(),
+            'nav_image' => get_image_path($item->nav_image),
+            'cart_image' => get_image_path($item->cart_image),
             'link' => route('category.product', [$item->category->slug, $item->slug])
         ];
 
@@ -48,10 +51,10 @@ class Cart
             $this->totalPrice = 0;
         }
         $storedItem['qty'] += $quantity;
-        $storedItem['total_price'] = $item->price * $storedItem['qty'];
+        $storedItem['total_price'] = $price * $storedItem['qty'];
         $this->items[$id] = $storedItem;
         $this->totalQty += $quantity;
-        $this->totalPrice = $this->totalPrice + ($item->price * $quantity);
+        $this->totalPrice = $this->totalPrice + ($price * $quantity);
 
         $this->discountedPrice = ((100 - $this->percent) / 100) * $this->totalPrice;
         $this->discount = $this->totalPrice - $this->discountedPrice;
@@ -60,18 +63,23 @@ class Cart
 
     public function delete($item, $id)
     {
+        $price = $item->discounted_price ?: $item->original_price;
+
+        if($this->totalQty == 0){
+            return;
+        }
 
         if ($this->items[$id]['qty'] == 1) {
             unset($this->items[$id]);
         } else {
             $this->items[$id]['qty']--;
-            $this->items[$id]['total_price'] -=  $item->price;
+            $this->items[$id]['total_price'] -=  $price;
         }
         $this->totalQty--;
-        $this->totalPrice -= $item->price;
+        $this->totalPrice -= $item->discounted_price ? $item->discounted_price : $item->original_price;
 
         $this->discountedPrice = ((100 - $this->percent) / 100) * $this->totalPrice;
-        $this->discount = $this->totalPrice - $this->discountedPrice;
+        $this->discount = $this->totalPrice - $price;
     }
 
     public function applyPromo($coupon_text, $percent)

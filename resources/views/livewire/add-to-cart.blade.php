@@ -6,5 +6,19 @@
         <option value="4">4</option>
         <option value="5">5</option>
     </select>
-    <button class="btn btn-primary btn-shadow d-block w-100" wire:click.prevent="addToCart({{ $product_id }})" type="button"><i class="ci-cart fs-lg me-2"></i>Add to Cart</button>
+    <button class="btn btn-primary btn-shadow d-block w-100" id="addToCart"
+        wire:click.prevent="addToCart({{ $product_id }})" type="button">
+        <i class="ci-cart fs-lg me-2"></i>
+        <span id="button-text">Add to Cart</span>
+    </button>
+
+    <script>
+        document.getElementById('addToCart').onclick = () => {
+            document.getElementById('button-text').innerText = "Added to Cart"
+            document.getElementById('addToCart').classList.remove("btn-primary");
+            document.getElementById('addToCart').classList.add("btn-danger");
+        }
+
+    </script>
+
 </div>

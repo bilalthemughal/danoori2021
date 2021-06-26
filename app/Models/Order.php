@@ -20,10 +20,12 @@ class Order extends Model
         'coupon',
         'order_note',
         'total_products',
+        'order_id',
+        'user_id',
         
     ];
 
     public function products(){
-        return $this->belongsToMany(Product::class)->withPivot('quantity');
+        return $this->belongsToMany(Product::class)->withPivot('quantity', 'price');
     }
 }

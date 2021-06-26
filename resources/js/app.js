@@ -1,3 +1,5 @@
-require('./bootstrap');
+require('yall-js')
 
-require('alpinejs');
+// require('./bootstrap');
+
+// require('alpinejs');

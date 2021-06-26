@@ -3,21 +3,23 @@
         <div class="py-2 px-xl-2">
             <div class="widget mb-3">
                 <h2 class="widget-title text-center">Order summary</h2>
-                @foreach ($products as $product)
-                    <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
-                            href="shop-single-v1.html"><img src="{{ $product['image'] }}" width="64"
-                                alt="Product"></a>
-                        <div class="ps-2">
-                            <h6 class="widget-product-title">
-                                <a href="shop-single-v1.html">{{ $product['name'] }}</a>
-                            </h6>
-                            <div class="widget-product-meta"><span
-                                    class="text-accent me-2">Rs.{{ $product['price'] }}<small>.00</small></span><span
-                                    class="text-muted">x {{ $product['qty'] }}</span>
+                @if ($totalPrice > 0)
+                    @foreach ($products as $product)
+                        <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
+                                href="shop-single-v1.html"><img src="{{ $product['image'] }}" width="64"
+                                    alt="Product"></a>
+                            <div class="ps-2">
+                                <h6 class="widget-product-title">
+                                    <a href="shop-single-v1.html">{{ $product['name'] }}</a>
+                                </h6>
+                                <div class="widget-product-meta"><span
+                                        class="text-accent me-2">Rs.{{ $product['price'] }}<small>.00</small></span><span
+                                        class="text-muted">x {{ $product['qty'] }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @endif
             </div>
             <div class="mb-3 mb-4">
                 <label class="form-label mb-3" for="order-comments">

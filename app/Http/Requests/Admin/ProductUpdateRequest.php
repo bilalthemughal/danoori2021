@@ -31,7 +31,7 @@ class ProductUpdateRequest extends FormRequest
             ],
             'image' => ['nullable', 'image', 'dimensions:width=600,height=900'],
             'is_active' => 'boolean',
-            'price' => ['required', 'numeric'],
+            'original_price' => ['required', 'numeric'],
             'discounted_price' => ['nullable', 'numeric'],
             'product_info' => 'required',
             'category_id' => 'required',

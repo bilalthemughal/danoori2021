@@ -36,8 +36,8 @@
         <div class="col-md-8">
             <div class="d-flex justify-content-between align-items-center pt-3 pb-4 pb-sm-5 mt-1">
                 <h2 class="h6 text-light mb-0">Fill out the form</h2>
-                <a class="btn btn-outline-primary btn-sm ps-2" href="/"><i
-                        class="ci-arrow-left me-2"></i>Continue shopping</a>
+                <a class="btn btn-outline-primary btn-sm ps-2" href="/"><i class="ci-arrow-left me-2"></i>Continue
+                    shopping</a>
             </div>
         </div>
 
@@ -54,24 +54,9 @@
             @csrf
             <div class="row">
                 <section class="col-lg-8">
-                    <!-- Steps-->
-                    {{-- <div class="steps steps-light pt-2 pb-3 mb-5"><a class="step-item active" href="shop-cart.html">
-                        <div class="step-progress"><span class="step-count">1</span></div>
-                        <div class="step-label"><i class="ci-cart"></i>Cart</div>
-                    </a><a class="step-item active current" href="checkout-details.html">
-                        <div class="step-progress"><span class="step-count">2</span></div>
-                        <div class="step-label"><i class="ci-user-circle"></i>Details</div>
-                    </a><a class="step-item" href="checkout-shipping.html">
-                        <div class="step-progress"><span class="step-count">3</span></div>
-                        <div class="step-label"><i class="ci-package"></i>Shipping</div>
-                    </a><a class="step-item" href="checkout-payment.html">
-                        <div class="step-progress"><span class="step-count">4</span></div>
-                        <div class="step-label"><i class="ci-card"></i>Payment</div>
-                    </a><a class="step-item" href="checkout-review.html">
-                        <div class="step-progress"><span class="step-count">5</span></div>
-                        <div class="step-label"><i class="ci-check-circle"></i>Review</div>
-                    </a>
-                </div> --}}
+                    @if (Session::has('message'))
+                        <p class="alert alert-danger">{{ Session::get('message') }}</p>
+                    @endif
                     <!-- Autor info-->
                     <div
                         class="d-sm-flex justify-content-between align-items-center bg-secondary p-4 rounded-3 mb-grid-gutter">
@@ -100,13 +85,15 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" for="checkout-fn">Name</label>
-                                <input name="name" required class="form-control" type="text" id="checkout-fn">
+                                <input name="name" required @auth value="{{ Auth::user()->name }}" @endauth
+                                    class="form-control" type="text" id="checkout-fn">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" for="checkout-email">E-mail Address</label>
-                                <input name="email" required class="form-control" type="email" id="checkout-email">
+                                <input name="email" @auth value="{{ Auth::user()->email }}" @endauth required
+                                    class="form-control" type="email" id="checkout-email">
                             </div>
                         </div>
                     </div>
@@ -114,13 +101,15 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" for="checkout-phone">Phone Number</label>
-                                <input name="phone_number" required class="form-control" type="text" id="checkout-phone">
+                                <input name="phone_number" value="{{ old('phone_number') }}" required class="form-control"
+                                    type="text" id="checkout-phone">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label" for="checkout-address-1">Address</label>
-                                <input name="address" required class="form-control" type="text" id="checkout-address-1">
+                                <input name="address" required value="{{ old('phone_number') }}" class="form-control"
+                                    type="text" id="checkout-address-1">
                             </div>
                         </div>
                     </div>
@@ -128,29 +117,26 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="city" class="form-label">City</label>
-                                <input name="city" required class="form-control" type="text" id="city">
+                                <input name="city" required value="{{ old('phone_number') }}" class="form-control"
+                                    type="text" id="city">
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <div class="form-check form-switch" onclick="yesnoCheck();">
-                                    <input type="checkbox" class="form-check-input" id="customSwitch1">
-                                    <label class="form-check-label" for="customSwitch1">Want to create account?</label>
+                    @guest
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <div class="form-check form-switch" onclick="yesnoCheck();">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch1">
+                                        <label class="form-check-label" for="customSwitch1">Want to create account?</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row" style="display: none;" id="showPassword">
-                        {{-- <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input name="password" required class="form-control" type="password" id="password">
-                            </div>
-                        </div> --}}
-                    </div>
+                        <div class="row" style="display: none;" id="showPassword">
+                        </div>
+                    @endguest
 
 
                     <!-- Navigation (desktop)-->
@@ -209,11 +195,11 @@
             // alert(document.getElementById('customSwitch1').value);
             if (document.getElementById("customSwitch1").checked) {
                 let password = `<div class="col-sm-6" id="passwordField">
-                                                                        <div class="mb-3">
-                                                                            <label for="password" class="form-label">Password</label>
-                                                                            <input name="password" required class="form-control" type="password" id="password">
-                                                                        </div>
-                                                                    </div>`;
+                                                                                                <div class="mb-3">
+                                                                                                    <label for="password" class="form-label">Password</label>
+                                                                                                    <input name="password" required class="form-control" type="password" id="password">
+                                                                                                </div>
+                                                                                            </div>`;
                 document.getElementById('showPassword').innerHTML += password;
                 document.getElementById('showPassword').style.display = 'block';
             } else {

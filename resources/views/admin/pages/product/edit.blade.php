@@ -74,8 +74,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="price">Price</label>
-                    <input name="price" required value="{{ $product->price }}" type="text" class="form-control" id="price" placeholder="Enter Price">
+                    <label for="original_price">Original Price</label>
+                    <input name="original_price" required value="{{ $product->original_price }}" type="text" class="form-control" id="original_price" placeholder="Enter Original Price">
                 </div>
 
                 <div class="form-group">
@@ -85,7 +85,7 @@
 
                 <div class="form-group">
                     <label for="upload-image">Upload Image</label>
-                    <input name="image" required type="file" class="form-control" id="upload-image" accept="image/png, image/jpeg, image/jpg, image/webp">
+                    <input name="image" type="file" class="form-control" id="upload-image" accept="image/png, image/jpeg, image/jpg, image/webp">
                 </div>
 
                 <div class="form-group">

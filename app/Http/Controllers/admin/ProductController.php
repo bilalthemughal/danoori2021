@@ -7,10 +7,11 @@ use App\Models\Carousel;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
+use Cloudinary\Transformation\Delivery;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\Admin\ProductCreateRequest;
 use App\Http\Requests\Admin\ProductUpdateRequest;
-use Cloudinary\Transformation\Delivery;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ProductController extends Controller
@@ -35,9 +36,60 @@ class ProductController extends Controller
 
         $params = $request->validated();
 
-        $params['image'] = Cloudinary::upload($request->file('image')->getRealPath(), [
-            'folder' => 'Products'
-        ])->getPublicId();
+        $image = Image::make($request->file('image'))->resize(296,444);
+
+        $image->save('tempfile');
+
+        
+    //     $params['canvas_image'] = Cloudinary::uploadFile($request->file('image')->getRealPath(), [
+    //         'folder' => 'Products',
+            
+    //     ])->getPublicId();
+
+        
+
+    //     $params['main_image'] = Cloudinary::upload($request->file('image')->getRealPath(), [
+    //         'folder' => 'Products',
+    //         'transformation' => [
+    //             'width' => 296,
+    //             'height' => 444,
+    //             'quality' => 100
+    //    ]
+    //    ])->getPublicId();
+        
+    //    $params['nav_image'] = Cloudinary::upload($request->file('image')->getRealPath(), [
+    //         'folder' => 'Products',
+    //         'transformation' => [
+    //             'width' => 64,
+    //             'height' => 96,
+    //             'quality' => 100
+    //    ]
+    //    ])->getPublicId();
+       
+       
+    //    $params['canvas_thumbnail'] = Cloudinary::upload($request->file('image')->getRealPath(), [
+    //         'folder' => 'Products',
+    //         'transformation' => [
+    //             'width' => 78,
+    //             'height' => 78,
+    //             'quality' => 100
+    //    ]
+    //    ])->getPublicId();
+       
+    //    $params['cart_image'] = Cloudinary::upload($request->file('image')->getRealPath(), [
+    //         'folder' => 'Products',
+    //         'transformation' => [
+    //             'width' => 160,
+    //             'height' => 240,
+    //             'quality' => 100
+    //    ]
+    //    ])->getPublicId();
+
+
+
+
+
+
 
         Product::create($params);
 
@@ -68,7 +120,7 @@ class ProductController extends Controller
             Cloudinary::destroy($product->image);
 
             $params['image'] = Cloudinary::upload($request->file('image')->getRealPath(), [
-                'folder' => 'Products'
+                'folder' => 'Products',
             ])->getPublicId();
         }
 
@@ -86,7 +138,7 @@ class ProductController extends Controller
     public function dt_ajax_products_data()
     {
         $query = Product::query()
-            ->select(['id', 'name', 'slug', 'stock', 'image', 'is_active', 'price', 'discounted_price', 'category_id'])
+            ->select(['id', 'name', 'slug', 'stock', 'main_image', 'is_active', 'original_price', 'discounted_price', 'category_id'])
             ->with('category:id,name');
 
         return Datatables::of($query)
@@ -110,7 +162,7 @@ class ProductController extends Controller
                 return '<span class="badge badge-pill badge-danger">In-active</span>';
             })
             ->addColumn('image', function ($products) {
-                return '<img class="img-popup" height="50px" width="50px" src=' . $products->getImage() . '>';
+                return '<img class="img-popup" height="50px" width="50px" src=' . get_image_path($products->main_image) . '>';
             })
             ->rawColumns(['action', 'status', 'image'])
             ->make();

@@ -53,6 +53,14 @@
                             <div class="col-sm-4 invoice-col">
                                 <br>
                                 <b>Order ID:</b> {{ $order->id }}<br>
+                                <br>
+                                @if ($order->status === 0)
+                                    <button class="btn btn-success" id="ship-button" onclick="shipIt({{ $order->id }})">Ship It</button>
+                                @elseif ($order->status === 1)
+                                    <span class="badge badge-success">Shipped</span>
+                                @elseif ($order->status === -1)
+                                    <span class="badge badge-danger">Cancelled</span>
+                                @endif
                             </div>
                             <!-- /.col -->
                         </div>
@@ -72,9 +80,11 @@
                                     <tbody>
                                         @foreach ($products as $product)
                                             <tr>
-                                                <td><a target="_blank" href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">{{ $product->name }}</a></td>
+                                                <td><a target="_blank"
+                                                        href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">{{ $product->name }}</a>
+                                                </td>
                                                 <td>{{ $product->pivot->quantity }}</td>
-                                                <td>Rs: {{ $product->price }}</td>
+                                                <td>Rs: {{ $product->pivot->price }}</td>
                                             </tr>
                                         @endforeach
 
@@ -102,6 +112,10 @@
                                                 <td>Rs: {{ $order->sub_total - $order->total }}</td>
                                             </tr>
                                             <tr>
+                                                <th>Coupon</th>
+                                                <td>{{ $order->coupon ?: 'N/A' }}</td>
+                                            </tr>
+                                            <tr>
                                                 <th>Total:</th>
                                                 <td>Rs: {{ $order->total }}</td>
                                             </tr>
@@ -111,7 +125,7 @@
                             </div>
                             <!-- /.col -->
                         </div>
-                        
+
                     </div>
                     <!-- /.invoice -->
                 </div><!-- /.col -->
@@ -121,3 +135,16 @@
     <!-- /.content -->
 
 @endsection
+
+<script>
+    function shipIt(id) {
+        $.ajax({
+            url: "/admin/order/ship/"+id,
+            type: 'GET',
+            success: function(res) {
+                document.getElementById('ship-button').innerHTML = 'Shipped';
+            }
+        });
+    }
+
+</script>

@@ -22,8 +22,7 @@ class CartPage extends Component
         if($oldCart){
             $this->products = $cart->items;
         }
-
-        // $this->totalItems = $cart->totalQty;
+        
         $this->totalPrice = $cart->totalPrice;
     }
 
@@ -33,9 +32,7 @@ class CartPage extends Component
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id, $this->quantity);
-        // $cart->applyPromo($cart->percent);
-
-
+        
         Session::put('cart', $cart);
 
         $this->emit('productAdded');
@@ -47,9 +44,7 @@ class CartPage extends Component
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->delete($product, $product->id);
-        // $cart->applyPromo($cart->percent);
-
-
+        
         Session::put('cart', $cart);
 
         $this->emit('productAdded');

@@ -17702,7 +17702,7 @@ html:not([dir=rtl]) .range-slider-ui.noUi-horizontal .noUi-handle {
 }
 
 .product-badge.product-not-available {
-  background-color: #f3f5f9;
+  background-color: var(--bs-red);
   color: #4b566b;
 }
 

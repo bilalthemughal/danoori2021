@@ -28,7 +28,7 @@ class ProductCreateRequest extends FormRequest
             'image' => ['required', 'image', 'dimensions:width=600,height=900'],
             'slug' => ['required', 'unique:products', 'alpha_dash'],
             'is_active' => 'boolean',
-            'price' => ['required', 'numeric'],
+            'original_price' => ['required', 'numeric'],
             'discounted_price' => ['nullable', 'numeric'],
             'product_info' => 'required',
             'category_id' => 'required',

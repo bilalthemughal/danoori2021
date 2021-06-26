@@ -24,14 +24,16 @@
         <div class="navbar navbar-expand-lg navbar-light">
             <div class="container"><a class="navbar-brand d-none d-sm-block flex-shrink-0" href="/"><img src="{{asset('images/noori.png')}}" width="222" alt="Cartzilla"></a><a class="navbar-brand d-sm-none flex-shrink-0 me-2" href="index.html"><img src="{{asset('images/noori.jpeg')}}" width="74" alt="Cartzilla"></a>
                 <div class="input-group d-none d-lg-flex mx-4">
-                    <input class="form-control rounded-end pe-5" type="text" placeholder="Search for products"><i class="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i>
+                    {{-- <input class="form-control rounded-end pe-5" type="text" placeholder="Search for products"><i class="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i> --}}
                 </div>
                 <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button><a class="navbar-tool navbar-stuck-toggler" href="#"><span class="navbar-tool-tooltip">Expand menu</span>
                         <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-menu"></i></div></a><a class="navbar-tool d-none d-lg-flex" href="account-wishlist.html"><span class="navbar-tool-tooltip">Wishlist</span>
-                        <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-heart"></i></div></a><a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="#signin-modal" data-bs-toggle="modal">
+                        <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-heart"></i></div></a><a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
                         <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
-                        <div class="navbar-tool-text ms-n3"><small>Hello, Sign in</small>My Account</div></a>
+                        <div class="navbar-tool-text ms-n3"><small>Hello, @guest Sign in @endguest @auth
+                            {{ Auth::user()->name }}
+                        @endauth</small>My Account</div></a>
                 </div>
                 @livewire('nav-cart')
             </div>
@@ -44,7 +46,7 @@
                         <input class="form-control rounded-start" type="text" placeholder="Search for products">
                     </div>
                     <!-- Departments menu-->
-                    <ul class="navbar-nav navbar-mega-nav pe-lg-2 me-lg-2">
+                    {{-- <ul class="navbar-nav navbar-mega-nav pe-lg-2 me-lg-2">
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle ps-lg-0" href="#" data-bs-toggle="dropdown"><i class="ci-view-grid me-2"></i>Departments</a>
                             <div class="dropdown-menu px-2 pb-4">
                                 <div class="d-flex flex-wrap flex-sm-nowrap">
@@ -113,101 +115,16 @@
                                 </div>
                             </div>
                         </li>
-                    </ul>
+                    </ul> --}}
                     <!-- Primary menu-->
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown active"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Home</a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-fashion-store-v1.html"><span class="d-block text-heading">Fashion Store v.1</span><small class="d-block text-muted">Classic shop layout</small></a>
-                                    <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-fashion-store-v1.html" style="width: 250px;"><img src="img/home/preview/th01.jpg" alt="Fashion Store v.1"></a></div>
-                                </li>
-                                <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-electronics-store.html"><span class="d-block text-heading">Electronics Store</span><small class="d-block text-muted">Slider + Promo banners</small></a>
-                                    <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-electronics-store.html" style="width: 250px;"><img src="img/home/preview/th03.jpg" alt="Electronics Store"></a></div>
-                                </li>
-                                <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-marketplace.html"><span class="d-block text-heading">Marketplace</span><small class="d-block text-muted">Multi-vendor, digital goods</small></a>
-                                    <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-marketplace.html" style="width: 250px;"><img src="img/home/preview/th04.jpg" alt="Marketplace"></a></div>
-                                </li>
-                                <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-grocery-store.html"><span class="d-block text-heading">Grocery Store</span><small class="d-block text-muted">Full width + Side menu</small></a>
-                                    <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-grocery-store.html" style="width: 250px;"><img src="img/home/preview/th06.jpg" alt="Grocery Store"></a></div>
-                                </li>
-                                <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-food-delivery.html"><span class="d-block text-heading">Food Delivery Service</span><small class="d-block text-muted">Food &amp; Beverages delivery</small></a>
-                                    <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-food-delivery.html" style="width: 250px;"><img src="img/home/preview/th07.jpg" alt="Food Delivery Service"></a></div>
-                                </li>
-                                <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-fashion-store-v2.html"><span class="d-block text-heading">Fashion Store v.2</span><small class="d-block text-muted">Slider + Featured categories</small></a>
-                                    <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-fashion-store-v2.html" style="width: 250px;"><img src="img/home/preview/th02.jpg" alt="Fashion Store v.2"></a></div>
-                                </li>
-                                <li class="dropdown position-static mb-0"><a class="dropdown-item py-2" href="home-single-store.html"><span class="d-block text-heading">Single Product Store</span><small class="d-block text-muted">Single product / mono brand</small></a>
-                                    <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-single-store.html" style="width: 250px;"><img src="img/home/preview/th05.jpg" alt="Single Product / Brand Store"></a></div>
-                                </li>
-                            </ul>
+                    <ul class="navbar-nav justify-content-center">
+                        <li class="nav-item"><a class="nav-link" href="#">Home</a>
+                            
                         </li>
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Shop</a>
-                            <div class="dropdown-menu p-0">
-                                <div class="d-flex flex-wrap flex-sm-nowrap px-2">
-                                    <div class="mega-dropdown-column pt-1 pt-lg-4 pb-4 px-2 px-lg-3">
-                                        <div class="widget widget-links mb-4">
-                                            <h6 class="fs-base mb-3">Shop layouts</h6>
-                                            <ul class="widget-list">
-                                                <li class="widget-list-item"><a class="widget-list-link" href="shop-grid-ls.html">Shop Grid - Left Sidebar</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="shop-grid-rs.html">Shop Grid - Right Sidebar</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="shop-grid-ft.html">Shop Grid - Filters on Top</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="shop-list-ls.html">Shop List - Left Sidebar</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="shop-list-rs.html">Shop List - Right Sidebar</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="shop-list-ft.html">Shop List - Filters on Top</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="widget widget-links">
-                                            <h6 class="fs-base mb-3">Marketplace</h6>
-                                            <ul class="widget-list">
-                                                <li class="widget-list-item"><a class="widget-list-link" href="marketplace-category.html">Category Page</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="marketplace-single.html">Single Item Page</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="marketplace-vendor.html">Vendor Page</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="marketplace-cart.html">Cart</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="marketplace-checkout.html">Checkout</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="mega-dropdown-column pt-1 pt-lg-4 pb-4 px-2 px-lg-3">
-                                        <div class="widget widget-links">
-                                            <h6 class="fs-base mb-3">Shop pages</h6>
-                                            <ul class="widget-list">
-                                                <li class="widget-list-item"><a class="widget-list-link" href="shop-categories.html">Shop Categories</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="shop-single-v1.html">Product Page v.1</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="shop-single-v2.html">Product Page v.2</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="shop-cart.html">Cart</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="checkout-details.html">Checkout - Details</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="checkout-shipping.html">Checkout - Shipping</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="checkout-payment.html">Checkout - Payment</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="checkout-review.html">Checkout - Review</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="checkout-complete.html">Checkout - Complete</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="order-tracking.html">Order Tracking</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="comparison.html">Product Comparison</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="mega-dropdown-column pt-1 pt-lg-4 pb-4 px-2 px-lg-3">
-                                        <div class="widget widget-links mb-4">
-                                            <h6 class="fs-base mb-3">Grocery store</h6>
-                                            <ul class="widget-list">
-                                                <li class="widget-list-item"><a class="widget-list-link" href="grocery-catalog.html">Product Catalog</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="grocery-single.html">Single Product Page</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="grocery-checkout.html">Checkout</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="widget widget-links">
-                                            <h6 class="fs-base mb-3">Food Delivery</h6>
-                                            <ul class="widget-list">
-                                                <li class="widget-list-item"><a class="widget-list-link" href="food-delivery-category.html">Category Page</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="food-delivery-single.html">Single Item (Restaurant)</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="food-delivery-cart.html">Cart (Your Order)</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link" href="food-delivery-checkout.html">Checkout (Address &amp; Payment)</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <li class="nav-item"><a class="nav-link">Shop</a>
+                            
                         </li>
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Account</a>
+                        <li class="nav-item"><a class="nav-link">Account</a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Shop User Account</a>
                                     <ul class="dropdown-menu">
@@ -235,7 +152,7 @@
                                 <li><a class="dropdown-item" href="account-password-recovery.html">Password Recovery</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Pages</a>
+                        <li class="nav-item"><a class="nav-link">Pages</a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Navbar Variants</a>
                                     <ul class="dropdown-menu">
@@ -268,7 +185,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Blog</a>
+                        <li class="nav-item"><a class="nav-link">Blog</a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Blog List Layouts</a>
                                     <ul class="dropdown-menu">
@@ -290,7 +207,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Docs / Components</a>
+                        <li class="nav-item"><a class="nav-link">Docs / Components</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="docs/dev-setup.html">
                                         <div class="d-flex">

@@ -40,4 +40,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function isAdmin()
+    {
+        $admins = collect(['mianumair1678@gmail.com', 'bilalafzal367@gmail.com']);
+        if ($admins->contains($this->email)) {
+            return true;
+        }
+        return false;
+    }
 }
