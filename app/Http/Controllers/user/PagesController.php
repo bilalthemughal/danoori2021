@@ -16,11 +16,20 @@ class PagesController extends Controller
 {
     public function product($category_slug, $product_slug)
     {
-        $product = Product::where('slug', $product_slug)->firstOrFail();
+        $product = Product::with('images')->where('slug', $product_slug)->firstOrFail();
 
         ProductView::createViewLog($product->id);
 
-        return view('frontend.product', compact('product'));
+        $sameProducts = Product::query()
+            ->where('id', '!=', $product->id)
+            ->inRandomOrder()
+            ->limit(5)
+            ->with('category:id,slug,name')
+            ->get();
+
+        
+
+        return view('frontend.product', compact('product', 'sameProducts'));
     }
 
     public function cart()

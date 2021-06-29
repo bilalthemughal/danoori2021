@@ -40,15 +40,28 @@
                         <div class="product-gallery">
                             <div class="product-gallery-preview order-sm-2">
                                 <div class="product-gallery-preview-item active" id="first">
-                                    <img class="image-zoom" src="{{ get_image_path( $product->canvas_image ) }}"
-                                        data-zoom="{{ get_image_path( $product->canvas_image ) }}" alt="Product image">
+                                    <img class="image-zoom" src="{{ get_image_path($product->large_photo_path) }}"
+                                        data-zoom="{{ get_image_path($product->large_photo_path) }}" alt="Product image">
                                     <div class="image-zoom-pane"></div>
                                 </div>
+                                @foreach ($product->images as $image)
+                                    <div class="product-gallery-preview-item" id="pic{{ $image->id }}">
+                                        <img class="image-zoom" src="{{ get_image_path($image->path) }}"
+                                            data-zoom="{{ get_image_path($image->path) }}" alt="Product image">
+                                        <div class="image-zoom-pane"></div>
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="product-gallery-thumblist order-sm-1">
                                 <a class="product-gallery-thumblist-item active" href="#first">
-                                    <img src="{{ get_image_path( $product->canvas_thumbnail ) }}" alt="Product thumb">
+                                    <img src="{{ get_image_path($product->small_photo_path) }}" alt="Product thumb">
                                 </a>
+
+                                @foreach ($product->images as $image)
+                                    <a class="product-gallery-thumblist-item" href="#pic{{ $image->id }}">
+                                        <img src="{{ get_image_path($image->path) }}" alt="Product thumb">
+                                    </a>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -236,10 +249,14 @@
         <h2 class="h3 text-center pb-4">You may also like</h2>
         <div class="tns-carousel tns-controls-static tns-controls-outside">
             <div class="tns-outer" id="tns3-ow">
-                <div class="tns-controls" aria-label="Carousel Navigation" tabindex="0"><button type="button"
-                        data-controls="prev" tabindex="-1" aria-controls="tns3"><i
-                            class="ci-arrow-left"></i></button><button type="button" data-controls="next" tabindex="-1"
-                        aria-controls="tns3"><i class="ci-arrow-right"></i></button></div>
+                <div class="tns-controls" aria-label="Carousel Navigation" tabindex="0">
+                    <button type="button" data-controls="prev" tabindex="-1" aria-controls="tns3">
+                        <i class="ci-arrow-left"></i>
+                    </button>
+                    <button type="button" data-controls="next" tabindex="-1" aria-controls="tns3">
+                        <i class="ci-arrow-right"></i>
+                    </button>
+                </div>
                 <div class="tns-liveregion tns-visually-hidden" aria-live="polite" aria-atomic="true">slide <span
                         class="current">9 to 12</span> of 5</div>
                 <div id="tns3-mw" class="tns-ovh">
@@ -247,498 +264,34 @@
                         <div class="tns-carousel-inner  tns-slider tns-carousel tns-subpixel tns-calc tns-horizontal"
                             data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1100&quot;:{&quot;items&quot;:4, &quot;gutter&quot;: 30}}}"
                             id="tns3" style="transition-duration: 0s; transform: translate3d(-38.0952%, 0px, 0px);">
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/22.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$24.<small>99</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-half active"></i><i
-                                                    class="star-rating-icon ci-star"></i><i
-                                                    class="star-rating-icon ci-star"></i>
+                            @foreach ($sameProducts as $product)
+                                <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
+                                    <div class="card product-card card-static">
+                                        {{-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                            data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
+                                            aria-label="Add to wishlist"><i class="ci-heart"></i>
+                                        </button> --}}
+                                        <a class="card-img-top d-block overflow-hidden" href="#">
+                                            <img loading="lazy" src="{{ get_image_path($product->small_photo_path) }}"
+                                                alt="Product">
+                                        </a>
+                                        <div class="card-body py-2">
+                                            <a class="product-meta d-block fs-xs pb-1" href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">
+                                                {{ $product->category->name }}
+                                            </a>
+                                            <h3 class="product-title fs-sm">
+                                                <a href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">{{ $product->name }}</a>
+                                            </h3>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="product-price text-accent">
+                                                    $24.<small>99</small>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/23.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$24.<small>99</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/24.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$25.<small>00</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/20.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price"><span
-                                                    class="text-accent">$24.<small>99</small></span></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-half active"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/21.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$26.<small>99</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/22.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$24.<small>99</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-half active"></i><i
-                                                    class="star-rating-icon ci-star"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/23.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$24.<small>99</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/24.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$25.<small>00</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product-->
-                            <div class="tns-item tns-slide-active" id="tns3-item0">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/20.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price"><span
-                                                    class="text-accent">$24.<small>99</small></span></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-half active"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product-->
-                            <div class="tns-item tns-slide-active" id="tns3-item1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/21.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$26.<small>99</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product-->
-                            <div class="tns-item tns-slide-active" id="tns3-item2">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/22.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$24.<small>99</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-half active"></i><i
-                                                    class="star-rating-icon ci-star"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product-->
-                            <div class="tns-item tns-slide-active" id="tns3-item3">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/23.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$24.<small>99</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product-->
-                            <div class="tns-item" id="tns3-item4" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/24.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$25.<small>00</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/20.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price"><span
-                                                    class="text-accent">$24.<small>99</small></span></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-half active"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/21.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$26.<small>99</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/22.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$24.<small>99</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-half active"></i><i
-                                                    class="star-rating-icon ci-star"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/23.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$24.<small>99</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/24.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$25.<small>00</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/20.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price"><span
-                                                    class="text-accent">$24.<small>99</small></span></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-half active"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/21.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$26.<small>99</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-                                <div class="card product-card card-static">
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                        aria-label="Add to wishlist"><i class="ci-heart"></i></button><a
-                                        class="card-img-top d-block overflow-hidden" href="#"><img
-                                            src="img/shop/catalog/22.jpg" alt="Product"></a>
-                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                            Hoodie</a>
-                                        <h3 class="product-title fs-sm"><a href="#">Block-colored Hooded Top</a></h3>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="product-price text-accent">$24.<small>99</small></div>
-                                            <div class="star-rating"><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-filled active"></i><i
-                                                    class="star-rating-icon ci-star-half active"></i><i
-                                                    class="star-rating-icon ci-star"></i><i
-                                                    class="star-rating-icon ci-star"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
@@ -760,6 +313,6 @@
     <script src="{{ asset('vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
     <script src="{{ asset('vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
 
-  
+
 
 @endsection

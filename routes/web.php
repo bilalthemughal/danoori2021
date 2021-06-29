@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\user\CheckoutController;
 use App\Http\Controllers\admin\CarouselController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\ProductImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::get('carousel/table/data', [CarouselController::class, 'dt_ajax_carousels_data'])->name('carousel.table.data');
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
+    Route::get('product/images/{id}', [ProductImageController::class, 'view'])->name('product.images');
     Route::resource('coupon', CouponController::class);
     Route::resource('order', OrderController::class);
     Route::get('product/table/data', [ProductController::class, 'dt_ajax_products_data'])->name('product.table.data');

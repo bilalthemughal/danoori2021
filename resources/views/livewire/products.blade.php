@@ -12,7 +12,7 @@
                     <a class="card-img-top d-block overflow-hidden"
                         href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">
                         <img class="lazy"  src="{{ asset('img/danoori.gif') }}"
-                            data-src="{{ get_image_path($product->canvas_image) }}" alt="{{ $product->slug }}" 
+                            data-src="{{ get_image_path($product->large_photo_path) }}" alt="{{ $product->slug }}" 
                             onload="if(this.src !== this.getAttribute('data-src')) this.src=this.getAttribute('data-src');">
                     </a>
                     <div class="card-body py-2 px-0">

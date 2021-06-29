@@ -104,6 +104,10 @@
                                     <table class="table">
                                         <tbody>
                                             <tr>
+                                                <th style="width:50%">Note:</th>
+                                                <td>{{ $order->order_note ?? 'N/A' }}</td>
+                                            </tr>
+                                            <tr>
                                                 <th style="width:50%">Subtotal:</th>
                                                 <td>Rs: {{ $order->sub_total }}</td>
                                             </tr>

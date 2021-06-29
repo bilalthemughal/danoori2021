@@ -44,8 +44,6 @@ class CartPage extends Component
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->delete($product, $product->id);
-        
-        Session::put('cart', $cart);
 
         $this->emit('productAdded');
 

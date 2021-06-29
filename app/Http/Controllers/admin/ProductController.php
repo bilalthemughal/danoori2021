@@ -36,60 +36,26 @@ class ProductController extends Controller
 
         $params = $request->validated();
 
-        $image = Image::make($request->file('image'))->resize(296,444);
+        $image = Image::make($request->file('image'))->resize(296, 444);
 
         $image->save('tempfile');
 
-        
-    //     $params['canvas_image'] = Cloudinary::uploadFile($request->file('image')->getRealPath(), [
-    //         'folder' => 'Products',
-            
-    //     ])->getPublicId();
 
-        
+        $params['large_photo_path'] = Cloudinary::uploadFile($request->file('image')->getRealPath(), [
+            'folder' => 'Products',
 
-    //     $params['main_image'] = Cloudinary::upload($request->file('image')->getRealPath(), [
-    //         'folder' => 'Products',
-    //         'transformation' => [
-    //             'width' => 296,
-    //             'height' => 444,
-    //             'quality' => 100
-    //    ]
-    //    ])->getPublicId();
-        
-    //    $params['nav_image'] = Cloudinary::upload($request->file('image')->getRealPath(), [
-    //         'folder' => 'Products',
-    //         'transformation' => [
-    //             'width' => 64,
-    //             'height' => 96,
-    //             'quality' => 100
-    //    ]
-    //    ])->getPublicId();
-       
-       
-    //    $params['canvas_thumbnail'] = Cloudinary::upload($request->file('image')->getRealPath(), [
-    //         'folder' => 'Products',
-    //         'transformation' => [
-    //             'width' => 78,
-    //             'height' => 78,
-    //             'quality' => 100
-    //    ]
-    //    ])->getPublicId();
-       
-    //    $params['cart_image'] = Cloudinary::upload($request->file('image')->getRealPath(), [
-    //         'folder' => 'Products',
-    //         'transformation' => [
-    //             'width' => 160,
-    //             'height' => 240,
-    //             'quality' => 100
-    //    ]
-    //    ])->getPublicId();
+        ])->getPublicId();
 
 
 
-
-
-
+        $params['small_photo_path'] = Cloudinary::upload($request->file('image')->getRealPath(), [
+            'folder' => 'Products',
+            'transformation' => [
+                'width' => 296,
+                'height' => 444,
+                'quality' => 100
+            ]
+        ])->getPublicId();
 
         Product::create($params);
 
@@ -138,13 +104,13 @@ class ProductController extends Controller
     public function dt_ajax_products_data()
     {
         $query = Product::query()
-            ->select(['id', 'name', 'slug', 'stock', 'main_image', 'is_active', 'original_price', 'discounted_price', 'category_id'])
+            ->select(['id', 'name', 'slug', 'stock', 'small_photo_path', 'is_active', 'original_price', 'discounted_price', 'category_id'])
             ->with('category:id,name');
 
         return Datatables::of($query)
             ->addColumn('action', function ($products) {
                 return
-                    '<form class="d-inline" action=' . route('admin.product.destroy',  $products->id) . '  method="POST">
+                    '<form class="" action=' . route('admin.product.destroy',  $products->id) . '  method="POST">
                     ' . csrf_field() . '
                     ' . method_field("DELETE") . '
                     <button type="submit" class="btn btn-danger btn-xs"
@@ -152,6 +118,7 @@ class ProductController extends Controller
                         ><i class="fa fa-trash"></i></button>
                     </form>
                     <a class="btn btn-info btn-xs" href=' . route('admin.product.edit', $products->id) . '><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-info btn-xs" href=' . route('admin.product.images', $products->id) . '><i class="fa fa-image"></i></a>
                     ';
             })
             ->addColumn('status', function ($products) {
@@ -162,7 +129,7 @@ class ProductController extends Controller
                 return '<span class="badge badge-pill badge-danger">In-active</span>';
             })
             ->addColumn('image', function ($products) {
-                return '<img class="img-popup" height="50px" width="50px" src=' . get_image_path($products->main_image) . '>';
+                return '<img class="img-popup" height="50px" width="50px" src=' . get_image_path($products->small_photo_path) . '>';
             })
             ->rawColumns(['action', 'status', 'image'])
             ->make();

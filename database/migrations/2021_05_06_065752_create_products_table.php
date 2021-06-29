@@ -18,11 +18,9 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('slug')->index();
 
-            $table->string('main_image');
-            $table->string('nav_image');
-            $table->string('canvas_thumbnail');
-            $table->string('canvas_image');
-            $table->string('cart_image');
+            $table->string('small_photo_path');
+            $table->string('large_photo_path');
+            
             
             $table->boolean('is_active');
             $table->integer('stock');

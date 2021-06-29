@@ -10,7 +10,7 @@
                 @forelse ($products as $product)
                     <div class="d-sm-flex justify-content-between my-4">
                         <div class="d-sm-flex text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto"
-                                href="shop-single-v1.html" style="width: 10rem;"><img src="{{ $product->getImage() }}"
+                                href="shop-single-v1.html" style="width: 10rem;"><img src="{{ get_image_path($product->small_photo_path) }}"
                                     alt="Product"></a>
                             <div class="ps-sm-4 pt-2">
                                 <h3 class="product-title fs-base mb-2">

@@ -37,8 +37,7 @@ class Cart
             'price' =>  $price,
             'qty' => 0,
             'total_price' => $item->price,
-            'nav_image' => get_image_path($item->nav_image),
-            'cart_image' => get_image_path($item->cart_image),
+            'image' => get_image_path($item->small_photo_path),
             'link' => route('category.product', [$item->category->slug, $item->slug])
         ];
 

@@ -1,4 +1,4 @@
-<aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5">
+<aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5" >
     <div class="bg-white rounded-3 shadow-lg p-4 ms-lg-auto">
         <div class="py-2 px-xl-2">
             <div class="widget mb-3">
@@ -6,11 +6,11 @@
                 @if ($totalPrice > 0)
                     @foreach ($products as $product)
                         <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
-                                href="shop-single-v1.html"><img src="{{ $product['image'] }}" width="64"
+                                href="{{ $product['link'] }}"><img src="{{ $product['image'] }}" width="64"
                                     alt="Product"></a>
                             <div class="ps-2">
                                 <h6 class="widget-product-title">
-                                    <a href="shop-single-v1.html">{{ $product['name'] }}</a>
+                                    <a href="{{ $product['link'] }}">{{ $product['name'] }}</a>
                                 </h6>
                                 <div class="widget-product-meta"><span
                                         class="text-accent me-2">Rs.{{ $product['price'] }}<small>.00</small></span><span

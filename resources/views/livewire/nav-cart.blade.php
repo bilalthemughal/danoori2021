@@ -39,7 +39,7 @@
                             </button>
                             <div class="d-flex align-items-center">
                                 <a class="flex-shrink-0" href="{{ $product['link'] }}">
-                                    <img src="{{ $product['nav_image'] }}" width="64" alt="Product">
+                                    <img src="{{ $product['image'] }}" width="64" alt="Product">
                                 </a>
                                 <div class="ps-2">
                                     <h6 class="widget-product-title">

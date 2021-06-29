@@ -13,11 +13,8 @@ class Product extends Model
     protected $fillable = [
         'name',
         'slug',
-        'main_image',
-        'nav_image',
-        'canvas_thumbnail',
-        'canvas_image',
-        'cart_image',
+        'small_photo_path',
+        'large_photo_path',
         'is_active',
         'original_price',
         'discounted_price',

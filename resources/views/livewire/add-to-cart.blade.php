@@ -7,7 +7,7 @@
         <option value="5">5</option>
     </select>
     <button class="btn btn-primary btn-shadow d-block w-100" id="addToCart"
-        wire:click.prevent="addToCart({{ $product_id }})" type="button">
+        wire:click.prevent="addToCart({{ $product_id }})" wire:loading.remove type="button">
         <i class="ci-cart fs-lg me-2"></i>
         <span id="button-text">Add to Cart</span>
     </button>
