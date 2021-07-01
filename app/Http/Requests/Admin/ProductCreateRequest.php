@@ -26,6 +26,7 @@ class ProductCreateRequest extends FormRequest
         return [
             'name' => 'required',
             'image' => ['required', 'image', 'dimensions:width=600,height=900'],
+            'second_image' => ['required', 'image', 'dimensions:width=600,height=900'],
             'slug' => ['required', 'unique:products', 'alpha_dash'],
             'is_active' => 'boolean',
             'original_price' => ['required', 'numeric'],

@@ -15,6 +15,7 @@
                 <button class="btn btn-primary" type="submit">Save Photo</button>
             @endif
         </form>
+        
     </div>
     <div class="card-body table-responsive">
         <table class="table" id="categories-table">
@@ -29,7 +30,9 @@
                 @forelse ($photos as $image)
                     <tr>
                         <td>{{ $image->id }}</td>
-                        <td><img src="{{ get_image_path($image->path) }}" height="150px" width="100px" alt=""></td>
+                        <td>
+                            <img src="{{ get_image_path($image->path) }}" height="150px" width="100px" alt="">
+                        </td>
                         <td>
                             <button class="btn btn-danger" wire:click.prevent="deleteImage('{{ $image->path }}')">
                                 <i class="fa fa-trash"></i>

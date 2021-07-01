@@ -28,7 +28,7 @@ class CartPage extends Component
 
     public function addToCart($product_id){
 
-        $product = Product::findOrFail($product_id);
+        $product = Product::where('id', $product_id)->firstOrFail();
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id, $this->quantity);
@@ -40,13 +40,12 @@ class CartPage extends Component
     }
 
     public function remove($id){
-        $product = Product::findOrFail($id);
+        $product = Product::where('id', $id)->firstOrFail();
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->delete($product, $product->id);
 
         $this->emit('productAdded');
-
     }
     
     public function render()

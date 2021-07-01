@@ -15,7 +15,7 @@ class AddToCart extends Component
 
     public function addToCart($product_id)
     {
-        $product = Product::findOrFail($product_id);
+        $product = Product::where('id', $this->product_id)->firstOrFail();
 
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);

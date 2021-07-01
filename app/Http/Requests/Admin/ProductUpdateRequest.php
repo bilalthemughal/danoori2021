@@ -30,6 +30,8 @@ class ProductUpdateRequest extends FormRequest
                 Rule::unique('products')->ignore($this->product),
             ],
             'image' => ['nullable', 'image', 'dimensions:width=600,height=900'],
+            'second_image' => ['nullable', 'image', 'dimensions:width=600,height=900'],
+            'image' => ['nullable', 'image', 'dimensions:width=600,height=900'],
             'is_active' => 'boolean',
             'original_price' => ['required', 'numeric'],
             'discounted_price' => ['nullable', 'numeric'],

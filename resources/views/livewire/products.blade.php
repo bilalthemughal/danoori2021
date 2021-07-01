@@ -2,7 +2,8 @@
 
     <div class="row pt-4 mx-n2">
         @foreach ($products as $product)
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4" onmouseenter="show_function({{ $product->id }})"
+                onmouseleave="show_function({{ $product->id }})" mouseleave="hide_function(this)">
                 <div class="card product-card card-static">
                     @if ($product->stock === 0)
                         <span class="badge bg-accent badge-shadow">Sold Out</span>
@@ -11,9 +12,11 @@
                     @endif
                     <a class="card-img-top d-block overflow-hidden"
                         href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">
-                        <img class="lazy"  src="{{ asset('img/danoori.gif') }}"
-                            data-src="{{ get_image_path($product->large_photo_path) }}" alt="{{ $product->slug }}" 
+                        <img class="lazy" src="{{ asset('img/danoori.gif') }}" loading="lazy"
+                            id="photo{{ $product->id }}" data-src="{{ get_image_path($product->large_photo_path) }}"
+                            alt="{{ $product->slug }}"
                             onload="if(this.src !== this.getAttribute('data-src')) this.src=this.getAttribute('data-src');">
+                        <input type="hidden" id="secondphoto{{ $product->id }}" value="@if ($product->second_photo_path) {{ get_image_path($product->second_photo_path) }} @endif" >
                     </a>
                     <div class="card-body py-2 px-0">
                         <h5 class="product-title fs-xs text-center text-uppercase"><a
@@ -70,6 +73,19 @@
             });
             observer.observe(lastRecord);
 
+            function show_function(e) {
+
+                let temp = document.getElementById('photo' + e).src;
+                let second_photo = document.getElementById('secondphoto' + e).value;
+
+                if (second_photo) {
+                    document.getElementById('photo' + e).src = document.getElementById('secondphoto' + e).value;
+                    document.getElementById('photo' + e).setAttribute('data-src', document.getElementById('secondphoto' + e)
+                        .value);
+                    document.getElementById('secondphoto' + e).value = temp;
+                }
+
+            }
         </script>
 
     @endsection

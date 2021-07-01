@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
 
             $table->string('small_photo_path');
             $table->string('large_photo_path');
+            $table->string('second_photo_path')->nullable();
             
             
             $table->boolean('is_active');

@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/f8blks9wngit/public_html/danoori.pk/
+    - /bin/cp * $DEPLOYPATH

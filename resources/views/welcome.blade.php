@@ -1,12 +1,6 @@
 @extends('frontend.layout')
 @section('extra-css')
 
-
-
-    {{-- <script>
-        // var lazyload = new yall();
-
-    </script> --}}
 @endsection
 @section('content')
 
@@ -64,7 +58,8 @@
                         <div class="row g-0 ps-1">
                             @forelse($categories as $category)
                                 <div class="col-sm-4 px-2 mb-grid-gutter">
-                                    <a class="d-block text-center text-decoration-none me-1" href="{{ $category->slug }}">
+                                    <a class="d-block text-center text-decoration-none me-1"
+                                        href="{{ route('category.page', $category->slug) }}">
                                         <img class="d-block rounded mb-3" width="700px" height="714px"
                                             src="{{ asset($category->getImage()) }}" alt="Men">
                                         <h3 class="fs-base pt-1 mb-0">{{ $category->name }}</h3>
@@ -80,7 +75,7 @@
     </section>
 
     @livewire('products')
-    
+
 
 
 @endsection

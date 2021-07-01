@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\Product;
-use App\Models\Carousel;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
-use Cloudinary\Transformation\Delivery;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\Admin\ProductCreateRequest;
 use App\Http\Requests\Admin\ProductUpdateRequest;
@@ -36,12 +33,14 @@ class ProductController extends Controller
 
         $params = $request->validated();
 
-        $image = Image::make($request->file('image'))->resize(296, 444);
-
-        $image->save('tempfile');
-
 
         $params['large_photo_path'] = Cloudinary::uploadFile($request->file('image')->getRealPath(), [
+            'folder' => 'Products',
+
+        ])->getPublicId();
+
+
+        $params['second_photo_path'] = Cloudinary::uploadFile($request->file('second_image')->getRealPath(), [
             'folder' => 'Products',
 
         ])->getPublicId();
@@ -83,9 +82,36 @@ class ProductController extends Controller
                 return back();
             }
 
-            Cloudinary::destroy($product->image);
+            Cloudinary::destroy($product->small_photo_path);
+            Cloudinary::destroy($product->large_photo_path);
 
-            $params['image'] = Cloudinary::upload($request->file('image')->getRealPath(), [
+
+            $params['large_photo_path'] = Cloudinary::upload($request->file('image')->getRealPath(), [
+                'folder' => 'Products',
+            ])->getPublicId();
+
+            $params['small_photo_path'] = Cloudinary::upload($request->file('image')->getRealPath(), [
+                'folder' => 'Products',
+                'transformation' => [
+                    'width' => 296,
+                    'height' => 444,
+                    'quality' => 100
+                ]
+            ])->getPublicId();
+        }
+
+        if ($request->second_image) {
+            $image_file = $request->file('second_image');
+            if (!$image_file->isValid()) {
+                return back();
+            }
+
+            if ($product->second_photo_path) {
+                Cloudinary::destroy($product->second_photo_path);
+            }
+
+
+            $params['second_photo_path'] = Cloudinary::upload($request->file('second_image')->getRealPath(), [
                 'folder' => 'Products',
             ])->getPublicId();
         }
@@ -96,7 +122,14 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        Cloudinary::destroy($product->image);
+        Cloudinary::destroy($product->small_photo_path);
+        Cloudinary::destroy($product->large_photo_path);
+        Cloudinary::destroy($product->second_photo_path);
+        $images = $product->images;
+        foreach ($images as $image) {
+            Cloudinary::destroy($image->path);
+        }
+        $product->images()->delete();
         $product->delete();
         return back();
     }

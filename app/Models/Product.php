@@ -15,6 +15,7 @@ class Product extends Model
         'slug',
         'small_photo_path',
         'large_photo_path',
+        'second_photo_path',
         'is_active',
         'original_price',
         'discounted_price',

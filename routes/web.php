@@ -40,12 +40,16 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::get('cancelled-orders', [OrderController::class, 'cancelled'])->name('order.cancelled');
 });
 
-Route::get('{category_slug}/{product_slug}', [PagesController::class, 'product'])->name('category.product');
+
 Route::get('cart', [PagesController::class, 'cart'])->name('cart');
 Route::get('checkout', [PagesController::class, 'checkout'])->name('checkout');
+Route::get('category/{category_slug}', [PagesController::class, 'category'])->name('category.page');
 Route::post('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', [PagesController::class, 'dashboard'])->name('dashboard');
 });
 require __DIR__ . '/auth.php';
+
+Route::get('/{category_slug}/{product_slug}', [PagesController::class, 'product'])->name('category.product');

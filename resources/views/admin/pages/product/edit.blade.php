@@ -87,6 +87,11 @@
                     <label for="upload-image">Upload Image</label>
                     <input name="image" type="file" class="form-control" id="upload-image" accept="image/png, image/jpeg, image/jpg, image/webp">
                 </div>
+                
+                <div class="form-group">
+                    <label for="upload-image">Upload Second Image</label>
+                    <input name="second_image" type="file" class="form-control" id="upload-image" accept="image/png, image/jpeg, image/jpg, image/webp">
+                </div>
 
                 <div class="form-group">
                     <label for="product_info">Product Information</label>

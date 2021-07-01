@@ -6,8 +6,9 @@ use App\Cart;
 use App\Models\Order;
 // use Request;
 use App\Models\Product;
-use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\ProductView;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
@@ -27,7 +28,7 @@ class PagesController extends Controller
             ->with('category:id,slug,name')
             ->get();
 
-        
+
 
         return view('frontend.product', compact('product', 'sameProducts'));
     }
@@ -42,8 +43,15 @@ class PagesController extends Controller
         return view('frontend.checkout');
     }
 
-    public function dashboard(){
+    public function dashboard()
+    {
         $orders = Auth::user()->orders ?? [];
         return view('user.dashboard', compact('orders'));
+    }
+
+    public function category($category_slug)
+    {
+        $category = Category::where('slug', $category_slug)->firstOrFail();
+        return view('frontend.category', compact('category'));
     }
 }

@@ -21,32 +21,33 @@ class ProductImage extends Component
     protected $listeners = ['refreshComponent' => 'mount'];
 
 
-    public function mount(){
-        $this->product = Product::where('id',$this->product_id)->firstOrFail();
+    public function mount()
+    {
+        $this->product = Product::where('id', $this->product_id)->firstOrFail();
 
         $this->photo = null;
-        
+
         $this->images = $this->product->images;
     }
 
     public function loadImages()
     {
-        
-        $this->product = Product::where('id',$this->product_id)->firstOrFail();
-        
+
+        $this->product = Product::where('id', $this->product_id)->firstOrFail();
+
         $this->images = $this->product->images;
-    
+
         $this->readyToLoad = true;
     }
 
-    public function deleteImage($image_id){
+    public function deleteImage($image_id)
+    {
+
         Cloudinary::destroy($image_id);
 
         Image::where('path', $image_id)->delete();
 
         $this->emit('refreshComponent');
-
-
     }
 
     public function save()
