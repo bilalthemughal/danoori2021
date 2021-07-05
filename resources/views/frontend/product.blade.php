@@ -202,8 +202,10 @@
         </div>
         <!-- Product description section 1-->
         <div class="row align-items-center py-md-3">
-            <div class="col-lg-5 col-md-6 offset-lg-1 order-md-2"><img class="d-block rounded-3"
-                    src="img/shop/single/prod-img.jpg" alt="Image"></div>
+            <div class="col-lg-5 col-md-6 offset-lg-1 order-md-2">
+                {{-- <img class="d-block rounded-3"
+                    src="img/shop/single/prod-img.jpg" alt="Image"> --}}
+                </div>
             <div class="col-lg-4 col-md-6 offset-lg-1 py-4 order-md-1">
                 <h2 class="h3 mb-4 pb-2">High quality materials</h2>
                 <h6 class="fs-base mb-3">Soft cotton blend</h6>
