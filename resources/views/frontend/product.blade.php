@@ -177,36 +177,9 @@
                                                     <div class="fw-semibold text-dark">Courier</div>
                                                     <div class="fs-sm text-muted">2 - 4 days</div>
                                                 </div>
-                                                <div>$26.50</div>
+                                                <div>FREE</div>
                                             </div>
-                                            <div class="d-flex justify-content-between border-bottom py-2">
-                                                <div>
-                                                    <div class="fw-semibold text-dark">Local shipping</div>
-                                                    <div class="fs-sm text-muted">up to one week</div>
-                                                </div>
-                                                <div>$10.00</div>
-                                            </div>
-                                            <div class="d-flex justify-content-between border-bottom py-2">
-                                                <div>
-                                                    <div class="fw-semibold text-dark">Flat rate</div>
-                                                    <div class="fs-sm text-muted">5 - 7 days</div>
-                                                </div>
-                                                <div>$33.85</div>
-                                            </div>
-                                            <div class="d-flex justify-content-between border-bottom py-2">
-                                                <div>
-                                                    <div class="fw-semibold text-dark">UPS ground shipping</div>
-                                                    <div class="fs-sm text-muted">4 - 6 days</div>
-                                                </div>
-                                                <div>$18.00</div>
-                                            </div>
-                                            <div class="d-flex justify-content-between pt-2">
-                                                <div>
-                                                    <div class="fw-semibold text-dark">Local pickup from store</div>
-                                                    <div class="fs-sm text-muted">—</div>
-                                                </div>
-                                                <div>$0.00</div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
