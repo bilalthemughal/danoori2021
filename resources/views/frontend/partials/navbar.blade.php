@@ -6,10 +6,10 @@
             <div class="topbar-text dropdown d-md-none"><a class="topbar-link dropdown-toggle" href="#"
                     data-bs-toggle="dropdown">Useful links</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="tel:00331697720"><i class="ci-support text-muted me-2"></i>(00)
-                            33 169 7720</a></li>
-                    <li><a class="dropdown-item" href="order-tracking.html"><i
-                                class="ci-location text-muted me-2"></i>Order tracking</a></li>
+                    <li>
+                        <a class="dropdown-item" href="tel:00331697720"><i class="ci-support text-muted me-2"></i>(+92)
+                            335 63991128</a>
+                    </li>
                 </ul>
             </div>
             <div class="topbar-text text-nowrap d-none d-md-inline-block"><i class="ci-support"></i><span
@@ -30,8 +30,8 @@
         <div class="navbar navbar-expand-lg navbar-light">
             <div class="container"><a class="navbar-brand d-none d-sm-block flex-shrink-0" href="/"><img
                         src="{{ asset('images/noori.png') }}" width="222" alt="Cartzilla"></a><a
-                    class="navbar-brand d-sm-none flex-shrink-0 me-2" href="index.html"><img
-                        src="{{ asset('images/noori.jpeg') }}" width="74" alt="Cartzilla"></a>
+                    class="navbar-brand d-sm-none flex-shrink-0 me-2" href="/"><img
+                        src="{{ asset('images/noori.png') }}" width="74" alt="Cartzilla"></a>
                 <div class="input-group d-none d-lg-flex mx-4">
                     {{-- <input class="form-control rounded-end pe-5" type="text" placeholder="Search for products"><i class="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i> --}}
                 </div>
@@ -75,16 +75,16 @@
 
                     </li>
                     <li class="nav-item"><a class="nav-link">Account</a>
-                        
+
                     </li>
                     <li class="nav-item"><a class="nav-link">Pages</a>
-                        
+
                     </li>
                     <li class="nav-item"><a class="nav-link">Blog</a>
-                        
+
                     </li>
                     <li class="nav-item"><a class="nav-link">Docs / Componentss</a>
-                       
+
                     </li>
                 </ul>
             </div>
