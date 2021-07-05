@@ -13,14 +13,20 @@
                     href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">
                     <img class="lazy" src="{{ asset('img/danoori.gif') }}"
                         data-src="{{ get_image_path($product->large_photo_path) }}" alt="{{ $product->slug }}"
-                        onload="if(this.src !== this.getAttribute('data-src')) this.src=this.getAttribute('data-src');">
+                        onload="if(this.src !== this.getAttribute('data-src')) 
+                        this.src=this.getAttribute('data-src');"
+                        id="photo{{ $product->id }}"
+                        onmouseenter="show_function({{ $product->id }})"
+                        onmouseleave="show_function({{ $product->id }})"
+                        >
+                        <input type="hidden" id="secondphoto{{ $product->id }}" value="@if ($product->second_photo_path) {{ get_image_path($product->second_photo_path) }} @endif" >
                 </a>
                 <div class="card-body py-2 px-0">
                     <h5 class="product-title fs-xs text-center text-uppercase"><a
                             href="{{ $product->category->slug . '/' . $product->slug }}">{{ $product->name }}</a>
                     </h5>
                     <div class="d-flex justify-content-center text-center">
-                        <div class="product-price" @if ($loop->last && $loadAmount < $totalRecords) id="last_record" @endif>
+                        <div class="product-price" @if ($loop->last) id="last_record" @endif>
                             @if ($product->discounted_price)
                                 <div class="fs-xs bg-faded-danger text-danger rounded-1 py-1 px-2 d-inline">
                                     {{ number_format((float) $product->discounted_price, 2, '.', '') }}<small>
@@ -69,6 +75,8 @@
             });
             observer.observe(lastRecord);
         </script>
+
+        <script src="{{ asset('page-level/js/second-image.js') }}"></script>
 
     @endsection
 

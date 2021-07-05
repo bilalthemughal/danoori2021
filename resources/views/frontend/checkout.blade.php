@@ -17,9 +17,9 @@ Checkout &#8211; Danoori
                                 Home
                             </a>
                         </li>
-                        <li class="breadcrumb-item text-nowrap"><a href="#">Shop</a>
+                        <li class="breadcrumb-item text-nowrap"><a href="{{ route('cart') }}">Cart</a>
                         </li>
-                        <li class="breadcrumb-item text-nowrap active" aria-current="page">Product Page v.1</li>
+                        <li class="breadcrumb-item text-nowrap active" aria-current="page">Checkout</li>
                     </ol>
                 </nav>
             </div>

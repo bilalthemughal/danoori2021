@@ -8,7 +8,7 @@ use Livewire\Component;
 class Products extends Component
 {
     public $totalRecords;
-    public $loadAmount = 12;
+    public $loadAmount = 0;
     public $loadedProducts = [];
     public $products;
     public $mounted_count = 0;
@@ -28,6 +28,8 @@ class Products extends Component
 
         $this->totalRecords = Product::count();
 
+        $this->loadAmount += $this->products->count();
+
         $this->mounted_count++;
 
         $this->loadedProducts = $this->products->pluck('id')->toArray();
@@ -44,7 +46,7 @@ class Products extends Component
 
         $this->products = $this->products->merge($newProducts);
         $this->loadedProducts = $this->products->pluck('id')->toArray();
-        $this->loadAmount += 12;
+        $this->loadAmount += $newProducts->count();
 
         $this->emit('productsAppended');
     }

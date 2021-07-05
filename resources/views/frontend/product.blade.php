@@ -179,7 +179,7 @@
                                                 </div>
                                                 <div>FREE</div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -205,7 +205,7 @@
             <div class="col-lg-5 col-md-6 offset-lg-1 order-md-2">
                 {{-- <img class="d-block rounded-3"
                     src="img/shop/single/prod-img.jpg" alt="Image"> --}}
-                </div>
+            </div>
             <div class="col-lg-4 col-md-6 offset-lg-1 py-4 order-md-1">
                 <h2 class="h3 mb-4 pb-2">High quality materials</h2>
                 <h6 class="fs-base mb-3">Soft cotton blend</h6>
@@ -262,11 +262,17 @@
                             @foreach ($sameProducts as $product)
                                 <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
                                     <div class="card product-card card-static">
-                                        
-                                        <a class="card-img-top d-block overflow-hidden" href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">
-                                            <img loading="lazy" src="{{ get_image_path($product->small_photo_path) }}"
-                                                alt="Product">
+
+                                        <a class="card-img-top d-block overflow-hidden"
+                                            href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">
+                                            <img loading="lazy" src="{{ asset('img/danoori.gif') }}" data-src="{{ get_image_path($product->large_photo_path) }}"
+                                                alt="Product" data-loaded=0
+                                                onload="if(this.src !== this.getAttribute('data-src')) this.src=this.getAttribute('data-src'); this.setAttribute('data-loaded', 1);"
+                                                id="photo{{ $product->id }}"
+                                                onmouseenter="show_function({{ $product->id }})"
+                                                onmouseleave="show_function({{ $product->id }})">
                                         </a>
+                                        <input type="hidden" id="secondphoto{{ $product->id }}" value="@if ($product->second_photo_path) {{ get_image_path($product->second_photo_path) }} @endif" >
                                         <div class="card-body py-2">
                                             <a class="product-meta d-block fs-xs pb-1"
                                                 href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">
@@ -306,6 +312,7 @@
     <script src="{{ asset('vendor/drift-zoom/dist/Drift.min.js') }}"></script>
     <script src="{{ asset('vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
     <script src="{{ asset('vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
+    <script src="{{ asset('page-level/js/second-image.js') }}"></script>
 
     <script>
         Livewire.on('productAdded', () => {
