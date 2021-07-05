@@ -58,7 +58,7 @@
                             <div class="text-end pt-4">
                                 <a href="{{ route('register') }}" class="btn btn-outline-secondary">
                                     <i class="ci-add me-2 ms-n21"></i>
-                                    Create An Account
+                                    Sign Up
                                 </a>
                                 <button class="btn btn-primary" type="submit">
                                     <i class="ci-sign-in me-2 ms-n21"></i>
