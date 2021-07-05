@@ -1,5 +1,9 @@
 @extends('frontend.layout')
 
+@section('title')
+{{ $category->name }} &#8211; Danoori
+@endsection
+
 
 @section('content')
     <div class="page-title-overlap bg-dark pt-4">

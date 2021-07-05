@@ -3,5 +3,5 @@
         <i class="ci-cart"></i>
         <span class="badge bg-primary rounded-pill ms-1">{{ $totalItems }}</span>
     </span>
-    <span class="handheld-toolbar-label">{{ $totalPrice }}</span>
+    <span class="handheld-toolbar-label">{{ number_format($totalPrice) }}</span>
 </a>

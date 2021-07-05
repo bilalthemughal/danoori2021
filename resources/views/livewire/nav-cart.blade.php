@@ -25,7 +25,7 @@
         <i class="navbar-tool-icon ci-cart"></i>
     </a>
     <a class="navbar-tool-text" href="{{ route('cart') }}">
-        <small>My Cart</small>PKR {{ $totalPrice }}</a>
+        <small>My Cart</small>PKR {{ number_format($totalPrice) }}</a>
     <!-- Cart dropdown-->
     @if ($totalItems > 0)
         <div class="dropdown-menu dropdown-menu-end">

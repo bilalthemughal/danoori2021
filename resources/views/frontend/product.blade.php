@@ -7,21 +7,32 @@
     <link rel="stylesheet" media="screen" href="{{ asset('vendor/tiny-slider/dist/tiny-slider.css') }}" />
     <link rel="stylesheet" media="screen" href="{{ asset('vendor/drift-zoom/dist/drift-basic.min.css') }}" />
     <link rel="stylesheet" media="screen" href="{{ asset('vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/3c40f56017.js" crossorigin="anonymous"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 
 @endsection
+
+@section('title')
+    {{ $product->name }} - {{ $product->category->name }} &#8211; Danoori
+@endsection
+
 @section('content')
     <div class="page-title-overlap bg-dark pt-4">
         <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
             <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                        <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>Home</a>
+                        <li class="breadcrumb-item"><a class="text-nowrap" href="/"><i class="ci-home"></i>Home</a>
                         </li>
-                        <li class="breadcrumb-item text-nowrap"><a href="#">Shop</a>
+                        <li class="breadcrumb-item text-nowrap"><a
+                                href="{{ route('category.page', $product->category->slug) }}">{{ $product->category->name }}</a>
                         </li>
-                        <li class="breadcrumb-item text-nowrap active" aria-current="page">Product Page v.1</li>
+                        <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ $product->name }}</li>
                     </ol>
                 </nav>
             </div>
@@ -44,6 +55,12 @@
                                         data-zoom="{{ get_image_path($product->large_photo_path) }}" alt="Product image">
                                     <div class="image-zoom-pane"></div>
                                 </div>
+                                <div class="product-gallery-preview-item" id="second">
+                                    <img class="image-zoom" src="{{ get_image_path($product->second_photo_path) }}"
+                                        data-zoom="{{ get_image_path($product->second_photo_path) }}"
+                                        alt="Product image">
+                                    <div class="image-zoom-pane"></div>
+                                </div>
                                 @foreach ($product->images as $image)
                                     <div class="product-gallery-preview-item" id="pic{{ $image->id }}">
                                         <img class="image-zoom" src="{{ get_image_path($image->path) }}"
@@ -55,6 +72,9 @@
                             <div class="product-gallery-thumblist order-sm-1">
                                 <a class="product-gallery-thumblist-item active" href="#first">
                                     <img src="{{ get_image_path($product->small_photo_path) }}" alt="Product thumb">
+                                </a>
+                                <a class="product-gallery-thumblist-item" href="#second">
+                                    <img src="{{ get_image_path($product->second_photo_path) }}" alt="Product thumb">
                                 </a>
 
                                 @foreach ($product->images as $image)
@@ -276,11 +296,13 @@
                                                 alt="Product">
                                         </a>
                                         <div class="card-body py-2">
-                                            <a class="product-meta d-block fs-xs pb-1" href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">
+                                            <a class="product-meta d-block fs-xs pb-1"
+                                                href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">
                                                 {{ $product->category->name }}
                                             </a>
                                             <h3 class="product-title fs-sm">
-                                                <a href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">{{ $product->name }}</a>
+                                                <a
+                                                    href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">{{ $product->name }}</a>
                                             </h3>
                                             <div class="d-flex justify-content-between">
                                                 <div class="product-price text-accent">
@@ -312,6 +334,30 @@
     <script src="{{ asset('vendor/drift-zoom/dist/Drift.min.js') }}"></script>
     <script src="{{ asset('vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
     <script src="{{ asset('vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
+
+    <script>
+        Livewire.on('productAdded', () => {
+            Command: toastr["success"]("Successfully added to the cart.")
+
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        })
+    </script>
 
 
 

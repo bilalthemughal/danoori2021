@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="container pb-5 mb-2 mb-md-4">
+    <div class="container pb-5 mb-2 mb-md-4 mt-4">
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -18,39 +18,22 @@
         @endif
 
         <div class="row">
-            <section class="col-lg-6 mx-auto mt-4">
+            <section class="col-lg-6 mx-auto pt-4">
                 <div class="card border-0 shadow">
                     <div class="card-body">
                         <h2 class="h4 mb-1">Sign Up</h2>
-                        <div class="py-3">
-                            <h3 class="d-inline-block align-middle fs-base fw-medium mb-2 me-2">With social account:</h3>
-                            <div class="d-inline-block align-middle">
-                                <a class="btn-social bs-google me-2 mb-2" href="#" data-bs-toggle="tooltip" title=""
-                                    data-bs-original-title="Sign in with Google" aria-label="Sign in with Google">
-                                    <i class="ci-google"></i>
-                                </a>
-                                <a class="btn-social bs-facebook me-2 mb-2" href="#" data-bs-toggle="tooltip" title=""
-                                    data-bs-original-title="Sign in with Facebook" aria-label="Sign in with Facebook">
-                                    <i class="ci-facebook"></i>
-                                </a>
-                                <a class="btn-social bs-twitter me-2 mb-2" href="#" data-bs-toggle="tooltip" title=""
-                                    data-bs-original-title="Sign in with Twitter" aria-label="Sign in with Twitter">
-                                    <i class="ci-twitter"></i>
-                                </a>
-                            </div>
-                        </div>
+                        <br>
                         <hr>
-                        <h3 class="fs-base pt-4 pb-2">Or using form below</h3>
-                        <form method="post" action="{{ route('register') }}">
+                        <form method="post" class="mt-4" action="{{ route('register') }}">
                             @csrf
                             <div class="input-group mb-3">
-                                <i class="ci-mail position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
-                                <input class="form-control rounded-start" name="name" type="text" placeholder="Name"
+                                <i class="ci-user position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
+                                <input class="form-control rounded-start" value="{{ old('name') }}" name="name" type="text" placeholder="Name"
                                     required="">
                             </div>
                             <div class="input-group mb-3">
                                 <i class="ci-mail position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
-                                <input class="form-control rounded-start" name="email" type="email" placeholder="Email"
+                                <input class="form-control rounded-start" value="{{ old('email') }}" name="email" type="email" placeholder="Email"
                                     required="">
                             </div>
                             <div class="input-group mb-3">

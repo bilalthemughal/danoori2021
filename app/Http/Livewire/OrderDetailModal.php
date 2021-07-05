@@ -18,7 +18,7 @@ class OrderDetailModal extends Component
 
     public function openModal($value)
     {
-        $this->order = Order::where('order_id', $value)->first();
+        $this->order = Order::where('order_id', $value)->with('products.category')->first();
 
         $this->products = $this->order->products;
 

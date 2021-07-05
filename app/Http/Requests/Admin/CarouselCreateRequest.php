@@ -25,7 +25,7 @@ class CarouselCreateRequest extends FormRequest
     {
         return [
             'background_color' => ['required'],
-            'link' => ['required', 'alpha_dash'],
+            'link' => ['required'],
             'h3_tag' => ['required'],
             'h2_tag' => ['required'],
             'p_tag' => ['required'],

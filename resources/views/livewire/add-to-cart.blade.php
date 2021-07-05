@@ -12,13 +12,15 @@
         <span id="button-text">Add to Cart</span>
     </button>
 
-    <script>
-        document.getElementById('addToCart').onclick = () => {
-            document.getElementById('button-text').innerText = "Added to Cart"
-            document.getElementById('addToCart').classList.remove("btn-primary");
-            document.getElementById('addToCart').classList.add("btn-danger");
-        }
+    
 
+    <script>
+        
+
+        // document.getElementById('button-text').innerText = "Added to Cart"
+        // document.getElementById('addToCart').classList.remove("btn-primary");
+        // document.getElementById('addToCart').classList.add("btn-danger");
     </script>
+
 
 </div>

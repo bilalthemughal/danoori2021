@@ -42,7 +42,7 @@
             <form class="needs-validation" novalidate="">
                 <div class="mb-3">
                     <input class="form-control" type="text" value="{{ $coupon_text }}" wire:model.defer="coupon_text"
-                        placeholder="Promo code" required="">
+                        placeholder="Promo code">
                     <div class="invalid-feedback">Please provide promo code.</div>
                 </div>
                 <button class="btn btn-outline-primary d-block w-100" wire:click.prevent="applyPromoCode">Apply promo

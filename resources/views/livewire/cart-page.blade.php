@@ -49,7 +49,7 @@
             <div class="py-2 px-xl-2">
                 <div class="text-center mb-4 pb-3 border-bottom">
                     <h2 class="h6 mb-3 pb-1">Subtotal</h2>
-                    <h3 class="fw-normal">Rs.{{ $totalPrice }}.<small>00</small></h3>
+                    <h3 class="fw-normal">Rs.{{ number_format($totalPrice) }}</h3>
                 </div>
 
                 @if($totalPrice > 0)

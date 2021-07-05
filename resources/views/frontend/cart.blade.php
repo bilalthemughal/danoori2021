@@ -1,5 +1,9 @@
 @extends('frontend.layout')
 
+@section('title')
+My Cart &#8211; Danoori
+@endsection
+
 @section('extra-css')
 
 <!-- <link rel="stylesheet" media="screen" href="{{asset('vendor/lightgallery.js/dist/css/lightgallery.min.css')}}" />

@@ -5,7 +5,7 @@
             <div class="d-md-flex align-items-center">
                 <div class="img-thumbnail rounded-circle position-relative flex-shrink-0 mx-auto mb-2 mx-md-0 mb-md-0"
                     style="width: 6.375rem;">
-                    <img class="rounded-circle" src="{{ asset('images/icon.png') }}" alt="{{ Auth::user()->name ?? '' }}">
+                    <img class="rounded-circle" src="{{ asset('images/placeholder.png') }}" alt="{{ Auth::user()->name ?? '' }}">
                 </div>
                 <div class="ps-md-3">
                     <h3 class="fs-base mb-0">{{ Auth::user()->name ?? '' }}</h3><span

@@ -1,6 +1,6 @@
 @extends('frontend.layout')
-@section('extra-css')
-
+@section('title')
+Danoori | Clothing Store
 @endsection
 @section('content')
 

@@ -31,7 +31,7 @@
             <div class="container"><a class="navbar-brand d-none d-sm-block flex-shrink-0" href="/"><img
                         src="{{ asset('images/noori.png') }}" width="222" alt="Cartzilla"></a><a
                     class="navbar-brand d-sm-none flex-shrink-0 me-2" href="/"><img
-                        src="{{ asset('images/noori.png') }}" width="74" alt="Cartzilla"></a>
+                        src="{{ asset('images/mobile-logo.png') }}" width="74" alt="Cartzilla"></a>
                 <div class="input-group d-none d-lg-flex mx-4">
                     {{-- <input class="form-control rounded-end pe-5" type="text" placeholder="Search for products"><i class="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i> --}}
                 </div>
@@ -57,38 +57,6 @@
             @livewire('nav-cart')
         </div>
     </div>
-    <div class="navbar navbar-expand-lg navbar-light navbar-stuck-menu mt-n2 pt-0 pb-2">
-        <div class="container">
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <!-- Search-->
-                {{-- <div class="input-group d-lg-none my-3"><i
-                        class="ci-search position-absolute top-50 start-0 translate-middle-y text-muted fs-base ms-3"></i>
-                    <input class="form-control rounded-start" type="text" placeholder="Search for products">
-                </div> --}}
-
-                <!-- Primary menu-->
-                <ul class="navbar-nav justify-content-center">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a>
-
-                    </li>
-                    <li class="nav-item"><a class="nav-link">Shop</a>
-
-                    </li>
-                    <li class="nav-item"><a class="nav-link">Account</a>
-
-                    </li>
-                    <li class="nav-item"><a class="nav-link">Pages</a>
-
-                    </li>
-                    <li class="nav-item"><a class="nav-link">Blog</a>
-
-                    </li>
-                    <li class="nav-item"><a class="nav-link">Docs / Componentss</a>
-
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    
 </div>
 </header>

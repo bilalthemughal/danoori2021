@@ -1,5 +1,8 @@
 @extends('frontend.layout')
 
+@section('title')
+Past Orders &#8211; Danoori
+@endsection
 
 @section('extra-css')
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -17,11 +20,10 @@
             <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                        <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>Home</a>
+                        <li class="breadcrumb-item"><a class="text-nowrap" href="/"><i class="ci-home"></i>Home</a>
                         </li>
-                        <li class="breadcrumb-item text-nowrap"><a href="#">Account</a>
+                        <li class="breadcrumb-item text-nowrap active">Orders History
                         </li>
-                        <li class="breadcrumb-item text-nowrap active" aria-current="page">Orders history</li>
                     </ol>
                 </nav>
             </div>
@@ -71,12 +73,12 @@
                                         @if ($order->status === 0)
                                             <span class="badge bg-info m-0">In Progress</span>
                                         @elseif ($order->status === 1)
-                                            <span class="badge bg-success m-0">Delivered</span>
+                                            <span class="badge bg-success m-0">Shipped</span>
                                         @else
                                             <span class="badge bg-danger m-0">Cancelled</span>
                                         @endif
                                     </td>
-                                    <td class="py-3">Rs. {{ $order->total }}</td>
+                                    <td class="py-3">Rs. {{ number_format($order->total) }}</td>
                                 </tr>
 
                             @empty
