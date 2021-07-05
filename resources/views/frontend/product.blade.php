@@ -262,11 +262,8 @@
                             @foreach ($sameProducts as $product)
                                 <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
                                     <div class="card product-card card-static">
-                                        {{-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                            data-bs-placement="left" title="" data-bs-original-title="Add to wishlist"
-                                            aria-label="Add to wishlist"><i class="ci-heart"></i>
-                                        </button> --}}
-                                        <a class="card-img-top d-block overflow-hidden" href="#">
+                                        
+                                        <a class="card-img-top d-block overflow-hidden" href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">
                                             <img loading="lazy" src="{{ get_image_path($product->small_photo_path) }}"
                                                 alt="Product">
                                         </a>
