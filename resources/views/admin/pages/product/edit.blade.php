@@ -93,6 +93,19 @@
                     <input name="second_image" type="file" class="form-control" id="upload-image" accept="image/png, image/jpeg, image/jpg, image/webp">
                 </div>
 
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="left_color">Left color</label>
+                        <input name="left_color" required value="{{ $product->left_color }}" type="text"
+                            class="form-control" id="left_color" placeholder="Enter left color">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="right_color">Right color</label>
+                        <input name="right_color" required value="{{ $product->right_color }}" type="text"
+                            class="form-control" id="right_color" placeholder="Enter right color">
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="product_info">Product Information</label>
                     <textarea id="product-info-editor" name="product_info">{{ $product->product_info }}</textarea>

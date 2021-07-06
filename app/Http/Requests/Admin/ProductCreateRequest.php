@@ -33,7 +33,9 @@ class ProductCreateRequest extends FormRequest
             'discounted_price' => ['nullable', 'numeric'],
             'product_info' => 'required',
             'category_id' => 'required',
-            'stock' => ['required', 'integer']
+            'stock' => ['required', 'integer'],
+            'left_color' => 'required',
+            'right_color' => 'required',
         ];
     }
 }

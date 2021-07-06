@@ -26,7 +26,8 @@ class ProductUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'slug' => ['required', 'alpha_dash',
+            'slug' => [
+                'required', 'alpha_dash',
                 Rule::unique('products')->ignore($this->product),
             ],
             'image' => ['nullable', 'image', 'dimensions:width=600,height=900'],
@@ -37,7 +38,9 @@ class ProductUpdateRequest extends FormRequest
             'discounted_price' => ['nullable', 'numeric'],
             'product_info' => 'required',
             'category_id' => 'required',
-            'stock' => ['required', 'integer']
+            'stock' => ['required', 'integer'],
+            'left_color' => 'required',
+            'right_color' => 'required',
         ];
     }
 }

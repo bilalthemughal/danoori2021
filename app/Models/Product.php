@@ -21,7 +21,9 @@ class Product extends Model
         'discounted_price',
         'product_info',
         'category_id',
-        'stock'
+        'stock',
+        'left_color',
+        'right_color'
     ];
 
     public function getImagePathAttribute()
