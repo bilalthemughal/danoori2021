@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('page-level/css/image-popup.css')}}">
-@stop
+@endsection
 
 @section('content')
 
@@ -43,9 +43,11 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
+
+    @include('admin.pages.partials.image-popup')
 @endsection
 
-@include('admin.pages.partials.image-popup')
+
 
 @section('extra-js')
 

@@ -316,7 +316,7 @@
     <script src="{{ asset('vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
     <script src="{{ asset('page-level/js/second-image.js') }}"></script>
 
-    <style>
+    {{-- <style>
         #toast-container>.toast {
             background-image: none !important;
             opacity: 1;
@@ -331,54 +331,85 @@
             background-color: #FE3638;
         }
 
-    </style>
+        
+
+        @media (min-width: 0) {
+            #toast-container>div {
+                width: 350px !important; 
+                margin-left: auto;
+                display: flex;
+            }
+
+            .card {
+                width: 342px;
+            }
+
+            .rounded-start {
+                margin-top: 10px;
+                margin-left: 10px;
+            }
+        }
+
+        @media (min-width:576px) {
+            #toast-container>div {
+                width: 400px !important; 
+            }
+
+            .card {
+                width: 392px;;
+            }
+
+            
+        }
+
+    </style> --}}
     <script>
         Livewire.on('productAdded', () => {
 
-            toastr.options = {
-                "closeButton": false,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": false,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "300000",
-                "hideDuration": "1000000",
-                "timeOut": "500000",
-                "extendedTimeOut": "1000000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            }
+    //         toastr.options = {
+    //             "closeButton": false,
+    //             "debug": false,
+    //             "newestOnTop": false,
+    //             "progressBar": false,
+    //             "positionClass": "toast-top-right",
+    //             "preventDuplicates": false,
+    //             "onclick": null,
+    //             "showDuration": "300000",
+    //             "hideDuration": "1000000",
+    //             "timeOut": "500000",
+    //             "extendedTimeOut": "1000000",
+    //             "showEasing": "swing",
+    //             "hideEasing": "linear",
+    //             "showMethod": "fadeIn",
+    //             "hideMethod": "fadeOut"
+    //         }
 
 
-            Command: toastr["success"](`<div
-      class='card'
-      style='max-width: 350px; max-height: 100px; overflow: hidden; background-color: white;'
-    >
-      <div class='row g-0'>
-        <div class='col-sm-3'>
-          <img
-            src='https://res.cloudinary.com/danoori/image/upload/v1/Products/bta0snvnmfsvu3vnayxe'
-            style='height: 100px; width: 75px'
-            class='rounded-start'
-            alt='Card image'
-          />
-        </div>
-        <div class='col-sm-7 pt-0' style='color: black;'>
-          <div class='card-body pt-0' style='line-height: 1'>
+    //         Command: toastr["success"](`<div
+    //   class='card'
+    //   style='overflow: hidden; background-color: white;'
+    // >
+    //   <div class='row'>
+    //     <div class='w-25'>
+    //       <img
+    //         src='https://res.cloudinary.com/danoori/image/upload/v1/Products/bta0snvnmfsvu3vnayxe'
+    //         style='height: 100px; width: 75px'
+    //         class='rounded-start'
+    //         alt='Card image'
+    //       />
+    //     </div>
+    //     <div class='w-75 pt-0' style='color: black;'>
+    //       <div class='card-body pt-2 pb-0' style='line-height: 1'>
             
-            <p class=''> <small>Some one in Lahore purchased</small> </p>
-            <p>Chiffon classic kurti afdfdas</p>
-            <div class='mb-0'>
-              <p style='color:blue;'><small>7 hour(s) ago</small></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>`)
+    //         <p class=''> <small>Some one in Lahore purchased </small> </p>
+    //         <p>Chiffon classic kurti afdfdas Chiffon classic kurti afdfdas Chiffon classic kurti afdfdas</p>
+    //         <div class='pt-0 pb-0'>
+    //           <p style='color:blue;'><small>7 hour(s) ago</small></p>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>`)
 
             // // toastr.options = {
             // //     "closeButton": true,
@@ -400,7 +431,7 @@
 
 
 
-            // Command: toastr["success"]("Successfully added")
+            Command: toastr["success"]("Item added into the cart.")
 
 
         })
