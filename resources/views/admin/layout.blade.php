@@ -18,6 +18,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 
+    <style>
+        .paginate_button {
+            padding: 5px 10px;
+            border: 1px solid blue;
+            cursor: pointer;
+        }
+
+        .paginate_button:hover {
+            background-color: rgb(132, 132, 206);
+        }
+
+    </style>
     @yield('extra-css')
 </head>
 
