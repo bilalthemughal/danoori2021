@@ -14,7 +14,7 @@ class CartPage extends Component
     public $totalPrice = 0;
     public $quantity = 1;
 
-    protected $listeners = ['productAdded' => 'mount'];
+    protected $listeners = ['productAdded' => 'mount', 'productRemoved' => 'mount'];
 
     public function mount(){
         $oldCart = Session::get('cart');

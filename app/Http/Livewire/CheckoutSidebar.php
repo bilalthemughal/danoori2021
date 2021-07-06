@@ -17,7 +17,7 @@ class CheckoutSidebar extends Component
     public $percent = 0;
     public $discount = 0;
     public $totalDiscount = 0;
-    protected $listeners = ['productAdded' => 'mount'];
+    protected $listeners = ['productAdded' => 'mount', 'productRemoved' => 'mount'];
 
     public function mount()
     {

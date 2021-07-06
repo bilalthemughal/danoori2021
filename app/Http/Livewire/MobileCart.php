@@ -11,7 +11,7 @@ class MobileCart extends Component
     public $totalItems = 0;
     public $totalPrice = 0;
 
-    protected $listeners = ['productAdded' => 'mount'];
+    protected $listeners = ['productAdded' => 'mount', 'productRemoved' => 'mount'];
 
     public function mount()
     {

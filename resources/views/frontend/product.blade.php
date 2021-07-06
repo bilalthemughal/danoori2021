@@ -265,14 +265,16 @@
 
                                         <a class="card-img-top d-block overflow-hidden"
                                             href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">
-                                            <img loading="lazy" src="{{ asset('img/danoori.gif') }}" data-src="{{ get_image_path($product->large_photo_path) }}"
-                                                alt="Product" data-loaded=0
+                                            <img loading="lazy" src="{{ asset('img/danoori.gif') }}"
+                                                data-src="{{ get_image_path($product->large_photo_path) }}" alt="Product"
+                                                data-loaded=0
                                                 onload="if(this.src !== this.getAttribute('data-src')) this.src=this.getAttribute('data-src'); this.setAttribute('data-loaded', 1);"
                                                 id="photo{{ $product->id }}"
                                                 onmouseenter="show_function({{ $product->id }})"
                                                 onmouseleave="show_function({{ $product->id }})">
                                         </a>
-                                        <input type="hidden" id="secondphoto{{ $product->id }}" value="@if ($product->second_photo_path) {{ get_image_path($product->second_photo_path) }} @endif" >
+                                        <input type="hidden" id="secondphoto{{ $product->id }}" value="@if ($product->second_photo_path) {{ get_image_path($product->second_photo_path) }} @endif"
+                                        >
                                         <div class="card-body py-2">
                                             <a class="product-meta d-block fs-xs pb-1"
                                                 href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">
@@ -314,27 +316,93 @@
     <script src="{{ asset('vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
     <script src="{{ asset('page-level/js/second-image.js') }}"></script>
 
+    <style>
+        #toast-container>.toast {
+            background-image: none !important;
+            opacity: 1;
+        }
+
+        #toast-container>div {
+            padding: 2px;
+            /* width: 250px; */
+        }
+
+        .toast-success {
+            background-color: #FE3638;
+        }
+
+    </style>
     <script>
         Livewire.on('productAdded', () => {
-            Command: toastr["success"]("Successfully added to the cart.")
 
             toastr.options = {
-                "closeButton": true,
+                "closeButton": false,
                 "debug": false,
                 "newestOnTop": false,
                 "progressBar": false,
                 "positionClass": "toast-top-right",
                 "preventDuplicates": false,
                 "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
+                "showDuration": "300000",
+                "hideDuration": "1000000",
+                "timeOut": "500000",
+                "extendedTimeOut": "1000000",
                 "showEasing": "swing",
                 "hideEasing": "linear",
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             }
+
+
+            Command: toastr["success"](`<div
+      class='card'
+      style='max-width: 350px; max-height: 100px; overflow: hidden; background-color: white;'
+    >
+      <div class='row g-0'>
+        <div class='col-sm-3'>
+          <img
+            src='https://res.cloudinary.com/danoori/image/upload/v1/Products/bta0snvnmfsvu3vnayxe'
+            style='height: 100px; width: 75px'
+            class='rounded-start'
+            alt='Card image'
+          />
+        </div>
+        <div class='col-sm-7 pt-0' style='color: black;'>
+          <div class='card-body pt-0' style='line-height: 1'>
+            
+            <p class=''> <small>Some one in Lahore purchased</small> </p>
+            <p>Chiffon classic kurti afdfdas</p>
+            <div class='mb-0'>
+              <p style='color:blue;'><small>7 hour(s) ago</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`)
+
+            // // toastr.options = {
+            // //     "closeButton": true,
+            // //     "debug": false,
+            // //     "newestOnTop": false,
+            // //     "progressBar": false,
+            // //     "positionClass": "toast-top-right",
+            // //     "preventDuplicates": false,
+            // //     "onclick": null,
+            // //     "showDuration": "300",
+            // //     "hideDuration": "1000",
+            // //     "timeOut": "5000",
+            // //     "extendedTimeOut": "1000",
+            // //     "showEasing": "swing",
+            // //     "hideEasing": "linear",
+            // //     "showMethod": "fadeIn",
+            // //     "hideMethod": "fadeOut"
+            // // }
+
+
+
+            // Command: toastr["success"]("Successfully added")
+
+
         })
     </script>
 
