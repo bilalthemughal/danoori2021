@@ -1,7 +1,7 @@
 @extends('frontend.layout')
 
 @section('title')
-Checkout &#8211; Danoori
+    Checkout &#8211; Danoori
 @endsection
 
 @section('content')
@@ -50,7 +50,7 @@ Checkout &#8211; Danoori
                 </ul>
             </div>
         @endif
-        <form method="post" action="{{ route('checkout') }}">
+        <form method="post" id='checkout-form' action="{{ route('checkout') }}">
             @csrf
             <div class="row">
                 <section class="col-lg-8">
@@ -62,12 +62,13 @@ Checkout &#8211; Danoori
                         class="d-sm-flex justify-content-between align-items-center bg-secondary p-4 rounded-3 mb-grid-gutter">
                         <div class="d-flex align-items-center">
                             <div class="img-thumbnail rounded-circle position-relative flex-shrink-0">
-                                
+
                                 <img class="rounded-circle" src="{{ asset('images/placeholder.png') }}" width="90"
                                     alt="Danoori User">
                             </div>
                             <div class="ps-3">
-                                <h3 class="fs-base mb-0">@auth {{ Auth::user()->name }} @else Danoori's Guest @endauth </h3>
+                                <h3 class="fs-base mb-0">@auth {{ Auth::user()->name }} @else Danoori's Guest @endauth
+                                </h3>
                                 <span class="text-accent fs-sm">@auth {{ Auth::user()->email }} @endauth</span>
                             </div>
                         </div>
@@ -135,6 +136,28 @@ Checkout &#8211; Danoori
                         </div>
                     @endguest
 
+                    <!-- Navigation (mobile)-->
+                    <div class="row d-lg-none">
+                        <div class="col-lg-8">
+                            <div class="d-flex pt-4 mt-3">
+                                <div class="w-50 pe-3">
+                                    <a class="btn btn-secondary d-block w-100" href="{{ route('cart') }}">
+                                        <i class="ci-arrow-left mt-sm-0 me-1"></i>
+                                        <span class="d-none d-sm-inline">Back to Cart</span>
+                                        <span class="d-inline d-sm-none">Back</span>
+                                    </a>
+                                </div>
+                                <div class="w-50 ps-2">
+                                    <button name="mobile-button" class="btn btn-primary d-block w-100" type="submit">
+                                        <span class="d-none d-sm-inline">Place Order</span>
+                                        <span class="d-inline d-sm-none">Place Order</span>
+                                        <i class="ci-arrow-right mt-sm-0 ms-1"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <!-- Navigation (desktop)-->
                     <div class="d-none d-lg-flex pt-4 mt-3">
@@ -146,7 +169,7 @@ Checkout &#8211; Danoori
                             </a>
                         </div>
                         <div class="w-50 ps-2">
-                            <button class="btn btn-primary d-block w-100" type="submit">
+                            <button name="desktop-button" class="btn btn-primary d-block w-100" type="submit">
                                 <span class="d-none d-sm-inline">Place Order</span>
                                 <span class="d-inline d-sm-none">Next</span>
                                 <i class="ci-arrow-right mt-sm-0 ms-1"></i>
@@ -158,29 +181,12 @@ Checkout &#8211; Danoori
                 @livewire('checkout-sidebar')
 
             </div>
-            <!-- Navigation (mobile)-->
-            <div class="row d-lg-none">
-                <div class="col-lg-8">
-                    <div class="d-flex pt-4 mt-3">
-                        <div class="w-50 pe-3">
-                            <a class="btn btn-secondary d-block w-100" href="{{ route('cart') }}">
-                                <i class="ci-arrow-left mt-sm-0 me-1"></i>
-                                <span class="d-none d-sm-inline">Back to Cart</span>
-                                <span class="d-inline d-sm-none">Back</span>
-                            </a>
-                        </div>
-                        <div class="w-50 ps-2">
-                            <button class="btn btn-primary d-block w-100" type="submit">
-                                <span class="d-none d-sm-inline">Place Order</span>
-                                <span class="d-inline d-sm-none">Next</span>
-                                <i class="ci-arrow-right mt-sm-0 ms-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </form>
+
     </div>
+
+    </form>
 
 
 @endsection
@@ -203,7 +209,6 @@ Checkout &#8211; Danoori
                 document.getElementById('passwordField').remove();
             }
         }
-
     </script>
 
 @endsection

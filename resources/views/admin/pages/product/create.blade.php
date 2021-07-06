@@ -85,7 +85,7 @@
 
                 <div class="form-group">
                     <label for="discounted_price">Discounted Price</label>
-                    <input name="discounted_price" required value="{{ old('discounted_price') }}" type="text"
+                    <input name="discounted_price" value="{{ old('discounted_price') }}" type="text"
                         class="form-control" id="discounted_price" placeholder="Enter Discounted Price">
                 </div>
 
