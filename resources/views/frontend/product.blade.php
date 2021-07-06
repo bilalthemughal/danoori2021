@@ -22,7 +22,8 @@
 @endsection
 
 @section('content')
-    <div class="page-title-overlap pt-4" style="background-image: linear-gradient(to bottom right, {{ $product->left_color }} , {{ $product->right_color}});">
+    <div class="page-title-overlap pt-4"
+        style="background-image: linear-gradient(to bottom right, {{ $product->left_color }} , {{ $product->right_color }});">
         <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
             <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
                 <nav aria-label="breadcrumb">
@@ -168,11 +169,12 @@
                                             href="#shippingOptions" role="button" data-bs-toggle="collapse"
                                             aria-expanded="false" aria-controls="shippingOptions"><i
                                                 class="ci-delivery text-muted lead align-middle mt-n1 me-2"></i>Shipping
-                                            options</a></h3>
+                                            options</a>
+                                    </h3>
                                     <div class="accordion-collapse collapse" id="shippingOptions"
                                         data-bs-parent="#productPanels" style="">
                                         <div class="accordion-body fs-sm">
-                                            <div class="d-flex justify-content-between border-bottom pb-2">
+                                            <div class="d-flex justify-content-between pb-2">
                                                 <div>
                                                     <div class="fw-semibold text-dark">Courier</div>
                                                     <div class="fs-sm text-muted">2 - 4 days</div>
@@ -183,7 +185,70 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header"><a class="accordion-button collapsed" href="#disclaimer"
+                                            role="button" data-bs-toggle="collapse" aria-expanded="false"
+                                            aria-controls="shippingOptions"><i class="ci-loudspeaker
+                                                            text-muted lead align-middle mt-n1 me-2"></i>Disclaimer</a>
+                                    </h3>
+                                    <div class="accordion-collapse collapse" id="disclaimer" data-bs-parent="#productPanels"
+                                        style="">
+                                        <div class="accordion-body fs-sm">
+                                            <div class="d-flex justify-content-between pb-2">
+                                                <div>
+                                                    {{-- <div class="fw-semibold text-dark">Disclaimer</div> --}}
+                                                    <div class="fs-sm text-muted">Product color may vary slightly due to
+                                                        photographic lighting or your device settings.</div>
+                                                </div>
+                                                {{-- <div>FREE</div> --}}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header"><a class="accordion-button collapsed" href="#instructions"
+                                            role="button" data-bs-toggle="collapse" aria-expanded="false"
+                                            aria-controls="shippingOptions"><i class="ci-basket
+                                                            text-muted lead align-middle mt-n1 me-2"></i>Washing Instructions</a>
+                                    </h3>
+                                    <div class="accordion-collapse collapse" id="instructions" data-bs-parent="#productPanels"
+                                        style="">
+                                        <div class="accordion-body fs-sm">
+                                            <div class=" pb-2">
+                                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                                    <li class="nav-item"><a class="nav-link active" href="#wash" data-bs-toggle="tab" role="tab"
+                                                            aria-selected="true"><i class="ci-wash fs-xl"></i></a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="#bleach" data-bs-toggle="tab" role="tab"
+                                                            aria-selected="false"><i class="ci-bleach fs-xl"></i></a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="#hand-wash" data-bs-toggle="tab" role="tab"
+                                                            aria-selected="false"><i class="ci-hand-wash fs-xl"></i></a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="#ironing" data-bs-toggle="tab" role="tab"
+                                                            aria-selected="false"><i class="ci-ironing fs-xl"></i></a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="#dry-clean" data-bs-toggle="tab" role="tab"
+                                                            aria-selected="false"><i class="ci-dry-clean fs-xl"></i></a></li>
+                                                </ul>
+                                                <div class="tab-content text-muted fs-sm">
+                                                    <div class="tab-pane fade active show" id="wash" role="tabpanel">30° mild machine washing
+                                                    </div>
+                                                    <div class="tab-pane fade" id="bleach" role="tabpanel">Do not use any bleach</div>
+                                                    <div class="tab-pane fade" id="hand-wash" role="tabpanel">Hand wash normal (30°)</div>
+                                                    <div class="tab-pane fade" id="ironing" role="tabpanel">Low temperature ironing</div>
+                                                    <div class="tab-pane fade" id="dry-clean" role="tabpanel">Do not dry clean</div>
+                                                </div>
+                                                
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
+                            
+
+                            
+
+                            
                             <!-- Sharing-->
                             <label class="form-label d-inline-block align-middle my-2 me-3">Share:</label>
                             <a class="btn-share btn-twitter me-2 my-2" target="_blank"
@@ -200,40 +265,7 @@
                 </div>
             </div>
         </div>
-        <!-- Product description section 1-->
-        <div class="row align-items-center py-md-3">
-            <div class="col-lg-5 col-md-6 offset-lg-1 order-md-2">
-                {{-- <img class="d-block rounded-3"
-                    src="img/shop/single/prod-img.jpg" alt="Image"> --}}
-            </div>
-            <div class="col-lg-4 col-md-6 offset-lg-1 py-4 order-md-1">
-                <h2 class="h3 mb-4 pb-2">High quality materials</h2>
-                <h6 class="fs-base mb-3">Soft cotton blend</h6>
-                <p class="fs-sm text-muted pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit.</p>
-                <h6 class="fs-base mb-3">Washing instructions</h6>
-                <ul class="nav nav-tabs mb-3" role="tablist">
-                    <li class="nav-item"><a class="nav-link active" href="#wash" data-bs-toggle="tab" role="tab"
-                            aria-selected="true"><i class="ci-wash fs-xl"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#bleach" data-bs-toggle="tab" role="tab"
-                            aria-selected="false"><i class="ci-bleach fs-xl"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#hand-wash" data-bs-toggle="tab" role="tab"
-                            aria-selected="false"><i class="ci-hand-wash fs-xl"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#ironing" data-bs-toggle="tab" role="tab"
-                            aria-selected="false"><i class="ci-ironing fs-xl"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#dry-clean" data-bs-toggle="tab" role="tab"
-                            aria-selected="false"><i class="ci-dry-clean fs-xl"></i></a></li>
-                </ul>
-                <div class="tab-content text-muted fs-sm">
-                    <div class="tab-pane fade active show" id="wash" role="tabpanel">30° mild machine washing</div>
-                    <div class="tab-pane fade" id="bleach" role="tabpanel">Do not use any bleach</div>
-                    <div class="tab-pane fade" id="hand-wash" role="tabpanel">Hand wash normal (30°)</div>
-                    <div class="tab-pane fade" id="ironing" role="tabpanel">Low temperature ironing</div>
-                    <div class="tab-pane fade" id="dry-clean" role="tabpanel">Do not dry clean</div>
-                </div>
-            </div>
-        </div>
-        <!-- Product description section 2-->
+        
 
     </div>
 
@@ -366,50 +398,50 @@
     <script>
         Livewire.on('productAdded', () => {
 
-    //         toastr.options = {
-    //             "closeButton": false,
-    //             "debug": false,
-    //             "newestOnTop": false,
-    //             "progressBar": false,
-    //             "positionClass": "toast-top-right",
-    //             "preventDuplicates": false,
-    //             "onclick": null,
-    //             "showDuration": "300000",
-    //             "hideDuration": "1000000",
-    //             "timeOut": "500000",
-    //             "extendedTimeOut": "1000000",
-    //             "showEasing": "swing",
-    //             "hideEasing": "linear",
-    //             "showMethod": "fadeIn",
-    //             "hideMethod": "fadeOut"
-    //         }
+            //         toastr.options = {
+            //             "closeButton": false,
+            //             "debug": false,
+            //             "newestOnTop": false,
+            //             "progressBar": false,
+            //             "positionClass": "toast-top-right",
+            //             "preventDuplicates": false,
+            //             "onclick": null,
+            //             "showDuration": "300000",
+            //             "hideDuration": "1000000",
+            //             "timeOut": "500000",
+            //             "extendedTimeOut": "1000000",
+            //             "showEasing": "swing",
+            //             "hideEasing": "linear",
+            //             "showMethod": "fadeIn",
+            //             "hideMethod": "fadeOut"
+            //         }
 
 
-    //         Command: toastr["success"](`<div
-    //   class='card'
-    //   style='overflow: hidden; background-color: white;'
-    // >
-    //   <div class='row'>
-    //     <div class='w-25'>
-    //       <img
-    //         src='https://res.cloudinary.com/danoori/image/upload/v1/Products/bta0snvnmfsvu3vnayxe'
-    //         style='height: 100px; width: 75px'
-    //         class='rounded-start'
-    //         alt='Card image'
-    //       />
-    //     </div>
-    //     <div class='w-75 pt-0' style='color: black;'>
-    //       <div class='card-body pt-2 pb-0' style='line-height: 1'>
-            
-    //         <p class=''> <small>Some one in Lahore purchased </small> </p>
-    //         <p>Chiffon classic kurti afdfdas Chiffon classic kurti afdfdas Chiffon classic kurti afdfdas</p>
-    //         <div class='pt-0 pb-0'>
-    //           <p style='color:blue;'><small>7 hour(s) ago</small></p>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>`)
+            //         Command: toastr["success"](`<div
+        //   class='card'
+        //   style='overflow: hidden; background-color: white;'
+        // >
+        //   <div class='row'>
+        //     <div class='w-25'>
+        //       <img
+        //         src='https://res.cloudinary.com/danoori/image/upload/v1/Products/bta0snvnmfsvu3vnayxe'
+        //         style='height: 100px; width: 75px'
+        //         class='rounded-start'
+        //         alt='Card image'
+        //       />
+        //     </div>
+        //     <div class='w-75 pt-0' style='color: black;'>
+        //       <div class='card-body pt-2 pb-0' style='line-height: 1'>
+
+        //         <p class=''> <small>Some one in Lahore purchased </small> </p>
+        //         <p>Chiffon classic kurti afdfdas Chiffon classic kurti afdfdas Chiffon classic kurti afdfdas</p>
+        //         <div class='pt-0 pb-0'>
+        //           <p style='color:blue;'><small>7 hour(s) ago</small></p>
+        //         </div>
+        //       </div>
+        //     </div>
+        //   </div>
+        // </div>`)
 
             // // toastr.options = {
             // //     "closeButton": true,
