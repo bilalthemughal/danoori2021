@@ -2,17 +2,31 @@
 
 @section('extra-css')
 
-    <link rel="stylesheet" media="screen" href="{{ asset('vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" />
-    <link rel="stylesheet" media="screen" href="{{ asset('vendor/simplebar/dist/simplebar.min.css') }}" />
-    <link rel="stylesheet" media="screen" href="{{ asset('vendor/tiny-slider/dist/tiny-slider.css') }}" />
-    <link rel="stylesheet" media="screen" href="{{ asset('vendor/drift-zoom/dist/drift-basic.min.css') }}" />
-    <link rel="stylesheet" media="screen" href="{{ asset('vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" />
+    {{-- <link rel="stylesheet" media="screen" href="{{ asset('vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" /> --}}
+    {{-- <link rel="stylesheet" media="screen" href="{{ asset('vendor/simplebar/dist/simplebar.min.css') }}" /> --}}
+    {{-- <link rel="stylesheet" media="screen" href="{{ asset('vendor/tiny-slider/dist/tiny-slider.css') }}" /> --}}
+    {{-- <link rel="stylesheet" media="screen" href="{{ asset('vendor/drift-zoom/dist/drift-basic.min.css') }}" /> --}}
+    {{-- <link rel="stylesheet" media="screen" href="{{ asset('vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" /> --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/3c40f56017.js" crossorigin="anonymous"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <style>
+
+        @media (max-width: 610px) {
+
+            .drift-zoom-pane.drift-open,
+            .drift-zoom-pane {
+                display: none;
+            }
+
+        }
+
+    </style>
+
 
 
 @endsection
@@ -188,8 +202,9 @@
                                 <div class="accordion-item">
                                     <h3 class="accordion-header"><a class="accordion-button collapsed" href="#disclaimer"
                                             role="button" data-bs-toggle="collapse" aria-expanded="false"
-                                            aria-controls="shippingOptions"><i class="ci-loudspeaker
-                                                            text-muted lead align-middle mt-n1 me-2"></i>Disclaimer</a>
+                                            aria-controls="shippingOptions"><i
+                                                class="ci-loudspeaker
+                                                                    text-muted lead align-middle mt-n1 me-2"></i>Disclaimer</a>
                                     </h3>
                                     <div class="accordion-collapse collapse" id="disclaimer" data-bs-parent="#productPanels"
                                         style="">
@@ -210,33 +225,44 @@
                                     <h3 class="accordion-header"><a class="accordion-button collapsed" href="#instructions"
                                             role="button" data-bs-toggle="collapse" aria-expanded="false"
                                             aria-controls="shippingOptions"><i class="ci-basket
-                                                            text-muted lead align-middle mt-n1 me-2"></i>Washing Instructions</a>
+                                                                    text-muted lead align-middle mt-n1 me-2"></i>Washing
+                                            Instructions</a>
                                     </h3>
-                                    <div class="accordion-collapse collapse" id="instructions" data-bs-parent="#productPanels"
-                                        style="">
+                                    <div class="accordion-collapse collapse" id="instructions"
+                                        data-bs-parent="#productPanels" style="">
                                         <div class="accordion-body fs-sm">
                                             <div class=" pb-2">
                                                 <ul class="nav nav-tabs mb-3" role="tablist">
-                                                    <li class="nav-item"><a class="nav-link active" href="#wash" data-bs-toggle="tab" role="tab"
-                                                            aria-selected="true"><i class="ci-wash fs-xl"></i></a></li>
-                                                    <li class="nav-item"><a class="nav-link" href="#bleach" data-bs-toggle="tab" role="tab"
-                                                            aria-selected="false"><i class="ci-bleach fs-xl"></i></a></li>
-                                                    <li class="nav-item"><a class="nav-link" href="#hand-wash" data-bs-toggle="tab" role="tab"
-                                                            aria-selected="false"><i class="ci-hand-wash fs-xl"></i></a></li>
-                                                    <li class="nav-item"><a class="nav-link" href="#ironing" data-bs-toggle="tab" role="tab"
-                                                            aria-selected="false"><i class="ci-ironing fs-xl"></i></a></li>
-                                                    <li class="nav-item"><a class="nav-link" href="#dry-clean" data-bs-toggle="tab" role="tab"
-                                                            aria-selected="false"><i class="ci-dry-clean fs-xl"></i></a></li>
+                                                    <li class="nav-item"><a class="nav-link active" href="#wash"
+                                                            data-bs-toggle="tab" role="tab" aria-selected="true"><i
+                                                                class="ci-wash fs-xl"></i></a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="#bleach"
+                                                            data-bs-toggle="tab" role="tab" aria-selected="false"><i
+                                                                class="ci-bleach fs-xl"></i></a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="#hand-wash"
+                                                            data-bs-toggle="tab" role="tab" aria-selected="false"><i
+                                                                class="ci-hand-wash fs-xl"></i></a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="#ironing"
+                                                            data-bs-toggle="tab" role="tab" aria-selected="false"><i
+                                                                class="ci-ironing fs-xl"></i></a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="#dry-clean"
+                                                            data-bs-toggle="tab" role="tab" aria-selected="false"><i
+                                                                class="ci-dry-clean fs-xl"></i></a></li>
                                                 </ul>
                                                 <div class="tab-content text-muted fs-sm">
-                                                    <div class="tab-pane fade active show" id="wash" role="tabpanel">30° mild machine washing
+                                                    <div class="tab-pane fade active show" id="wash" role="tabpanel">30°
+                                                        mild machine washing
                                                     </div>
-                                                    <div class="tab-pane fade" id="bleach" role="tabpanel">Do not use any bleach</div>
-                                                    <div class="tab-pane fade" id="hand-wash" role="tabpanel">Hand wash normal (30°)</div>
-                                                    <div class="tab-pane fade" id="ironing" role="tabpanel">Low temperature ironing</div>
-                                                    <div class="tab-pane fade" id="dry-clean" role="tabpanel">Do not dry clean</div>
+                                                    <div class="tab-pane fade" id="bleach" role="tabpanel">Do not use any
+                                                        bleach</div>
+                                                    <div class="tab-pane fade" id="hand-wash" role="tabpanel">Hand wash
+                                                        normal (30°)</div>
+                                                    <div class="tab-pane fade" id="ironing" role="tabpanel">Low temperature
+                                                        ironing</div>
+                                                    <div class="tab-pane fade" id="dry-clean" role="tabpanel">Do not dry
+                                                        clean</div>
                                                 </div>
-                                                
+
                                             </div>
 
                                         </div>
@@ -244,11 +270,11 @@
                                 </div>
                             </div>
 
-                            
 
-                            
 
-                            
+
+
+
                             <!-- Sharing-->
                             <label class="form-label d-inline-block align-middle my-2 me-3">Share:</label>
                             <a class="btn-share btn-twitter me-2 my-2" target="_blank"
@@ -265,7 +291,7 @@
                 </div>
             </div>
         </div>
-        
+
 
     </div>
 
@@ -339,13 +365,13 @@
 @section('extra-js')
 
 
-    <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    {{-- <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script> --}}
     <script src="{{ asset('vendor/simplebar/dist/simplebar.min.js') }}"></script>
-    <script src="{{ asset('vendor/tiny-slider/dist/min/tiny-slider.js') }}"></script>
-    <script src="{{ asset('vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js') }}"></script>
+    {{-- <script src="{{ asset('vendor/tiny-slider/dist/min/tiny-slider.js') }}"></script> --}}
+    {{-- <script src="{{ asset('vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js') }}"></script> --}}
     <script src="{{ asset('vendor/drift-zoom/dist/Drift.min.js') }}"></script>
-    <script src="{{ asset('vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
-    <script src="{{ asset('vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
+    {{-- <script src="{{ asset('vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('vendor/lg-video.js/dist/lg-video.min.js') }}"></script> --}}
     <script src="{{ asset('page-level/js/second-image.js') }}"></script>
 
     {{-- <style>
