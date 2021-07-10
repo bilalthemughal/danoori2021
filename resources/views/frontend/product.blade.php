@@ -2,32 +2,12 @@
 
 @section('extra-css')
 
-    {{-- <link rel="stylesheet" media="screen" href="{{ asset('vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" /> --}}
-    {{-- <link rel="stylesheet" media="screen" href="{{ asset('vendor/simplebar/dist/simplebar.min.css') }}" /> --}}
-    {{-- <link rel="stylesheet" media="screen" href="{{ asset('vendor/tiny-slider/dist/tiny-slider.css') }}" /> --}}
-    {{-- <link rel="stylesheet" media="screen" href="{{ asset('vendor/drift-zoom/dist/drift-basic.min.css') }}" /> --}}
-    {{-- <link rel="stylesheet" media="screen" href="{{ asset('vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" /> --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/3c40f56017.js" crossorigin="anonymous"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-    <style>
-
-        @media (max-width: 610px) {
-
-            .drift-zoom-pane.drift-open,
-            .drift-zoom-pane {
-                display: none;
-            }
-
-        }
-
-    </style>
-
-
 
 @endsection
 
@@ -66,21 +46,35 @@
                         <div class="product-gallery">
                             <div class="product-gallery-preview order-sm-2">
                                 <div class="product-gallery-preview-item active" id="first">
-                                    <img class="image-zoom" src="{{ get_image_path($product->large_photo_path) }}"
+                                    <img class="image-zoom d-none d-md-block"
+                                        src="{{ get_image_path($product->large_photo_path) }}"
                                         data-zoom="{{ get_image_path($product->large_photo_path) }}" alt="Product image">
-                                    <div class="image-zoom-pane"></div>
+                                    <div class="image-zoom-pane d-none d-md-block"></div>
+
+                                    <img class="d-sm-block d-md-none"
+                                        src="{{ get_image_path($product->large_photo_path) }}"
+                                        data-zoom="{{ get_image_path($product->large_photo_path) }}" alt="Product image">
                                 </div>
                                 <div class="product-gallery-preview-item" id="second">
-                                    <img class="image-zoom" src="{{ get_image_path($product->second_photo_path) }}"
+                                    <img class="image-zoom d-none d-md-block"
+                                        src="{{ get_image_path($product->second_photo_path) }}"
                                         data-zoom="{{ get_image_path($product->second_photo_path) }}"
                                         alt="Product image">
-                                    <div class="image-zoom-pane"></div>
+                                    <div class="image-zoom-pane d-none d-md-block"></div>
+
+                                    <img class="d-sm-block d-md-none"
+                                        src="{{ get_image_path($product->second_photo_path) }}"
+                                        data-zoom="{{ get_image_path($product->second_photo_path) }}" alt="Product image">
                                 </div>
                                 @foreach ($product->images as $image)
                                     <div class="product-gallery-preview-item" id="pic{{ $image->id }}">
-                                        <img class="image-zoom" src="{{ get_image_path($image->path) }}"
+                                        <img class="image-zoom d-none d-md-block" src="{{ get_image_path($image->path) }}"
                                             data-zoom="{{ get_image_path($image->path) }}" alt="Product image">
-                                        <div class="image-zoom-pane"></div>
+                                        <div class="image-zoom-pane d-none d-md-block"></div>
+
+                                        <img class="d-sm-block d-md-none"
+                                        src="{{ get_image_path($image->path) }}"
+                                        data-zoom="{{ get_image_path($image->path) }}" alt="Product image">
                                     </div>
                                 @endforeach
                             </div>
@@ -204,7 +198,7 @@
                                             role="button" data-bs-toggle="collapse" aria-expanded="false"
                                             aria-controls="shippingOptions"><i
                                                 class="ci-loudspeaker
-                                                                    text-muted lead align-middle mt-n1 me-2"></i>Disclaimer</a>
+                                                                                                text-muted lead align-middle mt-n1 me-2"></i>Disclaimer</a>
                                     </h3>
                                     <div class="accordion-collapse collapse" id="disclaimer" data-bs-parent="#productPanels"
                                         style="">
@@ -224,8 +218,9 @@
                                 <div class="accordion-item">
                                     <h3 class="accordion-header"><a class="accordion-button collapsed" href="#instructions"
                                             role="button" data-bs-toggle="collapse" aria-expanded="false"
-                                            aria-controls="shippingOptions"><i class="ci-basket
-                                                                    text-muted lead align-middle mt-n1 me-2"></i>Washing
+                                            aria-controls="shippingOptions"><i
+                                                class="ci-basket
+                                                                                                text-muted lead align-middle mt-n1 me-2"></i>Washing
                                             Instructions</a>
                                     </h3>
                                     <div class="accordion-collapse collapse" id="instructions"
@@ -365,13 +360,9 @@
 @section('extra-js')
 
 
-    {{-- <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script> --}}
+    
     <script src="{{ asset('vendor/simplebar/dist/simplebar.min.js') }}"></script>
-    {{-- <script src="{{ asset('vendor/tiny-slider/dist/min/tiny-slider.js') }}"></script> --}}
-    {{-- <script src="{{ asset('vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js') }}"></script> --}}
     <script src="{{ asset('vendor/drift-zoom/dist/Drift.min.js') }}"></script>
-    {{-- <script src="{{ asset('vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script> --}}
-    {{-- <script src="{{ asset('vendor/lg-video.js/dist/lg-video.min.js') }}"></script> --}}
     <script src="{{ asset('page-level/js/second-image.js') }}"></script>
 
     {{-- <style>
@@ -494,7 +485,4 @@
 
         })
     </script>
-
-
-
 @endsection
