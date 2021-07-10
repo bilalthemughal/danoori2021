@@ -2,23 +2,16 @@
 <header class="shadow-sm">
     <!-- Topbar-->
     <div class="topbar topbar-dark bg-dark">
-        <div class="container">
-            <div class="topbar-text dropdown d-md-none"><a class="topbar-link dropdown-toggle" href="#"
-                    data-bs-toggle="dropdown">Useful links</a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="dropdown-item" href="tel:00331697720"><i class="ci-support text-muted me-2"></i>(+92)
-                            335 63991128</a>
-                    </li>
-                </ul>
+        <div class="container" style="display: flex; justify-content: center;">
+            <div class="topbar-text text-nowrap d-sm-block d-md-none">
+                <i class="ci-rocket"></i>
+                {{-- <span class="text-muted me-1">Free Shipping:</span> --}}
+                <a class="topbar-link">Free shipping on all orders</a>
             </div>
-            <div class="topbar-text text-nowrap d-none d-md-inline-block"><i class="ci-support"></i><span
-                    class="text-muted me-1">Support</span><a class="topbar-link" href="tel:00331697720">(00) 33 169
-                    7720</a></div>
             <div class="tns-carousel tns-controls-static d-none d-md-block">
                 <div class="tns-carousel-inner"
                     data-carousel-options="{&quot;mode&quot;: &quot;gallery&quot;, &quot;nav&quot;: false, &quot;autoplay&quot;: true}">
-                    <div class="topbar-text">Free shipping on all Orders</div>
+                    <div class="topbar-text">Free shipping on all orders</div>
                     <div class="topbar-text">We return money within 30 days</div>
                     <div class="topbar-text">Friendly 24/7 customer support</div>
                 </div>
@@ -57,6 +50,6 @@
             @livewire('nav-cart')
         </div>
     </div>
-    
+
 </div>
 </header>

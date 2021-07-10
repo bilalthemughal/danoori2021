@@ -6,7 +6,7 @@
                 <div class="d-flex"><i class="ci-rocket text-primary" style="font-size: 2.25rem;"></i>
                     <div class="ps-3">
                         <h6 class="fs-base text-light mb-1">Fast and free delivery</h6>
-                        <p class="mb-0 fs-ms text-light opacity-50">Free delivery for all orders over $200</p>
+                        <p class="mb-0 fs-ms text-light opacity-50">Free delivery for all orders</p>
                     </div>
                 </div>
             </div>
@@ -27,10 +27,10 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 mb-4">
-                <div class="d-flex"><i class="ci-card text-primary" style="font-size: 2.25rem;"></i>
+                <div class="d-flex"><i class="ci-dollar-circle text-primary" style="font-size: 2.25rem;"></i>
                     <div class="ps-3">
-                        <h6 class="fs-base text-light mb-1">Secure online payment</h6>
-                        <p class="mb-0 fs-ms text-light opacity-50">We possess SSL / Secure сertificate</p>
+                        <h6 class="fs-base text-light mb-1">Cash on delivery</h6>
+                        <p class="mb-0 fs-ms text-light opacity-50">Pay after receiving the product</p>
                     </div>
                 </div>
             </div>

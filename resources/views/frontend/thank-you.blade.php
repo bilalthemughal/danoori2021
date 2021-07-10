@@ -12,19 +12,19 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
                         <li class="breadcrumb-item">
-                            <a class="text-nowrap" href="index.html">
+                            <a class="text-nowrap" href="/">
                                 <i class="ci-home"></i>
                                 Home
                             </a>
                         </li>
-                        <li class="breadcrumb-item text-nowrap"><a href="#">Shop</a>
+                        <li class="breadcrumb-item text-nowrap"><a href="/">Shop</a>
                         </li>
-                        <li class="breadcrumb-item text-nowrap active" aria-current="page">Product Page v.1</li>
+                        <li class="breadcrumb-item text-nowrap active" aria-current="page">Order placed</li>
                     </ol>
                 </nav>
             </div>
             <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-                <h1 class="h3 text-light mb-0">Cart Detail</h1>
+                <h1 class="h3 text-light mb-0">Order Placed</h1>
             </div>
         </div>
 

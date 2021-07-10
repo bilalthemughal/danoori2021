@@ -2,8 +2,7 @@
 
     <div class="row pt-4 mx-n2">
         @foreach ($products as $product)
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4" 
-                onmouseenter="show_function({{ $product->id }})"
+            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4" onmouseenter="show_function({{ $product->id }})"
                 onmouseleave="show_function({{ $product->id }})">
                 <div class="card product-card card-static">
                     @if ($product->stock === 0)
@@ -24,7 +23,7 @@
                                 href="{{ $product->category->slug . '/' . $product->slug }}">{{ $product->name }}</a>
                         </h5>
                         <div class="d-flex justify-content-center text-center">
-                            <div class="product-price" @if ($loop->last && $loadAmount <= $totalRecords) id="last_record" @endif>
+                            <div class="product-price" @if ($loop->last && $loadAmount < $totalRecords) id="last_record" @endif>
                                 @if ($product->discounted_price)
                                     <div class="fs-xs bg-faded-danger text-danger rounded-1 py-1 px-2 d-inline">
                                         {{ number_format((float) $product->discounted_price, 2, '.', '') }}<small>
@@ -62,19 +61,21 @@
 
         <script>
             const lastRecord = document.getElementById('last_record');
-            const options = {
-                root: null,
-                threshold: 1,
-                rootMargin: '0px'
-            }
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        @this.loadMore()
-                    }
+            if (lastRecord) {
+                const options = {
+                    root: null,
+                    threshold: 1,
+                    rootMargin: '0px'
+                }
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            @this.loadMore()
+                        }
+                    });
                 });
-            });
-            observer.observe(lastRecord);
+                observer.observe(lastRecord);
+            }
         </script>
 
 

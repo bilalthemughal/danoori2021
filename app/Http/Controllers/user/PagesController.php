@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
+use Symfony\Component\Console\Input\Input;
 
 class PagesController extends Controller
 {
@@ -53,5 +54,10 @@ class PagesController extends Controller
     {
         $category = Category::where('slug', $category_slug)->firstOrFail();
         return view('frontend.category', compact('category'));
+    }
+
+    public function thankyou()
+    {
+        return Request::input('order_id');
     }
 }

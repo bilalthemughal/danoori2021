@@ -45,6 +45,7 @@ Route::get('cart', [PagesController::class, 'cart'])->name('cart');
 Route::get('checkout', [PagesController::class, 'checkout'])->name('checkout');
 Route::get('category/{category_slug}', [PagesController::class, 'category'])->name('category.page');
 Route::post('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+Route::get('thank-you', [PagesController::class, 'thankyou'])->name('thank-you');
 
 
 Route::middleware('auth')->group(function () {

@@ -6,8 +6,7 @@
     <title>@yield('title')</title>
     <!-- SEO Meta Tags-->
     <meta name="description" content="Danoori - Clothing store.">
-    <meta name="keywords"
-        content="lawn, replica, embroidered dresses">
+    <meta name="keywords" content="lawn, replica, embroidered dresses">
     <meta name="author" content="Tech Notch">
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -174,9 +173,10 @@
             @livewire('mobile-cart')
         </div>
     </div>
-    <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span
-            class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">
-        </i></a>
+    <!-- Back To Top Button-->
+    <a class="btn-scroll-top bg-success" target="__blank" href="https://wa.me/+923098456120" data-scroll>
+        <i class="btn-scroll-top-icon ci-phone"></i>
+    </a>
     <!-- Vendor scrits: js libraries and plugins-->
     <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('vendor/simplebar/dist/simplebar.min.js') }}"></script>

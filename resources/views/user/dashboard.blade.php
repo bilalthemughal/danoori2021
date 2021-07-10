@@ -1,15 +1,29 @@
 @extends('frontend.layout')
 
 @section('title')
-Past Orders &#8211; Danoori
+    Past Orders &#8211; Danoori
 @endsection
 
 @section('extra-css')
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-    {{-- <link rel="stylesheet" href="{{asset('page-level/css/image-popup.css')}}"> --}}
-@stop
+
+    <style>
+        .paginate_button {
+            border: 1px solid #FE3638;
+            ;
+            padding: 2px 4px;
+            cursor: pointer;
+        }
+
+        .paginate_button:hover {
+            background-color: #ee9b9c;
+            color: white;
+        }
+
+    </style>
+@endsection
 
 @section('content')
     {{-- @include('user.partials.orderDetailModal') --}}
@@ -61,9 +75,8 @@ Past Orders &#8211; Danoori
                             @forelse ($orders as $order)
                                 <tr>
                                     <td class="py-3">
-                                        <a class="nav-link-style fw-medium fs-sm"
-                                        href="#"    
-                                        onclick="populateModal('{{ $order->order_id }}')">
+                                        <a class="nav-link-style fw-medium fs-sm" style="cursor: pointer;"
+                                            onclick="populateModal('{{ $order->order_id }}')">
                                             {{ $order->order_id }}
                                         </a>
                                     </td>
@@ -87,8 +100,6 @@ Past Orders &#8211; Danoori
                                 </tr>
 
                             @endforelse
-
-
                         </tbody>
                     </table>
                 </div>
@@ -112,7 +123,6 @@ Past Orders &#8211; Danoori
     Livewire.on('openModal', () => {
         $('#order-details').modal('show');
     })
-
 </script>
 
 @endsection

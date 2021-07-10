@@ -18,15 +18,15 @@ class CheckoutController extends Controller
 
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        if(count($cart->items) === 0) {
+        if (count($cart->items) === 0) {
             Session::flash('message', 'Your cart is empty. Add something in your cart to checkout.');
-            return back(); 
+            return back();
         }
 
         $user_id = null;
 
-        if($request['password']){
-            $this->validate($request,[
+        if ($request['password']) {
+            $this->validate($request, [
                 'email' => 'unique:users,email'
             ], [
                 'email.unique' => 'This email is already taken. If it belongs to you 
@@ -40,12 +40,12 @@ class CheckoutController extends Controller
             $user_id = $user->id;
         }
 
-        if(Auth::id()){
+        if (Auth::id()) {
             $user_id = Auth::id();
         }
 
         $params = $request->validated();
-        $params['order_id'] = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,11);
+        $params['order_id'] = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 1, 11);
 
         $params['user_id'] = $user_id;
         $params['sub_total'] = $cart->totalPrice;
@@ -69,10 +69,10 @@ class CheckoutController extends Controller
         }
 
         $request->session()->forget('cart');
-        if(isset($user)){
+        if (isset($user)) {
             Auth::login($user);
         }
 
-        return view('frontend.thank-you', ['order_id' => $order->order_id]);
+        return redirect()->route('thank-you',  ['order_id'=>$order->order_id]);
     }
 }
