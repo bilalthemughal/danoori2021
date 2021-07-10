@@ -68,7 +68,7 @@ class CheckoutController extends Controller
             );
         }
 
-        // $request->session()->forget('cart');
+        $request->session()->forget('cart');
         if(isset($user)){
             Auth::login($user);
         }
