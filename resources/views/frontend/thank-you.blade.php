@@ -1,7 +1,7 @@
 @extends('frontend.layout')
 
-@section('extra-css')
-
+@section('title')
+Thank you | Danoori
 @endsection
 
 @section('content')

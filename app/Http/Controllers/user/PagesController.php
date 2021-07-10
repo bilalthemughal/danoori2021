@@ -58,6 +58,7 @@ class PagesController extends Controller
 
     public function thankyou()
     {
-        return Request::input('order_id');
+        $order_id = Request::input('order_id');
+        return view('frontend.thank-you', compact('order_id'));
     }
 }
