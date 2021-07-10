@@ -12,7 +12,7 @@
                     @endif
                     <a class="card-img-top d-block overflow-hidden"
                         href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">
-                        <img class="lazy" src="{{ asset('img/danoori.gif') }}" loading="lazy"
+                        <img src="{{ asset('img/danoori.gif') }}" loading="lazy"
                             id="photo{{ $product->id }}" data-src="{{ get_image_path($product->large_photo_path) }}"
                             alt="{{ $product->slug }}" data-loaded=0
                             onload="if(this.src !== this.getAttribute('data-src')) this.src=this.getAttribute('data-src'); this.setAttribute('data-loaded', 1);">

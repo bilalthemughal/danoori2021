@@ -64,17 +64,18 @@
 
                                     <img class="d-sm-block d-md-none"
                                         src="{{ get_image_path($product->second_photo_path) }}"
-                                        data-zoom="{{ get_image_path($product->second_photo_path) }}" alt="Product image">
+                                        data-zoom="{{ get_image_path($product->second_photo_path) }}"
+                                        alt="Product image">
                                 </div>
                                 @foreach ($product->images as $image)
                                     <div class="product-gallery-preview-item" id="pic{{ $image->id }}">
-                                        <img class="image-zoom d-none d-md-block" src="{{ get_image_path($image->path) }}"
+                                        <img class="image-zoom d-none d-md-block"
+                                            src="{{ get_image_path($image->path) }}"
                                             data-zoom="{{ get_image_path($image->path) }}" alt="Product image">
                                         <div class="image-zoom-pane d-none d-md-block"></div>
 
-                                        <img class="d-sm-block d-md-none"
-                                        src="{{ get_image_path($image->path) }}"
-                                        data-zoom="{{ get_image_path($image->path) }}" alt="Product image">
+                                        <img class="d-sm-block d-md-none" src="{{ get_image_path($image->path) }}"
+                                            data-zoom="{{ get_image_path($image->path) }}" alt="Product image">
                                     </div>
                                 @endforeach
                             </div>
@@ -198,7 +199,7 @@
                                             role="button" data-bs-toggle="collapse" aria-expanded="false"
                                             aria-controls="shippingOptions"><i
                                                 class="ci-loudspeaker
-                                                                                                text-muted lead align-middle mt-n1 me-2"></i>Disclaimer</a>
+                                                                                                            text-muted lead align-middle mt-n1 me-2"></i>Disclaimer</a>
                                     </h3>
                                     <div class="accordion-collapse collapse" id="disclaimer" data-bs-parent="#productPanels"
                                         style="">
@@ -220,7 +221,7 @@
                                             role="button" data-bs-toggle="collapse" aria-expanded="false"
                                             aria-controls="shippingOptions"><i
                                                 class="ci-basket
-                                                                                                text-muted lead align-middle mt-n1 me-2"></i>Washing
+                                                                                                            text-muted lead align-middle mt-n1 me-2"></i>Washing
                                             Instructions</a>
                                     </h3>
                                     <div class="accordion-collapse collapse" id="instructions"
@@ -313,21 +314,23 @@
                             data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1100&quot;:{&quot;items&quot;:4, &quot;gutter&quot;: 30}}}"
                             id="tns3" style="transition-duration: 0s; transform: translate3d(-38.0952%, 0px, 0px);">
                             @foreach ($sameProducts as $product)
-                                <div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
+                                <div class="tns-item" aria-hidden="true" tabindex="-1">
                                     <div class="card product-card card-static">
+                                        @if ($product->stock === 0)
+                                            <span class="badge bg-accent badge-shadow">Sold Out</span>
+                                        @elseif ($product->discounted_price)
+                                            <span class="badge bg-danger badge-shadow">Sale</span>
+                                        @endif
 
                                         <a class="card-img-top d-block overflow-hidden"
                                             href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">
-                                            <img loading="lazy" src="{{ asset('img/danoori.gif') }}"
-                                                data-src="{{ get_image_path($product->large_photo_path) }}" alt="Product"
-                                                data-loaded=0
-                                                onload="if(this.src !== this.getAttribute('data-src')) this.src=this.getAttribute('data-src'); this.setAttribute('data-loaded', 1);"
+                                            <img src="{{ asset('img/danoori.gif') }}" loading="lazy"
                                                 id="photo{{ $product->id }}"
-                                                onmouseenter="show_function({{ $product->id }})"
-                                                onmouseleave="show_function({{ $product->id }})">
+                                                data-src="{{ get_image_path($product->large_photo_path) }}"
+                                                alt="{{ $product->slug }}"
+                                                onload="if(this.src !== this.getAttribute('data-src')) this.src=this.getAttribute('data-src');">
+                                            
                                         </a>
-                                        <input type="hidden" id="secondphoto{{ $product->id }}" value="@if ($product->second_photo_path) {{ get_image_path($product->second_photo_path) }} @endif"
-                                        >
                                         <div class="card-body py-2">
                                             <a class="product-meta d-block fs-xs pb-1"
                                                 href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">
@@ -337,9 +340,21 @@
                                                 <a
                                                     href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">{{ $product->name }}</a>
                                             </h3>
-                                            <div class="d-flex justify-content-between">
-                                                <div class="product-price text-accent">
-                                                    $24.<small>99</small>
+                                            <div class="d-flex justify-content-center text-center">
+                                                <div class="product-price">
+                                                    @if ($product->discounted_price)
+                                                        <div
+                                                            class="fs-xs bg-faded-danger text-danger rounded-1 py-1 px-2 d-inline">
+                                                            {{ number_format((float) $product->discounted_price, 2, '.', '') }}<small>
+                                                                PKR</small></div>
+                                                        <del class="fs-xs text-muted">{{ number_format((float) $product->original_price, 2, '.', '') }}<small>
+                                                                PKR</small></del>
+                                                    @else
+                                                        <div
+                                                            class="fs-xs bg-faded-danger text-danger rounded-1 py-1 px-2 d-inline">
+                                                            {{ number_format((float) $product->original_price, 2, '.', '') }}<small>
+                                                                PKR</small></div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -360,10 +375,10 @@
 @section('extra-js')
 
 
-    
+
     <script src="{{ asset('vendor/simplebar/dist/simplebar.min.js') }}"></script>
     <script src="{{ asset('vendor/drift-zoom/dist/Drift.min.js') }}"></script>
-    <script src="{{ asset('page-level/js/second-image.js') }}"></script>
+    {{-- <script src="{{ asset('page-level/js/second-image.js') }}"></script> --}}
 
     {{-- <style>
         #toast-container>.toast {
