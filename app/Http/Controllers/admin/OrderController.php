@@ -11,17 +11,17 @@ class OrderController extends Controller
 {
     public function index()
     {
-        return view('admin.pages.order.index', ['status' => 0]);
+        return view('admin.pages.order.index', ['status' => Order::IS_PENDING]);
     }
 
     public function completed()
     {
-        return view('admin.pages.order.index', ['status' => 1]);
+        return view('admin.pages.order.index', ['status' => Order::IS_SHIPPED]);
     }
 
     public function cancelled()
     {
-        return view('admin.pages.order.index', ['status' => -1]);
+        return view('admin.pages.order.index', ['status' => Order::IS_CANCELLED]);
     }
 
     public function show(Order $order)

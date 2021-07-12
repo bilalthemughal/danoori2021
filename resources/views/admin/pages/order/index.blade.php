@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ $status === 0 ? 'Pedning Orders' : ($status === 1 ? 'Completed Orders' : 'Cancelled Orders') }}</h1>
+                    <h1 class="m-0">{{ $status === App\Models\Order::IS_PENDING ? 'Pedning Orders' : ($status === App\Models\Order::IS_SHIPPED ? 'Completed Orders' : 'Cancelled Orders') }}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">

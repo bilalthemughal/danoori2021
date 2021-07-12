@@ -20,8 +20,6 @@ class PagesController extends Controller
     {
         $product = Product::with('images')->where('slug', $product_slug)->firstOrFail();
 
-        ProductView::createViewLog($product->id);
-
         $sameProducts = Product::query()
             ->where('id', '!=', $product->id)
             ->inRandomOrder()

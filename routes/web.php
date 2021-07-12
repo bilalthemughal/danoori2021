@@ -9,7 +9,9 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\user\CheckoutController;
 use App\Http\Controllers\admin\CarouselController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\admin\ProductImageController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,7 @@ use App\Http\Controllers\admin\ProductImageController;
 Route::get('/', [LandingPageController::class, 'index']);
 
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::view('dashboard', 'admin.pages.dashboard')->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('carousel', CarouselController::class);
     Route::get('carousel/table/data', [CarouselController::class, 'dt_ajax_carousels_data'])->name('carousel.table.data');
     Route::resource('category', CategoryController::class);

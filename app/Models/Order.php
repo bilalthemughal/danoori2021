@@ -9,6 +9,11 @@ class Order extends Model
 {
     use HasFactory;
 
+    public const IS_PENDING = 0;
+    public const IS_SHIPPED = 1;
+    public const IS_DELIVERED = 2;
+    public const IS_CANCELLED = -1;
+
     protected $fillable = [
         'name',
         'email',
