@@ -9,9 +9,8 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\user\CheckoutController;
 use App\Http\Controllers\admin\CarouselController;
 use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\ProductImageController;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
