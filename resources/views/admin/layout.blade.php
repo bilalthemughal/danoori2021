@@ -29,6 +29,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             background-color: rgb(132, 132, 206);
         }
 
+        .current {
+            background-color: rgb(62, 62, 168);
+        }
+
     </style>
     @yield('extra-css')
 </head>
