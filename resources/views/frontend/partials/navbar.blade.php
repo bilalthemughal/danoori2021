@@ -18,38 +18,41 @@
             </div>
         </div>
     </div>
-    <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
-    <div class="navbar-sticky bg-light">
-        <div class="navbar navbar-expand-lg navbar-light">
-            <div class="container"><a class="navbar-brand d-none d-sm-block flex-shrink-0" href="/"><img
-                        src="{{ asset('images/noori.png') }}" width="222" alt="Cartzilla"></a><a
-                    class="navbar-brand d-sm-none flex-shrink-0 me-2" href="/"><img
-                        src="{{ asset('images/mobile-logo.png') }}" width="74" alt="Cartzilla"></a>
-                <div class="input-group d-none d-lg-flex mx-4">
-                    {{-- <input class="form-control rounded-end pe-5" type="text" placeholder="Search for products"><i class="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i> --}}
-                </div>
-                <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <a class="navbar-tool navbar-stuck-toggler" href="#">
-                        <span class="navbar-tool-tooltip">Expand menu</span>
 
-                        {{-- <div class="navbar-tool-icon-box">
-                            <i class="navbar-tool-icon ci-heart"></i>
-                        </div> --}}
-                    </a>
-                    <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
-                        <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
-                        <div class="navbar-tool-text ms-n3"><small>Hello, @guest Sign in @endguest @auth
-                                {{ Auth::user()->name }}
-                            @endauth</small>My Account</div>
-                </a>
-            </div>
+    <div class="navbar navbar-sticky navbar-light navbar-expand-lg  px-3 rounded" style="background-color: #fff;">
+        <div class="container" style="background-color: fff;">
+            <a class="navbar-brand d-none d-lg-block me-3 order-lg-1" href="/"><img
+                    src="{{ asset('images/noori.png') }}" width="142" alt="Danoori"></a><a
+                class="navbar-brand d-lg-none me-2" href="/"><img src="{{ asset('images/noori.png') }}" width="74"
+                    alt="Danoori">
+            </a>
+            <div class="navbar-toolbar d-flex align-items-center order-lg-3">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCustomCollapse"><span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-tool ms-1 me-n1" href="{{ route('login') }}">
+                    <div class="navbar-tool-icon-box">
+                        <i class="navbar-tool-icon ci-user"></i>
+                    </div>
+
+                    <div class="navbar-tool-text ms-n3">
+                        <small>Hello, @guest Sign in @endguest @auth
+                            {{ Auth::user()->name }}
+                        @endauth</small>
+                    My Account
+                </div>
+            </a>
             @livewire('nav-cart')
         </div>
-    </div>
+        <?php $categories = App\Models\Category::inRandomOrder()->limit(3)->get(); ?>
+        <div class="collapse navbar-collapse me-auto order-lg-2" id="navbarCustomCollapse">
+            <hr class="d-lg-none mt-3 mb-2">
+            <ul class="navbar-nav">
+                @foreach ($categories as $category)
+                    <li class="nav-item"><a class="nav-link" href="#">{{ $category->name }}</a></li>
+                @endforeach
 
-</div>
+            </ul>
+        </div>
+    </div>
 </header>
