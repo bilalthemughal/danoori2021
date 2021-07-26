@@ -49,7 +49,7 @@
             <hr class="d-lg-none mt-3 mb-2">
             <ul class="navbar-nav">
                 @foreach ($categories as $category)
-                    <li class="nav-item"><a class="nav-link" href="#">{{ $category->name }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('category.page', $category->slug) }}">{{ $category->name }}</a></li>
                 @endforeach
 
             </ul>
