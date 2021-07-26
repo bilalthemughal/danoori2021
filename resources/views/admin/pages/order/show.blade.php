@@ -54,11 +54,12 @@
                                 <br>
                                 <b>Order ID:</b> {{ $order->id }}<br>
                                 <br>
-                                @if ($order->status === 0)
+                                @if ($order->status === App\Models\Order::IS_PENDING)
                                     <button class="btn btn-success" id="ship-button" onclick="shipIt({{ $order->id }})">Ship It</button>
-                                @elseif ($order->status === 1)
+                                    <button class="btn btn-danger" id="cancel-button" onclick="cancelIt({{ $order->id }})">Cancel It</button>
+                                @elseif ($order->status === App\Models\Order::IS_SHIPPED)
                                     <span class="badge badge-success">Shipped</span>
-                                @elseif ($order->status === -1)
+                                @elseif ($order->status === App\Models\Order::IS_CANCELLED)
                                     <span class="badge badge-danger">Cancelled</span>
                                 @endif
                             </div>
@@ -147,8 +148,19 @@
             type: 'GET',
             success: function(res) {
                 document.getElementById('ship-button').innerHTML = 'Shipped';
+                document.getElementById('cancel-button').style.visibility = 'hidden';
             }
         });
     }
 
+    function cancelIt(id) {
+        $.ajax({
+            url: "/admin/order/cancel/"+id,
+            type: 'GET',
+            success: function(res) {
+                document.getElementById('cancel-button').innerHTML = 'Cancelled';
+                document.getElementById('ship-button').style.visibility = 'hidden';
+            }
+        });
+    }
 </script>

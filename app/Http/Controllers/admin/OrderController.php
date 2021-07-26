@@ -48,15 +48,25 @@ class OrderController extends Controller
     {
         $order = Order::where('id', $id)->first();
 
-        // return ($order->products);
-        $order->status = 1;
-        // $order->products()->decrement('stock',$order->products()->pivot->quantity);
+        $order->status = Order::IS_SHIPPED;
+        
         $order->save();
 
         $products = $order->products;
         $products->each(function ($product){
             $product->decrement('stock',$product->pivot->quantity);
         });
+
+        return response()->json(['success' => 'Changed status successfully']);
+    }
+
+
+    public function cancel($id)
+    {
+        $order = Order::where('id', $id)->first();
+
+        $order->status = Order::IS_CANCELLED;
+        $order->save();
 
         return response()->json(['success' => 'Changed status successfully']);
     }
