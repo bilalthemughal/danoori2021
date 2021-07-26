@@ -44,7 +44,7 @@
             </a>
             @livewire('nav-cart')
         </div>
-        <?php $categories = App\Models\Category::inRandomOrder()->limit(3)->get(); ?>
+        <?php $categories = App\Models\Category::whereHas('products')->inRandomOrder()->limit(3)->get(); ?>
         <div class="collapse navbar-collapse me-auto order-lg-2" id="navbarCustomCollapse">
             <hr class="d-lg-none mt-3 mb-2">
             <ul class="navbar-nav">
