@@ -48,7 +48,7 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        $admins = collect(['mianumair1678@gmail.com', 'bilalafzal367@gmail.com']);
+        $admins = collect(['mianumair1678@gmail.com', 'bilalafzal367@gmail.com', 'hassanwahla540@gmail.com']);
         if ($admins->contains($this->email)) {
             return true;
         }

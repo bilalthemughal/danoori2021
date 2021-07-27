@@ -83,9 +83,9 @@
 
                                     <td class="py-3">{{ $order->created_at->format('M d, Y') }}</td>
                                     <td class="py-3">
-                                        @if ($order->status === 0)
+                                        @if ($order->status === App\Models\Order::IS_PENDING)
                                             <span class="badge bg-info m-0">In Progress</span>
-                                        @elseif ($order->status === 1)
+                                        @elseif ($order->status === App\Models\Order::IS_SHIPPED)
                                             <span class="badge bg-success m-0">Shipped</span>
                                         @else
                                             <span class="badge bg-danger m-0">Cancelled</span>
