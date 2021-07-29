@@ -123,6 +123,9 @@
                                         Product available
                                     </div>
                                 </div>
+                                <div class="alert alert-warning" role="alert">
+                                    Use "danoori20" on checkout page or mention in Whatsapp to get extra 20% off.
+                                </div>
                                 @livewire('add-to-cart', ['product_id' => $product->id])
                                 <div class="d-flex align-items-center pt-2 pb-4">
 
@@ -199,7 +202,7 @@
                                             role="button" data-bs-toggle="collapse" aria-expanded="false"
                                             aria-controls="shippingOptions"><i
                                                 class="ci-loudspeaker
-                                                                                                            text-muted lead align-middle mt-n1 me-2"></i>Disclaimer</a>
+                                                                                                                text-muted lead align-middle mt-n1 me-2"></i>Disclaimer</a>
                                     </h3>
                                     <div class="accordion-collapse collapse" id="disclaimer" data-bs-parent="#productPanels"
                                         style="">
@@ -221,7 +224,7 @@
                                             role="button" data-bs-toggle="collapse" aria-expanded="false"
                                             aria-controls="shippingOptions"><i
                                                 class="ci-basket
-                                                                                                            text-muted lead align-middle mt-n1 me-2"></i>Washing
+                                                                                                                text-muted lead align-middle mt-n1 me-2"></i>Washing
                                             Instructions</a>
                                     </h3>
                                     <div class="accordion-collapse collapse" id="instructions"
@@ -329,7 +332,7 @@
                                                 data-src="{{ get_image_path($product->large_photo_path) }}"
                                                 alt="{{ $product->slug }}"
                                                 onload="if(this.src !== this.getAttribute('data-src')) this.src=this.getAttribute('data-src');">
-                                            
+
                                         </a>
                                         <div class="card-body py-2">
                                             <a class="product-meta d-block fs-xs pb-1"
