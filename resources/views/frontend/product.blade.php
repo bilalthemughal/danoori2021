@@ -124,17 +124,18 @@
                                     </div>
                                 </div>
                                 <div class="alert alert-warning" role="alert">
-                                    Use "danoori20" on checkout page or mention in Whatsapp to get extra 20% off.
+                                    Use "danoori20" on checkout page or mention in whatsapp to get extra 20% off.
                                 </div>
                                 @livewire('add-to-cart', ['product_id' => $product->id])
-                                <div class="d-flex align-items-center pt-2 pb-4">
+                                <div class="d-flex justify-content-between pt-2 pb-1">
 
-                                    <a href="{{ 'https://wa.me/+923098456120?text=I am interested in buying *' . $product->name . ' - Rs: ' . ($product->discounted_price ?: $product->original_price) . '*. ' . Request::fullUrl() }}"
+                                    <a href="{{ 'https://wa.me/+923098456120?text=I am interested in buying *' . $product->name . ' - Rs: ' . ($product->discounted_price ?: $product->original_price) . '*. ' . Request::fullurl() }}"
                                         target="_blank" class="btn btn-success btn-shadow d-block w-100" type="button">
                                         <i class="fab fa-whatsapp"></i>
                                         &nbsp;Buy via whatsapp
                                     </a>
                                 </div>
+                                @livewire('quick-buy', ['product_id' => $product->id])
 
                             @else
                                 <div class="position-relative me-n4 mb-5">
@@ -202,7 +203,7 @@
                                             role="button" data-bs-toggle="collapse" aria-expanded="false"
                                             aria-controls="shippingOptions"><i
                                                 class="ci-loudspeaker
-                                                                                                                text-muted lead align-middle mt-n1 me-2"></i>Disclaimer</a>
+                                                                                                                    text-muted lead align-middle mt-n1 me-2"></i>Disclaimer</a>
                                     </h3>
                                     <div class="accordion-collapse collapse" id="disclaimer" data-bs-parent="#productPanels"
                                         style="">
@@ -224,7 +225,7 @@
                                             role="button" data-bs-toggle="collapse" aria-expanded="false"
                                             aria-controls="shippingOptions"><i
                                                 class="ci-basket
-                                                                                                                text-muted lead align-middle mt-n1 me-2"></i>Washing
+                                                                                                                    text-muted lead align-middle mt-n1 me-2"></i>Washing
                                             Instructions</a>
                                     </h3>
                                     <div class="accordion-collapse collapse" id="instructions"

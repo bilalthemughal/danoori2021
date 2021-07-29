@@ -59,4 +59,8 @@ class PagesController extends Controller
         $order_id = Request::input('order_id');
         return view('frontend.thank-you', compact('order_id'));
     }
+    
+    public function quickBuy($id){
+dd($id);
+    }
 }
