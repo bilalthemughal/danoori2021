@@ -11,14 +11,4 @@
         <i class="ci-cart fs-lg me-2"></i>
         <span id="button-text">Add to Cart</span>
     </button>
-
-
-
-    <script>
-        // document.getElementById('button-text').innerText = "Added to Cart"
-        // document.getElementById('addToCart').classList.remove("btn-primary");
-        // document.getElementById('addToCart').classList.add("btn-danger");
-    </script>
-
-
 </div>
