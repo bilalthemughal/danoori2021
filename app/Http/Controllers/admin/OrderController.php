@@ -41,7 +41,7 @@ class OrderController extends Controller
         return Datatables::of($query)
             ->addColumn('action', function ($orders) {
                 return
-                    '<a class="btn btn-success btn-xs" href=' . route('admin.order.show', $orders->id) . '><i class="fa fa-eye"></i></a>';
+                    '<a class="btn btn-secondary btn-xs" href=' . route('admin.order.show', $orders->id) . '>'.$orders->name.'</a>';
             })
             ->addColumn('time', function ($orders){
                 return $orders->created_at->diffForHumans();

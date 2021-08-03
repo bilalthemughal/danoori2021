@@ -73,7 +73,7 @@
                     title: 'ID'
                 },
                 {
-                    data: 'name',
+                    data: 'action',
                     title: 'Name'
                 },
                 {
@@ -91,11 +91,8 @@
                 {
                     data: 'time',
                     title: 'Placed @'
-                },
-                {
-                    data: 'action',
-                    title: 'Action'
-                },
+                }
+                
             ]
         });
     </script>
