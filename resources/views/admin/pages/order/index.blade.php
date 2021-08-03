@@ -56,14 +56,14 @@
             processing: true,
             serverSide: true,
             ajax: '{{ route('admin.order.table.data', ['id' => $status]) }}',
+            order: [ [0, 'desc'] ],
             columns: [
-                {data: 'order_id', title: 'ID'},
+                {data: 'id', title: 'ID'},
                 {data: 'name', title: 'Name'},
                 {data: 'sub_total', title: 'Sub'},
                 {data: 'total', title: 'Total'},
-                {data: 'phone_number', title: 'Number'},
                 {data: 'coupon', title: 'Coupon'},
-                {data: 'total_products', title: '#'},
+                {data: 'time', title: 'Placed @'},
                 {data: 'action', title: 'Action'},
             ]
         });

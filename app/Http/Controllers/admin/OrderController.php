@@ -34,13 +34,19 @@ class OrderController extends Controller
     public function dt_ajax_orders_data(Request $request)
     {
         $query = Order::query()
-            ->select(['id', 'order_id', 'name', 'sub_total', 'total', 'phone_number', 'coupon', 'total_products'])
+            ->select(['id', 'order_id', 'name', 'sub_total', 'total', 'coupon', 'created_at'])
             ->where('status', $request['id']);
+            
+            
         return Datatables::of($query)
             ->addColumn('action', function ($orders) {
                 return
                     '<a class="btn btn-success btn-xs" href=' . route('admin.order.show', $orders->id) . '><i class="fa fa-eye"></i></a>';
             })
+            ->addColumn('time', function ($orders){
+                return $orders->created_at->diffForHumans();
+            })
+            ->rawColumns(['action', 'time'])
             ->make();
     }
 

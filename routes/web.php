@@ -44,7 +44,6 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
 
 
 Route::get('cart', [PagesController::class, 'cart'])->name('cart');
-Route::get('quick-buy/{id}', [PagesController::class, 'quickBuy'])->name('quick.buy');
 Route::get('checkout', [PagesController::class, 'checkout'])->name('checkout');
 Route::get('category/{category_slug}', [PagesController::class, 'category'])->name('category.page');
 Route::post('checkout', [CheckoutController::class, 'checkout'])->name('checkout');

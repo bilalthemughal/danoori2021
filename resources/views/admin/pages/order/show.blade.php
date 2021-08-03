@@ -52,7 +52,7 @@
                             <!-- /.col -->
                             <div class="col-sm-4 invoice-col">
                                 <br>
-                                <b>Order ID:</b> {{ $order->id }}<br>
+                                <b>Order ID:</b> {{ $order->order_id }}<br>
                                 <br>
                                 @if ($order->status === App\Models\Order::IS_PENDING)
                                     <button class="btn btn-success" id="ship-button" onclick="shipIt({{ $order->id }})">Ship It</button>
@@ -99,8 +99,7 @@
                         <div class="row">
 
                             <!-- /.col -->
-                            <div class="col-6">
-
+                            <div class="col-md-6 col-sm-12">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tbody>
