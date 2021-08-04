@@ -46,7 +46,7 @@
                                     {{ $order->email }}<br>
                                     {{ $order->address }}<br>
                                     {{ $order->city }}<br>
-                                    <a href="tel:{{ $order->phone_number }}"> {{ $order->phone_number }} </a>
+                                    <a class="btn btn-info" href="tel:{{ $order->phone_number }}"> {{ $order->phone_number }} </a>
                                 </address>
                             </div>
                             <!-- /.col -->
