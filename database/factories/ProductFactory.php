@@ -24,8 +24,8 @@ class ProductFactory extends Factory
         return [
             'name' => $this->faker->name,
             'slug' => $this->faker->slug(5),
-            'large_photo_path' => 'Products/iw9i0owggotgbufa8rxb',
-            'small_photo_path' => 'Products/iw9i0owggotgbufa8rxb',
+            'large_photo_path' => 'Products/mn1begrtl98dlifaemuw',
+            'small_photo_path' => 'Products/mn1begrtl98dlifaemuw',
             'is_active' => 1,
             'stock' => $this->faker->numberBetween($min = 2, $max = 100),
             'original_price' => $this->faker->numberBetween($min = 1000, $max = 9000),

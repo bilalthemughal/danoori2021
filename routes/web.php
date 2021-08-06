@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\User;
+use App\Notifications\OrderReceived;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Notification;
 use App\Http\Controllers\user\PagesController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\LandingPageController;
@@ -10,6 +13,7 @@ use App\Http\Controllers\user\CheckoutController;
 use App\Http\Controllers\admin\CarouselController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
+use Illuminate\Notifications\Messages\SlackMessage;
 use App\Http\Controllers\admin\ProductImageController;
 
 /*
@@ -56,3 +60,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 Route::get('/{category_slug}/{product_slug}', [PagesController::class, 'product'])->name('category.product');
+
+Route::get('/test', function(){
+    return "test\r\nhello";
+});

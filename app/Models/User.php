@@ -54,4 +54,9 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function routeNotificationForSlack($notification)
+    {
+        return 'https://hooks.slack.com/services/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';
+    }
 }

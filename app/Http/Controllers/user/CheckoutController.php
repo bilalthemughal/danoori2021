@@ -7,9 +7,11 @@ use App\Cart;
 use App\Models\User;
 use App\Models\Order;
 use App\Http\Controllers\Controller;
+use App\Notifications\OrderReceived;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\user\CheckoutRequest;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class CheckoutController extends Controller
 {
@@ -73,6 +75,10 @@ class CheckoutController extends Controller
             Auth::login($user);
         }
 
-        return redirect()->route('thank-you',  ['order_id'=>$order->order_id]);
+        
+        $user = User::first();
+        Notification::send($user, new OrderReceived($order, $products));
+
+        return redirect()->route('thank-you',  ['order_id' => $order->order_id]);
     }
 }
