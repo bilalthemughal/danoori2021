@@ -64,7 +64,7 @@ class OrderReceived extends Notification
 
     public function toSlack($notifiable)
     {
-        $content = "You have received an order of amount : ". number_format($this->order->sub_total) .".\n Products: ";
+        $content = "You have received an order of amount : ". number_format($this->order->total) .".\n Products: ";
         foreach($this->products as $product){
             $content .= $product['name']. " * " . $product['qty'] . " , ";
         }
