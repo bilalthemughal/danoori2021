@@ -68,7 +68,7 @@ class OrderReceived extends Notification
         foreach($this->products as $product){
             $content .= $product['name']. " * " . $product['qty'] . " , ";
         }
-        $content .= "\nName : " . $this->order->name . "\nAddress: " . $this->order->address . "\nPhone Number: " . $this->order->phone_number;
+        $content .= "\nName : " . $this->order->name . "\nAddress: " . $this->order->address . ", " . $this->order->city . "\nPhone Number: " . $this->order->phone_number;
         return (new SlackMessage)
             ->content($content);
     }
