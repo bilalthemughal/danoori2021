@@ -6,8 +6,9 @@ use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class PendingOrderExport implements FromCollection,WithHeadings
+class PendingOrderExport implements FromCollection,WithHeadings,ShouldAutoSize
 { 
     public function headings():array{
         return[
