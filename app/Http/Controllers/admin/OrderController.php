@@ -4,7 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Exports\PendingOrderExport;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class OrderController extends Controller
@@ -75,5 +77,9 @@ class OrderController extends Controller
         $order->save();
 
         return response()->json(['success' => 'Changed status successfully']);
+    }
+
+    public function export(){
+        return Excel::download(new PendingOrderExport, 'pendingorders.xlsx');
     }
 }

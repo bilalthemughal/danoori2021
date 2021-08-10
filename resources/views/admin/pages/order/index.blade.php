@@ -43,6 +43,9 @@
                     @if ($status != App\Models\Order::IS_CANCELLED)
                         <a class="btn btn-danger" href="{{ route('admin.order.cancelled') }}">Cancelled Orders</a>
                     @endif
+                    @if ($status === App\Models\Order::IS_PENDING)
+                        <a class="btn btn-info" href="{{ route('admin.order.export') }}">Export</a>
+                    @endif
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table" id="orders-table">

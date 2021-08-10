@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\User;
+use App\Models\Order;
+use Illuminate\Support\Facades\DB;
 use App\Notifications\OrderReceived;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Notification;
@@ -49,6 +51,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::get('budget/create/{product}', [BudgetController::class, 'create'])->name('budget.create');
     Route::post('budget/store/{product}', [BudgetController::class, 'store'])->name('budget.store');
     Route::get('budget/{product}', [BudgetController::class, 'tableData'])->name('budget.table.data');
+    Route::get('export/orders', [OrderController::class, 'export'])->name('order.export');
 });
 
 
@@ -67,5 +70,5 @@ require __DIR__ . '/auth.php';
 Route::get('/{category_slug}/{product_slug}', [PagesController::class, 'product'])->name('category.product');
 
 Route::get('/test', function(){
-    return "test\r\nhello";
+        return Order::where('status', Order::IS_PENDING)->select(['name','address','phone_number','email','city',DB::raw('"1" as Pieces') , DB::raw('"0.6" as Weight'),'total',DB::raw('"DON-123" as CustomerReferenceNumber'),DB::raw('"No" as SpecialHandling'),DB::raw('"Overnight" as ServiceType'),DB::raw('"clothes" as ProductDetails')])->get();
 });
