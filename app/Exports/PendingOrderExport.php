@@ -31,6 +31,6 @@ class PendingOrderExport implements FromCollection,WithHeadings
     */
     public function collection()
     {
-        return Order::where('status', Order::IS_PENDING)->select(['name','address','phone_number','email','city',DB::raw('"1" as Pieces') , DB::raw('"0.6" as Weight'),'total',DB::raw('"DON-123" as CustomerReferenceNumber'),DB::raw('"No" as SpecialHandling'),DB::raw('"Overnight" as ServiceType'),DB::raw('"clothes" as ProductDetails'),'order_note'])->get();
+        return Order::where('status', Order::IS_PENDING)->select(['name','address','phone_number','email','city',DB::raw('"1" as Pieces') , DB::raw('"0.6" as Weight'),'total',DB::raw('order_id as CustomerReferenceNumber'),DB::raw('"No" as SpecialHandling'),DB::raw('"Overnight" as ServiceType'),DB::raw('"clothes" as ProductDetails'),'order_note'])->get();
     }
 }
