@@ -23,7 +23,8 @@ class Product extends Model
         'category_id',
         'stock',
         'left_color',
-        'right_color'
+        'right_color',
+        'cost'
     ];
 
     public function getImagePathAttribute()
@@ -38,5 +39,9 @@ class Product extends Model
 
     public function images(){
         return $this->hasMany(Image::class);
+    }
+
+    public function budgets(){
+        return $this->hasMany(AdBudget::class);
     }
 }

@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('page-level/css/image-popup.css')}}">
-@endsection
+@stop
 
 @section('content')
 
@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Products</h1>
+                    <h1 class="m-0">Ad Budget of {{ $product->name }}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -32,10 +32,10 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header float-right">
-                    <a class="btn btn-primary" href="{{ route('admin.product.create') }}">Create Product</a>
+                    <a class="btn btn-primary" href="{{ route('admin.budget.create', $product) }}">Create Budget</a>
                 </div>
                 <div class="card-body table-responsive">
-                    <table class="table" id="products-table">
+                    <table class="table" id="budgets-table">
                     </table>
                 </div>
             </div>
@@ -44,33 +44,27 @@
     </div>
     <!-- /.content -->
 
-    @include('admin.pages.partials.image-popup')
 @endsection
 
-
+@include('admin.pages.partials.image-popup')
 
 @section('extra-js')
 
     <script src="{{asset('plugins/datatables/jquery.dataTables.js')}}"></script>
     <script src="{{asset('page-level/js/image-popup.js')}}"></script>
 
-
     <script>
-        $('#products-table').DataTable({
+        $('#budgets-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ route('admin.product.table.data') }}',
+            ajax: '{{ route('admin.budget.table.data', $product->id) }}',
             columns: [
                 {data: 'id', title: 'ID'},
-                {data: 'name', title: 'Name'},
-                {data: 'category.name', title: 'Category'},
-                {data: 'image', title: 'Image'},
-                {data: 'slug', title: 'Slug'},
-                {data: 'status', title: 'Active'},
-                {data: 'original_price', title: 'Price'},
-                {data: 'discounted_price', title: 'Discounted Price'},
-                {data: 'cost', title: 'Cost'},
-                {data: 'action', title: 'Action'},
+                {data: 'budget', title: 'Budget'},
+                {data: 'sold', title: 'Sold'},
+                {data: 'cost', title: 'Cost per sale'},
+                {data: 'created_at', title: 'Date'}
+                
             ]
         });
     </script>

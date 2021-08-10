@@ -66,6 +66,8 @@ class CheckoutController extends Controller
                 [
                     'quantity' => $product['qty'],
                     'price' => $product['total_price'],
+                    'created_at' => now(),
+                    'updated_at' => now()
                 ]
             );
         }
@@ -75,10 +77,11 @@ class CheckoutController extends Controller
             Auth::login($user);
         }
 
-        
-        $user = User::first();
-        Notification::send($user, new OrderReceived($order, $products));
 
+        if (app()->isProduction()) {
+            $user = User::first();
+            Notification::send($user, new OrderReceived($order, $products));
+        }
         return redirect()->route('thank-you',  ['order_id' => $order->order_id]);
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Notification;
 use App\Http\Controllers\user\PagesController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\admin\BudgetController;
 use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\user\CheckoutController;
@@ -44,6 +45,10 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::get('order/cancel/{id}', [OrderController::class, 'cancel'])->name('order.ship');
     Route::get('completed-orders', [OrderController::class, 'completed'])->name('order.completed');
     Route::get('cancelled-orders', [OrderController::class, 'cancelled'])->name('order.cancelled');
+    Route::get('budget/index/{product}', [BudgetController::class, 'index'])->name('budget.show');
+    Route::get('budget/create/{product}', [BudgetController::class, 'create'])->name('budget.create');
+    Route::post('budget/store/{product}', [BudgetController::class, 'store'])->name('budget.store');
+    Route::get('budget/{product}', [BudgetController::class, 'tableData'])->name('budget.table.data');
 });
 
 

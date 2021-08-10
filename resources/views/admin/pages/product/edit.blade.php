@@ -84,6 +84,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="cost">Cost</label>
+                    <input name="cost" value="{{ $product->cost }}" type="text" class="form-control" id="cost" placeholder="Enter cost of product">
+                </div>
+
+                <div class="form-group">
                     <label for="upload-image">Upload Image</label>
                     <input name="image" type="file" class="form-control" id="upload-image" accept="image/png, image/jpeg, image/jpg, image/webp">
                 </div>

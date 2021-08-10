@@ -137,13 +137,13 @@ class ProductController extends Controller
     public function dt_ajax_products_data()
     {
         $query = Product::query()
-            ->select(['id', 'name', 'slug', 'stock', 'small_photo_path', 'is_active', 'original_price', 'discounted_price', 'category_id'])
+            ->select(['id', 'name', 'slug', 'cost', 'small_photo_path', 'is_active', 'original_price', 'discounted_price', 'category_id'])
             ->with('category:id,name');
 
         return Datatables::of($query)
             ->addColumn('action', function ($products) {
                 return
-                    '<form class="" action=' . route('admin.product.destroy',  $products->id) . '  method="POST">
+                    '<form class="d-inline" action=' . route('admin.product.destroy',  $products->id) . '  method="POST">
                     ' . csrf_field() . '
                     ' . method_field("DELETE") . '
                     <button type="submit" class="btn btn-danger btn-xs"
@@ -152,6 +152,7 @@ class ProductController extends Controller
                     </form>
                     <a class="btn btn-info btn-xs" href=' . route('admin.product.edit', $products->id) . '><i class="fa fa-edit"></i></a>
                     <a class="btn btn-info btn-xs" href=' . route('admin.product.images', $products->id) . '><i class="fa fa-image"></i></a>
+                    <a class="btn btn-info btn-xs" href=' . route('admin.budget.show', $products->id) . '>$$</a>
                     ';
             })
             ->addColumn('status', function ($products) {
