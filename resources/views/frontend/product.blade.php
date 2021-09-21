@@ -123,9 +123,6 @@
                                         Product available
                                     </div>
                                 </div>
-                                <div class="alert alert-warning" role="alert">
-                                    Use "danoori20" on checkout page or mention in whatsapp to get extra 20% off.
-                                </div>
                                 @livewire('add-to-cart', ['product_id' => $product->id])
                                 <div class="d-flex justify-content-between pt-2 pb-1">
 

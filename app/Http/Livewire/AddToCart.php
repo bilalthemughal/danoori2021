@@ -25,6 +25,8 @@ class AddToCart extends Component
 
         $this->emit('productAdded');
         $this->quantity = 1;
+        return redirect()->route('checkout');
+
     }
 
     public function render()
