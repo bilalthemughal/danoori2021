@@ -58,39 +58,42 @@
                         <p class="alert alert-danger">{{ Session::get('message') }}</p>
                     @endif
                     <!-- Autor info-->
-                    <div
-                        class="d-sm-flex justify-content-between align-items-center bg-secondary p-4 rounded-3 mb-grid-gutter">
-                        <div class="d-flex align-items-center">
-                            <div class="img-thumbnail rounded-circle position-relative flex-shrink-0">
+                    @auth
 
-                                <img class="rounded-circle" src="{{ asset('images/placeholder.png') }}" width="90"
-                                    alt="Danoori User">
+                        <div
+                            class="d-sm-flex justify-content-between align-items-center bg-secondary p-4 rounded-3 mb-grid-gutter">
+                            <div class="d-flex align-items-center">
+                                <div class="img-thumbnail rounded-circle position-relative flex-shrink-0">
+
+                                    <img class="rounded-circle" src="{{ asset('images/placeholder.png') }}" width="90"
+                                        alt="Danoori User">
+                                </div>
+                                <div class="ps-3">
+                                    <h3 class="fs-base mb-0">@auth {{ Auth::user()->name }} @else Danoori's Guest @endauth
+                                    </h3>
+                                    <span class="text-accent fs-sm">@auth {{ Auth::user()->email }} @endauth</span>
+                                </div>
                             </div>
-                            <div class="ps-3">
-                                <h3 class="fs-base mb-0">@auth {{ Auth::user()->name }} @else Danoori's Guest @endauth
-                                </h3>
-                                <span class="text-accent fs-sm">@auth {{ Auth::user()->email }} @endauth</span>
-                            </div>
-                        </div>
-                        <a class="btn btn-light btn-sm btn-shadow mt-3 mt-sm-0" href="account-profile.html">
+                            {{-- <a class="btn btn-light btn-sm btn-shadow mt-3 mt-sm-0" href="account-profile.html">
                             <i class="ci-edit me-2"></i>Edit profile
-                        </a>
-                    </div>
+                        </a> --}}
+                        </div>
+                    @endauth
                     <!-- Shipping address-->
 
-                    <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">Shipping address</h2>
+                    <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">Shipping Address</h2>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label class="form-label" for="checkout-fn">Name</label>
+                                <label class="form-label" for="checkout-fn">Name (نام)</label>
                                 <input name="name" required @auth value="{{ Auth::user()->name }}" @endauth
                                     class="form-control" type="text" id="checkout-fn">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label class="form-label" for="checkout-email">E-mail Address</label>
-                                <input name="email" @auth value="{{ Auth::user()->email }}" @endauth required
+                                <label class="form-label" for="checkout-email">E-mail Address (اگر آپ کے پاس ای میل نہیں ہے تو اسے خالی چھوڑ دیں)</label>
+                                <input name="email" @auth value="{{ Auth::user()->email }}" @endauth
                                     class="form-control" type="email" id="checkout-email">
                             </div>
                         </div>
@@ -98,30 +101,30 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label class="form-label" for="checkout-phone">Phone Number</label>
-                                <input name="phone_number" value="{{ old('phone_number') }}" required class="form-control"
-                                    type="text" id="checkout-phone">
+                                <label class="form-label" for="checkout-phone">Phone Number (فون نمبر)</label>
+                                <input name="phone_number" value="{{ old('phone_number') }}" required
+                                    class="form-control" type="text" id="checkout-phone">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label class="form-label" for="checkout-address-1">Address</label>
-                                <input name="address" required value="{{ old('phone_number') }}" class="form-control"
-                                    type="text" id="checkout-address-1">
+                                <label for="city" class="form-label">City (شہر)</label>
+                                <input name="city" required value="{{ old('phone_number') }}" class="form-control"
+                                    type="text" id="city">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="city" class="form-label">City</label>
-                                <input name="city" required value="{{ old('phone_number') }}" class="form-control"
-                                    type="text" id="city">
+                                <label class="form-label" for="checkout-address-1">Address (مکمل پتہ)</label>
+                                <textarea class="form-control" name="address" value="{{ old('phone_number') }}" required
+                                    id="checkout-address-1" cols="20" rows="3"></textarea>
                             </div>
                         </div>
                     </div>
 
-                    @guest
+                    {{-- @guest
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="mb-3">
@@ -134,7 +137,7 @@
                         </div>
                         <div class="row" style="display: none;" id="showPassword">
                         </div>
-                    @endguest
+                    @endguest --}}
 
                     <!-- Navigation (mobile)-->
                     <div class="row d-lg-none">
@@ -191,7 +194,7 @@
 
 @endsection
 
-@section('extra-js')
+{{-- @section('extra-js')
     <script>
         function yesnoCheck() {
 
@@ -211,4 +214,4 @@
         }
     </script>
 
-@endsection
+@endsection --}}

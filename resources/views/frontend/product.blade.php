@@ -132,7 +132,7 @@
                                         &nbsp;Buy via whatsapp
                                     </a>
                                 </div>
-                                @livewire('quick-buy', ['product_id' => $product->id])
+                                {{-- @livewire('quick-buy', ['product_id' => $product->id]) --}}
 
                             @else
                                 <div class="position-relative me-n4 mb-5">
