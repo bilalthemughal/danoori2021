@@ -19,10 +19,11 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
-    
+
     <link rel="stylesheet" media="screen" href="{{ asset('vendor/tiny-slider/dist/tiny-slider.css') }}" />
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" defer media="screen" href="{{ asset('css/theme.min.css') }}">
+    <!-- Facebook Pixel Code -->
     <!-- Facebook Pixel Code -->
     <script>
         ! function(f, b, e, v, n, t, s) {
@@ -43,9 +44,12 @@
             s.parentNode.insertBefore(t, s)
         }(window, document, 'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '239923794388178');
+        fbq('init', '383343576730611');
         fbq('track', 'PageView');
     </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=383343576730611&ev=PageView&noscript=1" /></noscript>
+    <!-- End Facebook Pixel Code -->
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=239923794388178&ev=PageView&noscript=1" /></noscript>
     <!-- End Facebook Pixel Code -->
@@ -95,8 +99,10 @@
         </div>
     </div>
     <!-- Back To Top Button-->
-    <a class="btn btn-success rounded-pill btn-icon" style="position: fixed; bottom: 10%; right: 5%; z-index: 100;" href="https://wa.me/+923414455332">
-        <img src="https://img.icons8.com/ios/24/000000/whatsapp--v2.png"/><span style="font-size: 18px;">&nbsp;CONTACT US</span> 
+    <a class="btn btn-success rounded-pill btn-icon" style="position: fixed; bottom: 10%; right: 5%; z-index: 100;"
+        href="https://wa.me/+923414455332">
+        <img src="https://img.icons8.com/ios/24/000000/whatsapp--v2.png" /><span style="font-size: 18px;">&nbsp;CONTACT
+            US</span>
     </a>
     <!-- Vendor scrits: js libraries and plugins-->
     <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
