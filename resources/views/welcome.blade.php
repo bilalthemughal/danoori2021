@@ -1,6 +1,6 @@
 @extends('frontend.layout')
 @section('title')
-Danoori | Clothing Store
+    Danoori | Clothing Store
 @endsection
 @section('content')
 
@@ -81,7 +81,7 @@ Danoori | Clothing Store
 @endsection
 
 @section('extra-js')
-
-
-
+    <script>
+        fbq('track', 'PageView');
+    </script>
 @endsection
