@@ -54,7 +54,9 @@
     <script>
         let total = {{ Session::get('total') }};
         if (total) {
-            fbq('track', 'Purchase', {currency: 'PKR', value: total});
+            <img height="1" width="1" style="display:none"
+                src=`https://www.facebook.com/tr?id=383343576730611&amp;amp;ev=Purchase&amp;amp;cd[value]=${total}.00&amp;amp;cd[currency]=PKR` />
+            // fbq('track', 'Purchase', {currency: 'PKR', value: total});
         }
     </script>
 @endsection
