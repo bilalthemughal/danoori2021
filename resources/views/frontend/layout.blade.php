@@ -96,7 +96,7 @@
     </div>
     <!-- Back To Top Button-->
     <a class="btn btn-success rounded-pill btn-icon" style="position: fixed; bottom: 10%; right: 5%; z-index: 100;"
-        href="https://wa.me/+923414455332" id="whatsapp-button">
+        href="https://wa.me/+923414455332" id="contactus-button">
         <img src="https://img.icons8.com/ios/24/000000/whatsapp--v2.png" /><span style="font-size: 18px;">&nbsp;CONTACT
             US</span>
     </a>
@@ -111,6 +111,11 @@
     @livewireScripts
     @yield('extra-js')
     <script src="{{ asset('js/theme.min.js') }}"></script>
+    <script>
+        $('#contactus-button').click(function() {
+            fbq('track', 'Lead');
+        });
+    </script>
 </body>
 
 </html>
