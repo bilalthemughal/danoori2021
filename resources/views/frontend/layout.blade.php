@@ -112,9 +112,9 @@
     @yield('extra-js')
     <script src="{{ asset('js/theme.min.js') }}"></script>
     <script>
-        $('#contactus-button').click(function() {
+        document.querySelector('#contactus-button').addEventListener('click', () => {
             fbq('track', 'Lead');
-        });
+        })
     </script>
 </body>
 
