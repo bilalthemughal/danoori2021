@@ -127,7 +127,8 @@
                                 <div class="d-flex justify-content-between pt-2 pb-1">
 
                                     <a href="{{ 'https://wa.me/+923414455332?text=I am interested in buying *' . $product->name . ' - Rs: ' . ($product->discounted_price ?: $product->original_price) . '*. ' . Request::fullurl() }}"
-                                        target="_blank" class="btn btn-success btn-shadow d-block w-100" type="button">
+                                        target="_blank" class="btn btn-success btn-shadow d-block w-100"
+                                        id="whatsapp-button" type="button">
                                         <i class="fab fa-whatsapp"></i>
                                         &nbsp;Buy via whatsapp
                                     </a>
@@ -150,7 +151,8 @@
                                 <div class="d-flex align-items-center pt-2 pb-4">
 
                                     <a href="{{ 'https://wa.me/+923414455332?text=When this dress will be back in stock? *' . $product->name . ' - Rs: ' . ($product->discounted_price ?: $product->original_price) . '*. ' . Request::fullUrl() }}"
-                                        target="_blank" class="btn btn-success btn-shadow d-block w-100" type="button">
+                                        target="_blank" class="btn btn-success btn-shadow d-block w-100"
+                                        id="whatsapp-button" type="button">
                                         <i class="fab fa-whatsapp"></i>
                                         &nbsp;Inform When Available ?
                                     </a>
@@ -254,7 +256,8 @@
                                                         bleach</div>
                                                     <div class="tab-pane fade" id="hand-wash" role="tabpanel">Hand wash
                                                         normal (30°)</div>
-                                                    <div class="tab-pane fade" id="ironing" role="tabpanel">Low temperature
+                                                    <div class="tab-pane fade" id="ironing" role="tabpanel">Low
+                                                        temperature
                                                         ironing</div>
                                                     <div class="tab-pane fade" id="dry-clean" role="tabpanel">Do not dry
                                                         clean</div>
@@ -266,11 +269,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
 
                             <!-- Sharing-->
                             <label class="form-label d-inline-block align-middle my-2 me-3">Share:</label>
@@ -378,5 +376,11 @@
     <script src="{{ asset('vendor/drift-zoom/dist/Drift.min.js') }}"></script>
     <script>
         fbq('track', 'ViewContent');
+    </script>
+
+    <script>
+        $('#whatsapp-button').click(function() {
+            fbq('track', 'Lead');
+        });
     </script>
 @endsection
