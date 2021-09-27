@@ -52,6 +52,9 @@
 
 @section('extra-js')
     <script>
-        fbq('track', 'Purchase');
+        let total = '{{ Session::get('total') }}';
+        if (total) {
+            fbq('track', 'Purchase', {currency: "PKR", value: total});
+        }
     </script>
 @endsection

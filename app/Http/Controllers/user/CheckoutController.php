@@ -27,21 +27,6 @@ class CheckoutController extends Controller
 
         $user_id = null;
 
-        // if ($request['password']) {
-        //     $this->validate($request, [
-        //         'email' => 'unique:users,email'
-        //     ], [
-        //         'email.unique' => 'This email is already taken. If it belongs to you 
-        //         <a href="' . route('login') . '">click here to sign in.</a>'
-        //     ]);
-        //     $user = User::create([
-        //         'name' => $request['name'],
-        //         'email' => $request['email'],
-        //         'password' => bcrypt($request['password'])
-        //     ]);
-        //     $user_id = $user->id;
-        // }
-
         if (Auth::id()) {
             $user_id = Auth::id();
         }
@@ -58,7 +43,6 @@ class CheckoutController extends Controller
         $params['total'] = $cart->discountedPrice;
         $params['coupon'] = $cart->coupon_text;
         $params['total_products'] = $cart->totalQty;
-        // return $params;
 
         $products = $cart->items;
 
@@ -81,11 +65,11 @@ class CheckoutController extends Controller
             Auth::login($user);
         }
 
-
         if (app()->isProduction()) {
             $user = User::first();
             Notification::send($user, new OrderReceived($order, $products));
         }
+        Session::flash('total', $params['total']);
         return redirect()->route('thank-you',  ['order_id' => $order->order_id]);
     }
 }
