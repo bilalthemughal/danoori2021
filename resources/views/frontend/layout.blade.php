@@ -111,9 +111,6 @@
     @livewireScripts
     @yield('extra-js')
     <script src="{{ asset('js/theme.min.js') }}"></script>
-
-
-
 </body>
 
 </html>

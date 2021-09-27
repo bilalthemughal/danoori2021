@@ -75,12 +75,9 @@
     </section>
 
     @livewire('products')
-
-
-
 @endsection
 
-@section('extra-js')
+@section('extra-css')
     <script>
         fbq('track', 'PageView');
     </script>
