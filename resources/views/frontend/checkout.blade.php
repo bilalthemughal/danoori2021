@@ -194,24 +194,8 @@
 
 @endsection
 
-{{-- @section('extra-js')
-    <script>
-        function yesnoCheck() {
-
-            // alert(document.getElementById('customSwitch1').value);
-            if (document.getElementById("customSwitch1").checked) {
-                let password = `<div class="col-sm-6" id="passwordField">
-                                                                                                <div class="mb-3">
-                                                                                                    <label for="password" class="form-label">Password</label>
-                                                                                                    <input name="password" required class="form-control" type="password" id="password">
-                                                                                                </div>
-                                                                                            </div>`;
-                document.getElementById('showPassword').innerHTML += password;
-                document.getElementById('showPassword').style.display = 'block';
-            } else {
-                document.getElementById('passwordField').remove();
-            }
-        }
-    </script>
-
-@endsection --}}
+@section('extra-js')
+<script>
+    fbq('track', 'AddToCart');
+</script>
+@endsection
