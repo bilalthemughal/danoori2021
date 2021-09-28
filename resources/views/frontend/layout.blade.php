@@ -74,7 +74,7 @@
             position: fixed;
             left: 50px;
             bottom: 20px;
-            z-index: 100;
+            z-index: 150;
             background: white;
             max-width: 360px;
             max-height: 0;
