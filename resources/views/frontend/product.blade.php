@@ -375,7 +375,10 @@
     <script src="{{ asset('vendor/simplebar/dist/simplebar.min.js') }}"></script>
     <script src="{{ asset('vendor/drift-zoom/dist/Drift.min.js') }}"></script>
     <script>
-        fbq('track', 'ViewContent');
+        let view = {{ Session::get('view') }};
+        if (view) {
+            fbq('track', 'ViewContent');
+        }
     </script>
 
     <script>

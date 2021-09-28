@@ -19,6 +19,7 @@ class QuickBuy extends Component
         $cart->add($product, $product->id, 1);
 
         Session::put('cart', $cart);
+        Session::flash('added', true);
 
         return redirect()->route('checkout');
     }

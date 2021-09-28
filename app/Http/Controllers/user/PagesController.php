@@ -26,9 +26,8 @@ class PagesController extends Controller
             ->limit(5)
             ->with('category:id,slug,name')
             ->get();
-
-
-
+        
+        Session::flash('view', true);
         return view('frontend.product', compact('product', 'sameProducts'));
     }
 

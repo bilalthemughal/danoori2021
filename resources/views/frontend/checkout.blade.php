@@ -196,6 +196,9 @@
 
 @section('extra-js')
 <script>
-    fbq('track', 'AddToCart');
+    let added = {{ Session::get('added') }};
+    if(added){
+        fbq('track', 'AddToCart');
+    }
 </script>
 @endsection
