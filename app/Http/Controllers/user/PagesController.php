@@ -70,6 +70,7 @@ class PagesController extends Controller
             ->inRandomOrder()
             ->limit(1)
             ->whereDate('order_product.created_at', '>=', Carbon::now()->subDays(2))
+            ->where('orders.status', '!=', Order::IS_CANCELLED)
             ->first(['order_product.created_at', 'small_photo_path', 'products.name', 'city', 'categories.slug as category_slug', 'products.slug as product_slug']);
 
         return response()->json(
