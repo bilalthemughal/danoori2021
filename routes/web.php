@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Order;
 use Illuminate\Support\Facades\DB;
@@ -69,6 +70,4 @@ require __DIR__ . '/auth.php';
 
 Route::get('/{category_slug}/{product_slug}', [PagesController::class, 'product'])->name('category.product');
 
-Route::get('/test', function(){
-        return Order::where('status', Order::IS_PENDING)->select(['name','address','phone_number','email','city',DB::raw('"1" as Pieces') , DB::raw('"0.6" as Weight'),'total',DB::raw('"DON-123" as CustomerReferenceNumber'),DB::raw('"No" as SpecialHandling'),DB::raw('"Overnight" as ServiceType'),DB::raw('"clothes" as ProductDetails')])->get();
-});
+Route::get('/pop-up', [PagesController::class, 'popup'])->name('pop-up');

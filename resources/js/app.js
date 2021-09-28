@@ -1,4 +1,4 @@
-require('yall-js')
+// require('yall-js')
 
 // require('./bootstrap');
 

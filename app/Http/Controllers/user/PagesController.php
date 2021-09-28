@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\user;
 
 use App\Cart;
-use App\Models\Order;
+use Carbon\Carbon;
 // use Request;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductView;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
@@ -26,7 +28,7 @@ class PagesController extends Controller
             ->limit(5)
             ->with('category:id,slug,name')
             ->get();
-        
+
         Session::flash('view', true);
         return view('frontend.product', compact('product', 'sameProducts'));
     }
@@ -57,5 +59,28 @@ class PagesController extends Controller
     {
         $order_id = Request::input('order_id');
         return view('frontend.thank-you', compact('order_id'));
+    }
+
+    public function popup()
+    {
+        $order = DB::table('order_product')
+            ->join('products', 'products.id', '=', 'order_product.product_id')
+            ->join('orders', 'orders.id', '=', 'order_product.order_id')
+            ->join('categories', 'categories.id', '=' , 'products.category_id')
+            ->inRandomOrder()
+            ->limit(1)
+            ->whereDate('order_product.created_at', '>=', Carbon::now()->subDays(2))
+            ->first(['order_product.created_at', 'small_photo_path', 'products.name', 'city', 'categories.slug as category_slug', 'products.slug as product_slug']);
+
+        return response()->json(
+            [
+                'city' => $order->city,
+                'product_name' => $order->name,
+                'time' => Carbon::parse($order->created_at)->diffForHumans(),
+                'photo' => $order->small_photo_path,
+                'category_slug' => $order->category_slug,
+                'product_slug' => $order->product_slug
+            ]
+        );
     }
 }
