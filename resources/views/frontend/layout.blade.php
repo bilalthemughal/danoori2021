@@ -218,7 +218,7 @@
 
             setInterval(() => {
                 let popup = document.querySelector('.purchase-popup');
-                // popup.classList.remove('active');
+                popup.classList.remove('active');
                 setTimeout(() => {
                     showPopUp();
                 }, 5000)
