@@ -82,6 +82,7 @@
             transition: 1s ease;
             overflow: hidden;
             cursor: pointer;
+
         }
 
         .purchase-popup.active {
@@ -152,8 +153,8 @@
 
         .pop__cta {
             position: absolute;
-            top: -5px;
-            right: -5px;
+            top: 0px;
+            right: 6px;
             cursor: pointer;
         }
 
