@@ -7,5 +7,5 @@
             <h6 class="popup__heading"></h6>
             <p class="popup__time"></p>
         </div>
-    <button class="btn btn-xs pop__cta">X</button>
+    <button class="btn btn-xs pop__cta"><i class="ci-close" style="font-size: 11px;"></i></button>
 </div>
