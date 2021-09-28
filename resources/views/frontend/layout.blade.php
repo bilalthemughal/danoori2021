@@ -137,6 +137,7 @@
         .popup__detail {
             font-size: 12px;
             font-weight: 400;
+            margin-right: 25px;
         }
 
         .popup__heading {
@@ -217,7 +218,7 @@
 
             setInterval(() => {
                 let popup = document.querySelector('.purchase-popup');
-                popup.classList.remove('active');
+                // popup.classList.remove('active');
                 setTimeout(() => {
                     showPopUp();
                 }, 5000)
@@ -237,6 +238,8 @@
             let popup__heading = document.querySelector('.popup__heading');
             let popup__time = document.querySelector('.popup__time');
             let popup = document.querySelector('.purchase-popup');
+            let popup__text = document.querySelector('.popup__text');
+            let url = '';
             axios.get('/pop-up').then(({
                 data
             }) => {
@@ -244,10 +247,17 @@
                 popup__detail.innerHTML = 'Someone in ' + data['city'] + ' , Pakistan purchased';
                 popup__heading.innerHTML = data['product_name'];
                 popup__time.innerHTML = data['time'];
-                popup.href = "/"+data['category_slug']+"/"+data['product_slug'];
+                url = "/"+data['category_slug']+"/"+data['product_slug'];
                 image.addEventListener('load', function() {
                     popup.classList.add('active');
                 })
+            })
+
+            image.addEventListener('click', function() {
+                window.location.href = url;
+            })
+            popup__text.addEventListener('click', function() {
+                window.location.href = url;
             })
         }
     </script>

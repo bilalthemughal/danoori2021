@@ -1,4 +1,4 @@
-<a class="purchase-popup">
+<div class="purchase-popup">
         <div class="image-container">
             <img class="popup__image" src="" alt="">
         </div>
@@ -8,4 +8,4 @@
             <p class="popup__time"></p>
         </div>
     <button class="btn btn-xs pop__cta">X</button>
-</a>
+</div>
