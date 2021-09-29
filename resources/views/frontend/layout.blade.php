@@ -220,7 +220,7 @@
         // import axios from 'axios';
         window.onload = function() {
 
-            showPopUp();
+            setTimeout(showPopUp, 4000);
 
             setInterval(() => {
                 let popup = document.querySelector('.purchase-popup');
