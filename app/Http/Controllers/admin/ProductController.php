@@ -33,6 +33,10 @@ class ProductController extends Controller
 
         $params = $request->validated();
 
+        if($request->video_path){
+            $params['video_path'] = $request->video_path;
+        }
+
 
         $params['large_photo_path'] = Cloudinary::uploadFile($request->file('image')->getRealPath(), [
             'folder' => 'Products',
@@ -114,6 +118,10 @@ class ProductController extends Controller
             $params['second_photo_path'] = Cloudinary::upload($request->file('second_image')->getRealPath(), [
                 'folder' => 'Products',
             ])->getPublicId();
+        }
+
+        if($request->video_path){
+            $params['video_path'] = $request->video_path;
         }
 
         $product->update($params);

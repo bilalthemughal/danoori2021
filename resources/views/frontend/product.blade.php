@@ -6,8 +6,9 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/3c40f56017.js" crossorigin="anonymous"></script>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" media="screen" href="{{asset('vendor/lightgallery.js/dist/css/lightgallery.min.css')}}">
+    <link rel="stylesheet" media="screen" href="{{asset('vendor/simplebar/dist/simplebar.min.css')}}">
+    <link rel="stylesheet" media="screen" href="{{asset('vendor/drift-zoom/dist/drift-basic.min.css')}}">
 
 @endsection
 
@@ -92,6 +93,14 @@
                                         <img src="{{ get_image_path($image->path) }}" alt="Product thumb">
                                     </a>
                                 @endforeach
+                                @if($product->video_path)
+                                <a class="product-gallery-thumblist-item video-item"
+                                    href="{{ $product->video_path }}">
+                                    <div class="product-gallery-thumblist-item-text">
+                                        <i class="ci-video"></i>Video
+                                    </div>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -368,12 +377,12 @@
         </div>
     </div>
 
-
 @endsection
 
 @section('extra-js')
-    <script src="{{ asset('vendor/simplebar/dist/simplebar.min.js') }}"></script>
     <script src="{{ asset('vendor/drift-zoom/dist/Drift.min.js') }}"></script>
+    <script src="{{ asset('vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
+    <script src="{{ asset('vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
     <script>
         let view = {{ Session::get('view') }};
         if (view) {

@@ -95,6 +95,7 @@
                         accept="image/png, image/jpeg, image/jpg, image/webp">
                 </div>
 
+
                 <div class="form-group">
                     <label for="upload-image">Upload Image</label>
                     <input name="second_image" required type="file" class="form-control" id="upload-image"
@@ -112,6 +113,12 @@
                         <input name="right_color" required value="{{ old('right_color') }}" type="text"
                             class="form-control" id="right_color" placeholder="Enter right color">
                     </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="video">Video</label>
+                    <input name="video_path" value="{{ old('video') }}" type="text" class="form-control" id="video"
+                        placeholder="Enter Video Path">
                 </div>
 
                 <div class="form-group">

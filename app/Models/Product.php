@@ -24,7 +24,8 @@ class Product extends Model
         'stock',
         'left_color',
         'right_color',
-        'cost'
+        'cost',
+        'video_path'
     ];
 
     public function getImagePathAttribute()

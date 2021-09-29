@@ -112,6 +112,12 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="video">Video</label>
+                    <input name="video_path" value="{{ $product->video_path }}" type="text" class="form-control" id="video"
+                        placeholder="Enter Video Path">
+                </div>
+
+                <div class="form-group">
                     <label for="product_info">Product Information</label>
                     <textarea id="product-info-editor" name="product_info">{{ $product->product_info }}</textarea>
                 </div>
