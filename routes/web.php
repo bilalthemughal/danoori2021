@@ -53,6 +53,8 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::post('budget/store/{product}', [BudgetController::class, 'store'])->name('budget.store');
     Route::get('budget/{product}', [BudgetController::class, 'tableData'])->name('budget.table.data');
     Route::get('export/orders', [OrderController::class, 'export'])->name('order.export');
+    Route::get('new-order', [OrderController::class, 'newOrder'])->name('new-order');
+    Route::post('store-order', [OrderController::class, 'store'])->name('order.store');
 });
 
 

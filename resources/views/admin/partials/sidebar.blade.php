@@ -51,6 +51,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.new-order') }}" class="nav-link {{ Request::routeIs('admin.new-order') ? 'active' : '' }}">
+                        <i class="fa fa-shopping-cart nav-icon"></i>
+                        <p>New Order</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.order.index') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fa fa-lock nav-icon"></i>
                         <p>Log Out</p>
