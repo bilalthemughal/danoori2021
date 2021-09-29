@@ -94,16 +94,6 @@
             padding: 5px;
         }
 
-        @media (max-width: 400px) {
-            .purchase-popup {
-                left: 10px;
-            }
-
-            .purchase-popup.active {
-                left: 10px;
-                bottom: 70px;
-            }
-        }
 
         @media (max-width: 800px) {
             .purchase-popup {
@@ -113,6 +103,19 @@
             .purchase-popup.active {
                 left: 10px;
                 bottom: 100px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .purchase-popup {
+                left: 10px;
+            }
+
+            .purchase-popup.active {
+                left: 50%;
+                transform: translateX(-50%);
+                min-width: 340px;
+                bottom: 60px;
             }
         }
 
@@ -219,7 +222,7 @@
 
             setInterval(() => {
                 let popup = document.querySelector('.purchase-popup');
-                popup.classList.remove('active');
+                // popup.classList.remove('active');
                 setTimeout(() => {
                     showPopUp();
                 }, 5000)
