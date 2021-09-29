@@ -106,8 +106,9 @@
             }
         }
         
-        @media (max-width: 400px) {
+        @media (max-width: 450px) {
             .purchase-popup {
+                min-width: 340px;
                 left: 50%;
                 transform: translateX(-50%);
             }
