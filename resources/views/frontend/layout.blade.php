@@ -108,7 +108,8 @@
         
         @media (max-width: 400px) {
             .purchase-popup {
-                left: 10px;
+                left: 50%;
+                transform: translateX(-50%);
             }
 
             .purchase-popup.active {
@@ -222,7 +223,7 @@
 
             setInterval(() => {
                 let popup = document.querySelector('.purchase-popup');
-                // popup.classList.remove('active');
+                popup.classList.remove('active');
                 setTimeout(() => {
                     showPopUp();
                 }, 5000)
