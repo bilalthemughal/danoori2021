@@ -69,7 +69,9 @@ class CheckoutController extends Controller
             $user = User::first();
             Notification::send($user, new OrderReceived($order, $products));
         }
-        Session::flash('total', $params['total']);
+
+        $total = round($params['total']/150,2); 
+        Session::flash('total', $total);
         return redirect()->route('thank-you',  ['order_id' => $order->order_id]);
     }
 }
