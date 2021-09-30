@@ -70,7 +70,7 @@ class CheckoutController extends Controller
             Notification::send($user, new OrderReceived($order, $products));
         }
 
-        $total = round($params['total']/150,2); 
+        $total = round($params['total'],2); 
         Session::flash('total', $total);
         return redirect()->route('thank-you',  ['order_id' => $order->order_id]);
     }
