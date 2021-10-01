@@ -54,7 +54,7 @@
     <script>
         let total = {{ Session::get('total') }};
         if (total) {
-            fbq('track', 'Purchase', {currency: 'abc', value: total});
+            fbq('track', 'Purchase', {currency: 'PKR', value: total});
         }
     </script>
 @endsection
