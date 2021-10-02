@@ -14,11 +14,11 @@ class AddVideoPathColumnToProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('video_path')->default(null);
+            $table->string('video_path')->nullable();
         });
     }
 
-    /**
+    /** 
      * Reverse the migrations.
      *
      * @return void

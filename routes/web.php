@@ -1,12 +1,6 @@
 <?php
 
-use Carbon\Carbon;
-use App\Models\User;
-use App\Models\Order;
-use Illuminate\Support\Facades\DB;
-use App\Notifications\OrderReceived;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Notification;
 use App\Http\Controllers\user\PagesController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\LandingPageController;
@@ -17,7 +11,6 @@ use App\Http\Controllers\user\CheckoutController;
 use App\Http\Controllers\admin\CarouselController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
-use Illuminate\Notifications\Messages\SlackMessage;
 use App\Http\Controllers\admin\ProductImageController;
 
 /*
