@@ -38,11 +38,9 @@
                 <div class="card-body text-center">
                     <h2 class="h4 pb-3">Thank you for your order!</h2>
                     <p class="fs-sm mb-2">Your order has been placed and will be processed as soon as possible.</p>
-                    <p class="fs-sm mb-2">Make sure you make note of your order number, which is <span
-                            class="fw-medium">{{ $order_id }}.</span></p>
-                    <p class="fs-sm">You will be receiving an email shortly with confirmation of your order. <u>You
-                            can now:</u></p><a class="btn btn-secondary mt-3 me-3" href="/">Go back shopping</a> @auth <a
-                            class="btn btn-primary mt-3" href="{{ route('dashboard') }}"><i
+                    <p class="fs-sm">We will call you shortly or confirm your order via Whatsapp.</p>
+                    <a class="btn btn-success mt-3 me-3" href="{{ 'https://wa.me/+923414455332?text=Confirm my order: ' . $order_id  }}"><i class="ci-message"></i>&nbsp;&nbsp;Confirm via Whatsapp</a> @auth 
+                            <a class="btn btn-primary mt-3" href="{{ route('dashboard') }}"><i
                             class="ci-location"></i>&nbsp;Track order</a> @endauth
                 </div>
             </div>
