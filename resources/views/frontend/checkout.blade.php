@@ -19,6 +19,7 @@
     <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
+    <meta name="facebook-domain-verification" content="ixijrccyazbuvpq0s547fy0pk86ye2" />
     <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
 
     <link rel="stylesheet" media="screen" href="{{ asset('vendor/tiny-slider/dist/tiny-slider.css') }}" />
