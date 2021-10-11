@@ -212,6 +212,17 @@
     @yield('extra-js')
     <script src="{{ asset('js/theme.min.js') }}"></script>
     <script>
+        history.scrollRestoration = "manual";
+        window.addEventListener("pageshow", function(event) {
+            var historyTraversal = event.persisted ||
+                (typeof window.performance != "undefined" &&
+                    window.performance.navigation.type === 2);
+            if (historyTraversal) {
+                window.location.reload();
+            }
+        });
+    </script>
+    <script>
         document.querySelector('#contactus-button').addEventListener('click', () => {
             fbq('track', 'Lead');
         })
