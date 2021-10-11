@@ -53,17 +53,14 @@ class OrderController extends Controller
             ->addColumn('products', function($orders){
                 $products = $orders->products;
                 $i = 1;
-                $product_name = '';
+                $product_name = '<div>';
                 foreach($products as $product){
-                    $product_name .= $i . ')  ' .$product->name;
-                    if($i != count($products)){
-                        $product_name .= '  -  ';
-                    }
-                    $i++;
+                    $product_name .= "<img src='https://res.cloudinary.com/danoori/image/upload/v1/$product->small_photo_path' width='50px' height='50px'>";
                 }
+                $product_name  .= '</div>';
                 return $product_name;
             })
-            ->rawColumns(['action', 'time'])
+            ->rawColumns(['action', 'time', 'products'])
             ->make();
     }
 
