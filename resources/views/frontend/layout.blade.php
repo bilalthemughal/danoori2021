@@ -218,7 +218,8 @@
                 (typeof window.performance != "undefined" &&
                     window.performance.navigation.type === 2);
             if (historyTraversal) {
-                window.location.reload();
+                Livewire.emit('productAdded')
+                // window.location.reload();
             }
         });
     </script>
