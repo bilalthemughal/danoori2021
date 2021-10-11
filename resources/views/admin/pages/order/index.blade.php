@@ -94,6 +94,10 @@
                 {
                     data: 'time',
                     title: 'Placed @'
+                }, 
+                {
+                    data: 'edit',
+                    title: 'Edit'
                 }
                 
             ]

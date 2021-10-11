@@ -48,6 +48,8 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::get('export/orders', [OrderController::class, 'export'])->name('order.export');
     Route::get('new-order', [OrderController::class, 'newOrder'])->name('new-order');
     Route::post('store-order', [OrderController::class, 'store'])->name('order.store');
+    // Route::get('edit/{order}', [OrderController::class, 'edit'])->name('order.edit');
+    // Route::put('update-order', [OrderController::class, 'update'])->name('order.update');
 });
 
 
