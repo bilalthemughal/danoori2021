@@ -88,8 +88,8 @@
                     title: 'Total'
                 },
                 {
-                    data: 'coupon',
-                    title: 'Coupon'
+                    data: 'products',
+                    title: 'Products'
                 },
                 {
                     data: 'time',

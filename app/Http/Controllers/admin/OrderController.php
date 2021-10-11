@@ -37,7 +37,8 @@ class OrderController extends Controller
     public function dt_ajax_orders_data(Request $request)
     {
         $query = Order::query()
-            ->select(['id', 'order_id', 'name', 'sub_total', 'total', 'coupon', 'created_at'])
+            ->select(['id', 'order_id', 'name', 'sub_total', 'total', 'created_at'])
+            ->with('products')
             ->where('status', $request['id']);
 
 
@@ -48,6 +49,19 @@ class OrderController extends Controller
             })
             ->addColumn('time', function ($orders) {
                 return $orders->created_at->diffForHumans();
+            })
+            ->addColumn('products', function($orders){
+                $products = $orders->products;
+                $i = 1;
+                $product_name = '';
+                foreach($products as $product){
+                    $product_name .= $i . ')  ' .$product->name;
+                    if($i != count($products)){
+                        $product_name .= '  -  ';
+                    }
+                    $i++;
+                }
+                return $product_name;
             })
             ->rawColumns(['action', 'time'])
             ->make();
