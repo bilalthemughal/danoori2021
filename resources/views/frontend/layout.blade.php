@@ -219,7 +219,6 @@
                     window.performance.navigation.type === 2);
             if (historyTraversal) {
                 Livewire.emit('productAdded')
-                // window.location.reload();
             }
         });
     </script>
