@@ -11,6 +11,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    protected $slack_url = null;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -55,8 +57,28 @@ class User extends Authenticatable
         return false;
     }
 
+    public function setSlackChannel($name)
+    {
+        if (isset($this->slackChannels[$name])) {
+            if($name == 'online'){
+                $this->setSlackUrl(env('SLACK_ONLINE_ORDER'));
+            }
+        }
+        else {
+                $this->setSlackUrl(env('SLACK_OFFLINE_ORDER'));
+        }
+        return $this;
+    }
+
+    public function setSlackUrl($url)
+    {
+        $this->slack_url = $url;
+
+        return $this;
+    }
+
     public function routeNotificationForSlack($notification)
     {
-        return env('SLACK_WEBHOOK');
+        return $this->slack_url;
     }
 }

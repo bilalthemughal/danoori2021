@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Exports\PendingOrderExport;
+use App\Notifications\OfflineOrder;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Notification;
 
 class OrderController extends Controller
 {
@@ -17,10 +20,11 @@ class OrderController extends Controller
         return view('admin.pages.order.index', ['status' => Order::IS_PENDING]);
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $products = Product::all();
         $order = Order::where('id', $id)->first();
-        return view('admin.pages.order.edit', compact('order','products'));
+        return view('admin.pages.order.edit', compact('order', 'products'));
     }
 
     public function completed()
@@ -56,17 +60,17 @@ class OrderController extends Controller
             ->addColumn('time', function ($orders) {
                 return $orders->created_at->diffForHumans();
             })
-            ->addColumn('products', function($orders){
+            ->addColumn('products', function ($orders) {
                 $products = $orders->products;
                 $product_name = '<div>';
-                foreach($products as $product){
+                foreach ($products as $product) {
                     $product_name .= "<img src='https://res.cloudinary.com/danoori/image/upload/v1/$product->small_photo_path' width='50px' height='50px'>";
                 }
                 $product_name  .= '</div>';
                 return $product_name;
             })
             ->addColumn('edit', function ($orders) {
-                return'<a class="btn btn-secondary btn-xs" href=' . route('admin.order.edit', $orders->id) . '> <i class="fa fa-edit"></i> </a>'; 
+                return '<a class="btn btn-secondary btn-xs" href=' . route('admin.order.edit', $orders->id) . '> <i class="fa fa-edit"></i> </a>';
             })
             ->rawColumns(['action', 'time', 'products', 'edit'])
             ->make();
@@ -140,13 +144,20 @@ class OrderController extends Controller
             ]
         );
 
+        if (app()->isProduction()) {
+            $user = User::first();
+            $products = $order->products;
+            $user->setSlackChannel('offline')
+                ->notify(new OfflineOrder($order, $products));
+        }
+
         return redirect()->back();
     }
 
-    public function update(Request $request, Order $order){
+    public function update(Request $request, Order $order)
+    {
         // return $order;
         $order->update($request->all());
         return redirect()->route('admin.order.index');
-
     }
 }
