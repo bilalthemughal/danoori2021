@@ -67,7 +67,8 @@ class CheckoutController extends Controller
 
         if (app()->isProduction()) {
             $user = User::first();
-            Notification::send($user, new OrderReceived($order, $products));
+            $user->setSlackChannel('online')
+                ->notify(new OrderReceived($order, $products));
         }
 
         $total = round($params['total'],2); 
