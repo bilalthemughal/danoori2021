@@ -27,6 +27,7 @@ class Order extends Model
         'total_products',
         'order_id',
         'user_id',
+        'source'
         
     ];
 

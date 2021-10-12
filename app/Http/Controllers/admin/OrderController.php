@@ -47,15 +47,18 @@ class OrderController extends Controller
     public function dt_ajax_orders_data(Request $request)
     {
         $query = Order::query()
-            ->select(['id', 'order_id', 'name', 'sub_total', 'total', 'created_at'])
+            ->select(['id', 'order_id', 'name', 'sub_total', 'source', 'total', 'created_at'])
             ->with('products')
             ->where('status', $request['id']);
 
 
         return Datatables::of($query)
             ->addColumn('action', function ($orders) {
-                return
-                    '<a class="btn btn-secondary btn-xs" href=' . route('admin.order.show', $orders->id) . '>' . $orders->name . '</a>';
+                if($orders->source == 0){
+                    return '<a class="btn btn-primary btn-xs" href=' . route('admin.order.show', $orders->id) . '>' . $orders->name . '</a>';
+                }else {
+                    return '<a class="btn btn-secondary btn-xs" href=' . route('admin.order.show', $orders->id) . '>' . $orders->name . '</a>';
+                }
             })
             ->addColumn('time', function ($orders) {
                 return $orders->created_at->diffForHumans();
@@ -125,6 +128,7 @@ class OrderController extends Controller
         $params['total_products'] = 1;
         $params['order_note'] = $request->order_note;
         $params['order_id'] = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 1, 11);
+        $params['source'] = 0;
 
         if ($request->email) {
             $params['email'] = $request->email;
