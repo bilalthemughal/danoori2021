@@ -55,7 +55,7 @@ class OrderController extends Controller
         return Datatables::of($query)
             ->addColumn('action', function ($orders) {
                 if($orders->source == 0){
-                    return '<a class="btn btn-primary btn-xs" href=' . route('admin.order.show', $orders->id) . '>' . $orders->name . '</a>';
+                    return '<a class="btn btn-success btn-xs" href=' . route('admin.order.show', $orders->id) . '>' . $orders->name . '</a>';
                 }else {
                     return '<a class="btn btn-secondary btn-xs" href=' . route('admin.order.show', $orders->id) . '>' . $orders->name . '</a>';
                 }
