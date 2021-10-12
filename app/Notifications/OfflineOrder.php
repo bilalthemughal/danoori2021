@@ -64,10 +64,10 @@ class OfflineOrder extends Notification
     
     public function toSlack($notifiable)
     {
-        $content = "You have received an order of amount : ". number_format($this->order->total) .".\n Products: ";
+        $content = "Order: " .$this->order->order_id. " " .number_format($this->order->total).".\n Products: ";
         foreach($this->products as $product){
-            $content .= $product['name']. " * " . $product['qty'] . " , ";
-            $content .= 'https://res.cloudinary.com/danoori/image/upload/v1/'.$product['small_photo_path'] . " , ";
+            $content .= $product['name']. " * " . $product['qty'] . "\n";
+            $content .= 'https://res.cloudinary.com/danoori/image/upload/v1/'.$product['small_photo_path'] . "\n";
         }
         $content .= "\nName : " . $this->order->name . "\nAddress: " . $this->order->address . ", " . $this->order->city . "\nPhone Number: " . $this->order->phone_number;
         return (new SlackMessage)
