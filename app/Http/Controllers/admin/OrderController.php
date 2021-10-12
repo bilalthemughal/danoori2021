@@ -123,6 +123,7 @@ class OrderController extends Controller
         $params['total'] = $request->price;
         $params['sub_total'] = $request->price;
         $params['total_products'] = 1;
+        $params['order_note'] = $request->order_note;
         $params['order_id'] = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 1, 11);
 
         if ($request->email) {

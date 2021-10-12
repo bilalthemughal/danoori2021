@@ -65,6 +65,11 @@
                         placeholder="Address">
                 </div>
                 <div class="form-group">
+                    <label for="order_note">Remarks</label>
+                    <input name="order_note" required value="{{ old('order_note') }}" type="text" class="form-control" id="order_note"
+                        placeholder="Enter Remarks">
+                </div>
+                <div class="form-group">
                     <label for="product_id">Product</label>
                     <select name="product_id" required value="{{ old('product_id') }}" class="form-control"
                         id="product_id">
