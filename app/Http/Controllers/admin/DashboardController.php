@@ -39,11 +39,18 @@ class DashboardController extends Controller
             ->whereDate('orders.created_at', Carbon::yesterday())
             ->where('orders.status', '!=', Order::IS_CANCELLED)
             ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
-            ->leftJoin('products', 'products.id', 'order_product.product_id')
-            ->sum('products.cost');
+            ->rightJoin('products', 'products.id', 'order_product.product_id')
+            ->sum(DB::raw('products.cost * order_product.quantity'));
+
+        $todays_dresses_sold = DB::table('orders')
+            ->where('orders.created_at', '>=', Carbon::today())
+            ->where('orders.status', '!=', Order::IS_CANCELLED)
+            ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
+            ->sum('order_product.quantity');
+
 
         $yesterday_profit = $yesterday_total_sale - ($yesterday_ad_cost + $yesterday_products_cost);
         
-        return view('admin.pages.dashboard', compact('newOrdersCount', 'today_ad_cost', 'yesterday_profit'));
+        return view('admin.pages.dashboard', compact('newOrdersCount', 'today_ad_cost', 'yesterday_profit', 'todays_dresses_sold'));
     }
 }

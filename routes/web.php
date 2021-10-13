@@ -86,9 +86,12 @@ Route::get('/test',function(){
     $products_cost = DB::table('orders')
     ->where('orders.created_at', '>=', Carbon::today())
     ->where('orders.status', '!=', Order::IS_CANCELLED)
-    ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
+    ->rightJoin('order_product', 'orders.id', 'order_product.order_id')
     ->rightJoin('products', 'products.id', 'order_product.product_id')
-    ->sum('products.cost');
+    ->sum(DB::raw('products.cost * order_product.quantity'));
+    // ->get('products.*');
+
+    return $products_cost;
 
     return $total_sale-($ad_cost+$products_cost);
 });

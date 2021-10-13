@@ -73,9 +73,9 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>{{ $todays_dresses_sold }}</h3>
 
-                            <p>Unique Visitors</p>
+                            <p>Today's dresses sold</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>

@@ -55,7 +55,7 @@ class DailyReport extends Command
             ->where('orders.status', '!=', Order::IS_CANCELLED)
             ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
             ->rightJoin('products', 'products.id', 'order_product.product_id')
-            ->sum('products.cost');
+            ->sum(DB::raw('products.cost * order_product.quantity'));
 
         $user = User::first();
         $user->setSlackChannel('daily')
