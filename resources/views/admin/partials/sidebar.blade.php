@@ -57,6 +57,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.ad.create') }}" class="nav-link {{ Request::routeIs('admin.ad.create') ? 'active' : '' }}">
+                        <i class="fa fa-shopping-cart nav-icon"></i>
+                        <p>AD Budget</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.order.index') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fa fa-lock nav-icon"></i>
                         <p>Log Out</p>

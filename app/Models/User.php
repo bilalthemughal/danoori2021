@@ -60,8 +60,10 @@ class User extends Authenticatable
     {
             if($name == 'online'){
                 $this->setSlackUrl(env('SLACK_ONLINE_ORDER'));
-            } else {
+            } else if($name == 'offline') {
                 $this->setSlackUrl(env('SLACK_OFFLINE_ORDER'));
+            } else {
+                $this->setSlackUrl(env('SLACK_DAILY_REPORT'));
             }
         return $this;
     }

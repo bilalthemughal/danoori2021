@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\admin\ADController;
+use Carbon\Carbon;
+use App\Models\Order;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\user\PagesController;
 use App\Http\Controllers\admin\OrderController;
@@ -48,8 +52,8 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::get('export/orders', [OrderController::class, 'export'])->name('order.export');
     Route::get('new-order', [OrderController::class, 'newOrder'])->name('new-order');
     Route::post('store-order', [OrderController::class, 'store'])->name('order.store');
-    // Route::get('edit/{order}', [OrderController::class, 'edit'])->name('order.edit');
-    // Route::put('update-order', [OrderController::class, 'update'])->name('order.update');
+    Route::get('ad', [ADController::class, 'create'])->name('ad.create');
+    Route::post('ad', [ADController::class, 'store'])->name('ad.store');
 });
 
 
@@ -68,3 +72,23 @@ require __DIR__ . '/auth.php';
 Route::get('/{category_slug}/{product_slug}', [PagesController::class, 'product'])->name('category.product');
 
 Route::get('/pop-up', [PagesController::class, 'popup'])->name('pop-up');
+
+Route::get('/test',function(){
+    $total_sale = Order::where('created_at', '>=', Carbon::today())->where('status', '!=', Order::IS_CANCELLED)->sum('total');
+    $ad_cost = DB::table('ad_cost')->where('created_at', '>=',  Carbon::today())->first();
+    if($ad_cost){
+        $ad_cost = $ad_cost->cost;
+    }
+    else {
+        $ad_cost = 0;
+    }
+
+    $products_cost = DB::table('orders')
+    ->where('orders.created_at', '>=', Carbon::today())
+    ->where('orders.status', '!=', Order::IS_CANCELLED)
+    ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
+    ->rightJoin('products', 'products.id', 'order_product.product_id')
+    ->sum('products.cost');
+
+    return $total_sale-($ad_cost+$products_cost);
+});

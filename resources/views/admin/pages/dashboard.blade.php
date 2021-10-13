@@ -43,9 +43,9 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <h3>{{ $today_ad_cost }}<sup style="font-size: 20px">PKR</sup></h3>
 
-                            <p>Bounce Rate</p>
+                            <p>Today's AD Budget</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -58,9 +58,9 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3>{{ $yesterday_profit }}</h3>
 
-                            <p>User Registrations</p>
+                            <p>Yesterday's Profit</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
