@@ -43,7 +43,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{ $today_ad_cost }}<sup style="font-size: 20px">PKR</sup></h3>
+                            <h3>{{ number_format($today_ad_cost) }}<sup style="font-size: 20px">PKR</sup></h3>
 
                             <p>Today's AD Budget</p>
                         </div>
@@ -58,7 +58,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>{{ $yesterday_profit }}</h3>
+                            <h3>{{ number_format($yesterday_profit) }}</h3>
 
                             <p>Yesterday's Profit</p>
                         </div>
