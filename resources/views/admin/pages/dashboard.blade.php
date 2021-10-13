@@ -58,7 +58,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>{{ number_format($yesterday_profit) }}</h3>
+                            <h3>{{ number_format($yesterday_profit) }}<sup style="font-size: 20px">PKR</sup></h3>
 
                             <p>Yesterday's Profit</p>
                         </div>
