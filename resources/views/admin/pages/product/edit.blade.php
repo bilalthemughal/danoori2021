@@ -56,7 +56,7 @@
                     <label for="is_active">Category</label>
                     <select name="category_id" required value="{{ old('category_id') }}" class="form-control" id="category_id">
                         @forelse($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option {{ $category->id == $product->category_id ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->name }}</option>
                         @empty
                             <option value="">No record found</option>
                         @endforelse
