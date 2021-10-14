@@ -65,6 +65,11 @@
                     <input name="address" required value="{{ $order->address }}" type="text" class="form-control" id="address"
                         placeholder="Address">
                 </div>
+                <div class="form-group">
+                    <label for="note">Note</label>
+                    <input name="note" required value="{{ $order->note }}" type="text" class="form-control" id="note"
+                        placeholder="Note">
+                </div>
                 {{-- <div class="form-group">
                     <label for="product_id">Product</label>
                     <select name="product_id" required class="form-control"
