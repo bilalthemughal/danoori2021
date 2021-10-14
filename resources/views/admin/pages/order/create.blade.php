@@ -66,7 +66,7 @@
                 </div>
                 <div class="form-group">
                     <label for="order_note">Remarks</label>
-                    <input name="order_note" required value="{{ old('order_note') }}" type="text" class="form-control" id="order_note"
+                    <input name="order_note" value="{{ old('order_note') }}" type="text" class="form-control" id="order_note"
                         placeholder="Enter Remarks">
                 </div>
                 <div class="form-group">
