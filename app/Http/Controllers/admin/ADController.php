@@ -37,6 +37,9 @@ class ADController extends Controller
             ->select(['id','cost','created_at']);
 
         return Datatables::of($query)
+        ->addColumn('created_at', function($ads){
+            return $ads->created_at->format('d-m-Y');
+        })
         ->addColumn('action', function ($ads) {
                 return
                     '<a class="btn btn-info btn-xs" href=' . route('admin.ad.edit', $ads->id) . '><i class="fa fa-edit"></i></a>';
