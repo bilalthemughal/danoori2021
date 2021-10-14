@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.ad.create') }}" class="nav-link {{ Request::routeIs('admin.ad.create') ? 'active' : '' }}">
+                    <a href="{{ route('admin.ad.index') }}" class="nav-link {{ Request::routeIs('admin.ad.create') ? 'active' : '' }}">
                         <i class="fa fa-shopping-cart nav-icon"></i>
                         <p>AD Budget</p>
                     </a>

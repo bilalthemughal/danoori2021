@@ -53,7 +53,11 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::get('new-order', [OrderController::class, 'newOrder'])->name('new-order');
     Route::post('store-order', [OrderController::class, 'store'])->name('order.store');
     Route::get('ad', [ADController::class, 'create'])->name('ad.create');
+    Route::get('ad/edit/{ad_cost}', [ADController::class, 'edit'])->name('ad.edit');
+    Route::put('ad/update/{id}', [ADController::class, 'update'])->name('ad.update');
     Route::post('ad', [ADController::class, 'store'])->name('ad.store');
+    Route::get('ads', [ADController::class, 'index'])->name('ad.index');
+    Route::get('ads/table', [ADController::class, 'dt_ajax_ad_budget_data'])->name('ad.budget.table');
 });
 
 
