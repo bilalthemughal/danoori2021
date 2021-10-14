@@ -48,9 +48,17 @@ class DashboardController extends Controller
             ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
             ->sum('order_product.quantity');
 
-        // dd($yesterday_ad_cost);
-        $yesterday_profit = $yesterday_total_sale - ($yesterday_ad_cost->cost + $yesterday_products_cost);
+        $yesterday_ad_cost = $yesterday_ad_cost->cost;
+        $yesterday_profit = $yesterday_total_sale - ($yesterday_ad_cost + $yesterday_products_cost);
         
-        return view('admin.pages.dashboard', compact('newOrdersCount', 'today_ad_cost', 'yesterday_profit', 'todays_dresses_sold'));
+        return view('admin.pages.dashboard', compact(
+            'newOrdersCount', 
+            'today_ad_cost', 
+            'yesterday_profit', 
+            'todays_dresses_sold',
+            'yesterday_total_sale',
+            'yesterday_ad_cost',
+            'yesterday_products_cost'
+        ));
     }
 }
