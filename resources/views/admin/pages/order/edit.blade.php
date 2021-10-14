@@ -66,9 +66,9 @@
                         placeholder="Address">
                 </div>
                 <div class="form-group">
-                    <label for="note">Note</label>
-                    <input name="note" required value="{{ $order->note }}" type="text" class="form-control" id="note"
-                        placeholder="Note">
+                    <label for="order_note">Remarks</label>
+                    <input name="order_note" required value="{{ $order->order_note }}" type="text" class="form-control" id="order_note"
+                        placeholder="Remarks">
                 </div>
                 {{-- <div class="form-group">
                     <label for="product_id">Product</label>
