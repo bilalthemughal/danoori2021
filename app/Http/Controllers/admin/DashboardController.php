@@ -18,7 +18,7 @@ class DashboardController extends Controller
         if ($today_ad_cost) {
             $today_ad_cost = $today_ad_cost->cost;
         } else {
-            $today_ad_cost = 'N/A';
+            $today_ad_cost = 0;
         }
         
         $yesterday_total_sale = Order::whereDate('created_at', Carbon::yesterday())
