@@ -24,7 +24,7 @@ class CategoryFactory extends Factory
         return [
             'name' => $this->faker->name,
             'slug' => $this->faker->slug(4),
-            'image' => 'Categories/jyb05i0nni4p7u798p8m',
+            'image' => 'Categories/0Kit7vVmhYnscTxVJrdOQDxOAmPCGH59CyknUaT7.jpg',
             'is_active' => 1,
 
         ];
