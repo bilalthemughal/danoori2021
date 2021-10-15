@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class Category extends Model
 {
@@ -25,6 +24,6 @@ class Category extends Model
 
     public function getImage()
     {
-        return Cloudinary::getImage($this->image);
+        return get_image_path($this->image);
     }
 }

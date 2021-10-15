@@ -6,10 +6,10 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\Admin\ProductCreateRequest;
 use App\Http\Requests\Admin\ProductUpdateRequest;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ProductController extends Controller
 {
@@ -33,32 +33,20 @@ class ProductController extends Controller
 
         $params = $request->validated();
 
-        if($request->video_path){
+        if ($request->video_path) {
             $params['video_path'] = $request->video_path;
         }
 
+        $params['large_photo_path'] = $request->file('image')->store('Products', 's3');
 
-        $params['large_photo_path'] = Cloudinary::uploadFile($request->file('image')->getRealPath(), [
-            'folder' => 'Products',
+        $params['second_photo_path'] = $request->file('second_image')->store('Products', 's3');
 
-        ])->getPublicId();
+        $small = Image::make(request()->file('image'))->resize(296,444)->encode('jpg');
 
-
-        $params['second_photo_path'] = Cloudinary::uploadFile($request->file('second_image')->getRealPath(), [
-            'folder' => 'Products',
-
-        ])->getPublicId();
-
-
-
-        $params['small_photo_path'] = Cloudinary::upload($request->file('image')->getRealPath(), [
-            'folder' => 'Products',
-            'transformation' => [
-                'width' => 296,
-                'height' => 444,
-                'quality' => 100
-            ]
-        ])->getPublicId();
+        $append_str = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 1, 6);
+        $image_name = $append_str . $request->file('image')->getClientOriginalName();
+        Storage::disk('s3')->put('Products/'.$image_name, (string)$small);
+        $params['small_photo_path'] = 'Products/'.$image_name;
 
         Product::create($params);
 
@@ -86,22 +74,18 @@ class ProductController extends Controller
                 return back();
             }
 
-            Cloudinary::destroy($product->small_photo_path);
-            Cloudinary::destroy($product->large_photo_path);
+            Storage::disk('s3')->delete($product->small_photo_path);
+            Storage::disk('s3')->delete($product->large_photo_path);
 
+            $params['large_photo_path'] = $request->file('image')->store('Products', 's3');
 
-            $params['large_photo_path'] = Cloudinary::upload($request->file('image')->getRealPath(), [
-                'folder' => 'Products',
-            ])->getPublicId();
+            $small = Image::make(request()->file('image'))->resize(296,444)->encode('jpg');
+            $append_str = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 1, 6);
+            
+            $image_name = $append_str . $request->file('image')->getClientOriginalName();
 
-            $params['small_photo_path'] = Cloudinary::upload($request->file('image')->getRealPath(), [
-                'folder' => 'Products',
-                'transformation' => [
-                    'width' => 296,
-                    'height' => 444,
-                    'quality' => 100
-                ]
-            ])->getPublicId();
+            Storage::disk('s3')->put('Products/'.$image_name, (string)$small);
+            $params['small_photo_path'] = 'Products/'.$image_name;
         }
 
         if ($request->second_image) {
@@ -111,16 +95,13 @@ class ProductController extends Controller
             }
 
             if ($product->second_photo_path) {
-                Cloudinary::destroy($product->second_photo_path);
+                Storage::disk('s3')->delete($product->second_photo_path);
             }
 
-
-            $params['second_photo_path'] = Cloudinary::upload($request->file('second_image')->getRealPath(), [
-                'folder' => 'Products',
-            ])->getPublicId();
+            $params['second_photo_path'] = $request->file('second_image')->store('Products', 's3');
         }
 
-        if($request->video_path){
+        if ($request->video_path) {
             $params['video_path'] = $request->video_path;
         }
 
@@ -130,12 +111,14 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        Cloudinary::destroy($product->small_photo_path);
-        Cloudinary::destroy($product->large_photo_path);
-        Cloudinary::destroy($product->second_photo_path);
+        Storage::disk('s3')->delete($product->small_photo_path);
+        Storage::disk('s3')->delete($product->large_photo_path);
+        Storage::disk('s3')->delete($product->second_photo_path);
+
+
         $images = $product->images;
         foreach ($images as $image) {
-            Cloudinary::destroy($image->path);
+            Storage::disk('s3')->delete($image->path);
         }
         $product->images()->delete();
         $product->delete();

@@ -261,7 +261,7 @@
             axios.get('/pop-up').then(({
                 data
             }) => {
-                image.src = 'https://res.cloudinary.com/danoori/image/upload/v1/' + data['photo'];
+                image.src = 'https://danoori.s3.ap-south-1.amazonaws.com/' + data['photo'];
                 popup__detail.innerHTML = 'Someone in ' + data['city'] + ' , Pakistan purchased';
                 popup__heading.innerHTML = data['product_name'];
                 popup__time.innerHTML = data['time'];

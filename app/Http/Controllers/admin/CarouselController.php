@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Models\Carousel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\Admin\CarouselCreateRequest;
 use App\Http\Requests\Admin\CarouselUpdateRequest;
@@ -46,15 +47,9 @@ class CarouselController extends Controller
             return back();
         }
 
-        // $image_name = time(). '.' . $image_file->getClientOriginalExtension();
-        // $image_file->storeAs('public/images/carousels', $image_name);
-
         $params = $request->validated();
-        // $params['image'] = 'storage/images/carousels/'.$image_name;
 
-        $params['image'] = Cloudinary::upload($request->file('image')->getRealPath(),[
-            'folder' => 'Carousels'
-        ])->getPublicId();
+        $params['image'] = $request->file('image')->store('Carousels', 's3');
 
         Carousel::create($params);
         return redirect()->route('admin.carousel.index');
@@ -90,12 +85,10 @@ class CarouselController extends Controller
                 return back();
             }
 
-            // unlink(public_path($carousel->image));
-            Cloudinary::destroy($carousel->image);
+            Storage::disk('s3')->delete($carousel->image);
 
-            $params['image'] = Cloudinary::upload($request->file('image')->getRealPath(),[
-                'folder' => 'Carousels'
-            ])->getPublicId();    
+            $params['image'] = $request->file('image')->store('Carousels', 's3');
+     
         }
 
         $carousel->update($params);
@@ -106,7 +99,7 @@ class CarouselController extends Controller
 
     public function destroy(Carousel $carousel)
     {
-        Cloudinary::destroy($carousel->image);
+        Storage::disk('s3')->delete($carousel->image);
         $carousel->delete();
         return back();
     }

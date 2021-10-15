@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Admin\CategoryCreateRequest;
@@ -39,25 +38,11 @@ class CategoryController extends Controller
 
         $params = $request->validated();
 
-        $params['image'] = Cloudinary::upload($request->file('image')->getRealPath(),[
-            'folder' => 'Categories'
-        ])->getPublicId();
+        $params['image'] = $request->file('image')->store('Categories', 's3');
 
         Category::create($params);
         return redirect()->route('admin.category.index');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
 
     public function edit(Category $category)
     {
@@ -75,11 +60,10 @@ class CategoryController extends Controller
                 return back();
             }
 
-            Cloudinary::destroy($category->image);
+            Storage::disk('s3')->delete($category->image);
 
-            $params['image'] = Cloudinary::upload($request->file('image')->getRealPath(),[
-                'folder' => 'Categories'
-            ])->getPublicId();
+            $params['image'] = $request->file('image')->store('Categories', 's3');
+
         }
 
         $category->update($params);
@@ -90,7 +74,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        Cloudinary::destroy($category->image);
+        Storage::disk('s3')->delete($category->image);
         $category->delete();
         return redirect()->route('admin.category.index');
     }

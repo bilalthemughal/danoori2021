@@ -6,6 +6,7 @@ use App\Models\Image;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ProductImage extends Component
@@ -43,7 +44,10 @@ class ProductImage extends Component
     public function deleteImage($image_id)
     {
 
-        Cloudinary::destroy($image_id);
+        // Cloudinary::destroy($image_id);
+
+        Storage::disk('s3')->delete($image_id);
+
 
         Image::where('path', $image_id)->delete();
 
@@ -53,10 +57,10 @@ class ProductImage extends Component
     public function save()
     {
 
-        $result = $this->photo->storeOnCloudinary('Products');
+        $result = $this->photo->store('Products', 's3');
 
         $this->product->images()->create([
-            'path' => $result->getPublicId()
+            'path' => $result
         ]);
 
         $this->emit('refreshComponent');
