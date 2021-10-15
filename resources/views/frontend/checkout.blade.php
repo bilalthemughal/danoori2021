@@ -253,7 +253,8 @@
                 Livewire.emit('productAdded')
             }
             else {
-                if(Session::get('checkoutInitiated')){
+                if({{ Session::get('checkoutInitiated') }}){
+                    alert('hello');
                     fbq('track', 'InitiateCheckout');
                 }
             }
