@@ -25,7 +25,7 @@ class AddToCart extends Component
 
         $this->emit('productAdded');
         $this->quantity = 1;
-        // Session::flash('added', true);
+        Session::flash('added', true);
         return redirect()->route('cart');
 
     }
