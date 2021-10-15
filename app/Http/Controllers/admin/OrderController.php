@@ -67,7 +67,7 @@ class OrderController extends Controller
                 $products = $orders->products;
                 $product_name = '<div>';
                 foreach ($products as $product) {
-                    $product_name .= "<img src='https://res.cloudinary.com/danoori/image/upload/v1/$product->small_photo_path' width='50px' height='50px'>";
+                    $product_name .= "<img src='https://danoori.s3.ap-south-1.amazonaws.com/$product->small_photo_path' width='50px' height='50px'>";
                 }
                 $product_name  .= '</div>';
                 return $product_name;
