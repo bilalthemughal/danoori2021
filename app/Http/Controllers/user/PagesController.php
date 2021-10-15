@@ -40,6 +40,7 @@ class PagesController extends Controller
 
     public function checkout()
     {
+        Session::flash('checkoutInitiated', true);
         return view('frontend.checkout');
     }
 

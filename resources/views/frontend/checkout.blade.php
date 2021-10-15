@@ -252,6 +252,11 @@
             if (historyTraversal) {
                 Livewire.emit('productAdded')
             }
+            else {
+                if(Session::get('checkoutInitiated')){
+                    fbq('track', 'InitiateCheckout');
+                }
+            }
         });
     </script>
 </body>
