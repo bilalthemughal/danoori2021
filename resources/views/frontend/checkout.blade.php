@@ -242,11 +242,7 @@
 
 
 @livewireScripts
-<script>
-    if ({{ Session::get('added') }}) {
-        fbq('track', 'AddToCart');
-    }
-</script>
+
 <script>
         history.scrollRestoration = "manual";
         window.addEventListener("pageshow", function(event) {
