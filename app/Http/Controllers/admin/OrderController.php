@@ -46,13 +46,22 @@ class OrderController extends Controller
 
     public function dt_ajax_orders_data(Request $request)
     {
+        $search_query = $request->search['value'];
         $query = Order::query()
-            ->select(['id', 'order_id', 'name', 'sub_total', 'source', 'total', 'created_at'])
+            ->select(['id', 'order_id', 'name', 'sub_total', 'source', 'total', 'created_at', 'phone_number'])
             ->with('products')
             ->where('status', $request['id']);
 
 
         return Datatables::of($query)
+                ->filter(function ($query) use ($search_query)  {
+                    if ($search_query) {
+                        $query->where('name', 'like', "%" . $search_query . "%");
+                        $query->orWhere('phone_number', 'like', "%" . $search_query . "%");
+                        $query->orWhere('order_id', 'like', "%" . $search_query . "%");
+                    }
+                })
+
             ->addColumn('action', function ($orders) {
                 if($orders->source == 0){
                     return '<a class="btn btn-success btn-xs" href=' . route('admin.order.show', $orders->id) . '>' . $orders->name . '</a>';
