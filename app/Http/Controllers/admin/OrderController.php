@@ -128,6 +128,7 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $params['name'] = $request->name;
         $params['phone_number'] = $request->phone;
         $params['city'] = $request->city;
@@ -138,6 +139,7 @@ class OrderController extends Controller
         $params['order_note'] = $request->order_note;
         $params['order_id'] = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 1, 11);
         $params['source'] = 0;
+        // $products_id = $request['products_id'];
 
         if ($request->email) {
             $params['email'] = $request->email;
@@ -148,15 +150,17 @@ class OrderController extends Controller
         }
         $order = Order::create($params);
 
+        for($i = 0; $i<count($request['product_id']); $i++){
         $order->products()->attach(
-            $request->product_id,
+            $request->product_id[$i],
             [
-                'quantity' => 1,
-                'price' => $params['total'],
+                'quantity' => $request->product_quantity[$i],
+                'price' => $request->product_price[$i] * $request->product_quantity[$i],
                 'created_at' => now(),
                 'updated_at' => now()
             ]
         );
+    }
 
         if (app()->isProduction()) {
             $user = User::first();

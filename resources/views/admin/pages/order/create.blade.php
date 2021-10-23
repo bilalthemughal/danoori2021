@@ -61,24 +61,60 @@
                 </div>
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input name="address" required value="{{ old('address') }}" type="text" class="form-control" id="address"
-                        placeholder="Address">
+                    <input name="address" required value="{{ old('address') }}" type="text" class="form-control"
+                        id="address" placeholder="Address">
                 </div>
                 <div class="form-group">
                     <label for="order_note">Remarks</label>
-                    <input name="order_note" value="{{ old('order_note') }}" type="text" class="form-control" id="order_note"
-                        placeholder="Enter Remarks">
+                    <input name="order_note" value="{{ old('order_note') }}" type="text" class="form-control"
+                        id="order_note" placeholder="Enter Remarks">
                 </div>
-                <div class="form-group">
-                    <label for="product_id">Product</label>
-                    <select name="product_id" required value="{{ old('product_id') }}" class="form-control"
-                        id="product_id">
-                        @forelse($products as $product)
-                            <option value="{{ $product->id }}">{{ $product->name }}</option>
-                        @empty
-                            <option value="">No record found</option>
-                        @endforelse
-                    </select>
+                <div>
+                    <div id="product_div0" class="row product_div">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="product_id">Product</label>
+                                <select name="product_id[]" required value="{{ old('product_id') }}"
+                                    class="form-control" id="product_id">
+                                    @forelse($products as $product)
+                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                    @empty
+                                        <option value="">No record found</option>
+                                    @endforelse
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for"product_price">Product Price</label>
+                                <input type="text" name="product_price[]" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for"product_quantity">Product Quantity</label>
+                                <input type="text" value="1" name="product_quantity[]" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for"remove_product">Remove Product</label>
+                                <button type="button" class="btn btn-danger form-control" onclick="checkid(this)"><i
+                                        class="fa fa-trash"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <button id="add_new_product" type="button" class="form-control btn btn-primary"><i
+                                class="fa fa-plus"></i> Add new</button>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
@@ -89,5 +125,26 @@
 
 @endsection
 
+@section('extra-js')
+    <script>
+        let add_button = document.querySelector('#add_new_product');
 
+        let i = 0;
+        add_button.addEventListener('click', function() {
+            var original = document.querySelector('.product_div');
+            var clone = original.cloneNode(true); // "deep" clone
+            clone.id = "product_div" + ++i; // there can only be one element with an ID
+            original.parentNode.appendChild(clone);
+        })
 
+        function checkid(el) {
+            let count = document.querySelectorAll('.product_div').length;
+            if (count > 1) {
+                el.parentNode.parentNode.parentNode.remove();
+            } else {
+                alert('You cant delete the last item');
+            }
+        }
+    </script>
+
+@endsection
