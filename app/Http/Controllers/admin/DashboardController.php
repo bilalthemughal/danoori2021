@@ -48,7 +48,13 @@ class DashboardController extends Controller
             ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
             ->sum('order_product.quantity');
 
-        $yesterday_ad_cost = $yesterday_ad_cost->cost;
+            if($yesterday_ad_cost){
+                $yesterday_ad_cost = $yesterday_ad_cost->cost;
+            }
+            else {
+                $yesterday_ad_cost = 0;
+            }
+            
         $yesterday_profit = $yesterday_total_sale - ($yesterday_ad_cost + $yesterday_products_cost);
         
         return view('admin.pages.dashboard', compact(

@@ -67,7 +67,7 @@ class OfflineOrder extends Notification
         $content = "Order ID: " .$this->order->order_id. "\nAmount: " .number_format($this->order->total).".\n\n Products: ";
         foreach($this->products as $product){
             $content .= $product['name']. " * " . $product['qty'] . "\n";
-            $content .= 'https://danoori.s3.ap-south-1.amazonaws.com/'.$product['small_photo_path'] . "\n";
+            $content .= get_image_path($product['small_photo_path']) . "\n";
         }
         $content .= "\nName : " . $this->order->name . "\nAddress: " . $this->order->address . ", " . $this->order->city . "\nPhone Number: " . $this->order->phone_number;
         return (new SlackMessage)
