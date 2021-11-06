@@ -20,7 +20,7 @@ class CheckoutController extends Controller
 
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        if (count($cart->items) === 0) {
+        if (!isset($cart->items) || count($cart->items) === 0) {
             Session::flash('message', 'Your cart is empty. Add something in your cart to checkout.');
             return back();
         }
