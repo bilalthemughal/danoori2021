@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\admin\ADController;
+use App\Models\Order;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\ADController;
 use App\Http\Controllers\user\PagesController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\LandingPageController;
@@ -55,6 +57,8 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::post('ad', [ADController::class, 'store'])->name('ad.store');
     Route::get('ads', [ADController::class, 'index'])->name('ad.index');
     Route::get('ads/table', [ADController::class, 'dt_ajax_ad_budget_data'])->name('ad.budget.table');
+    Route::get('pendingdresses', [OrderController::class, 'pendingDresses'])->name('pendingdresses');
+    Route::get('pendingdressestable', [OrderController::class, 'dt_ajax_pending_dresses'])->name('pendingdressestable');
 });
 
 

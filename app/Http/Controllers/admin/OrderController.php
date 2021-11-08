@@ -6,12 +6,14 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Exports\PendingOrderExport;
 use App\Notifications\OfflineOrder;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Notification;
+use Yajra\DataTables\Contracts\DataTable;
 
 class OrderController extends Controller
 {
@@ -54,18 +56,18 @@ class OrderController extends Controller
 
 
         return Datatables::of($query)
-                ->filter(function ($query) use ($search_query)  {
-                    if ($search_query) {
-                        $query->where('name', 'like', "%" . $search_query . "%");
-                        $query->orWhere('phone_number', 'like', "%" . $search_query . "%");
-                        $query->orWhere('order_id', 'like', "%" . $search_query . "%");
-                    }
-                })
+            ->filter(function ($query) use ($search_query) {
+                if ($search_query) {
+                    $query->where('name', 'like', "%" . $search_query . "%");
+                    $query->orWhere('phone_number', 'like', "%" . $search_query . "%");
+                    $query->orWhere('order_id', 'like', "%" . $search_query . "%");
+                }
+            })
 
             ->addColumn('action', function ($orders) {
-                if($orders->source == 0){
+                if ($orders->source == 0) {
                     return '<a class="btn btn-success btn-xs" href=' . route('admin.order.show', $orders->id) . '>' . $orders->name . '</a>';
-                }else {
+                } else {
                     return '<a class="btn btn-secondary btn-xs" href=' . route('admin.order.show', $orders->id) . '>' . $orders->name . '</a>';
                 }
             })
@@ -150,17 +152,17 @@ class OrderController extends Controller
         }
         $order = Order::create($params);
 
-        for($i = 0; $i<count($request['product_id']); $i++){
-        $order->products()->attach(
-            $request->product_id[$i],
-            [
-                'quantity' => $request->product_quantity[$i],
-                'price' => $request->product_price[$i] * $request->product_quantity[$i],
-                'created_at' => now(),
-                'updated_at' => now()
-            ]
-        );
-    }
+        for ($i = 0; $i < count($request['product_id']); $i++) {
+            $order->products()->attach(
+                $request->product_id[$i],
+                [
+                    'quantity' => $request->product_quantity[$i],
+                    'price' => $request->product_price[$i] * $request->product_quantity[$i],
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]
+            );
+        }
 
         if (app()->isProduction()) {
             $user = User::first();
@@ -177,5 +179,29 @@ class OrderController extends Controller
         // return $order;
         $order->update($request->all());
         return redirect()->route('admin.order.index');
+    }
+
+    public function pendingDresses()
+    {
+        return view('admin.pages.order.pendingdresses');
+    }
+
+    public function dt_ajax_pending_dresses()
+    {
+        $query = DB::table('orders')
+            ->where('orders.status', Order::IS_PENDING)
+            ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
+            ->rightJoin('products', 'products.id', 'order_product.product_id')
+            ->select('products.name', 'order_product.quantity', 'products.small_photo_path');
+
+        return DataTables::of($query)
+            ->addColumn('photo', function ($products) {
+                $product_name = '<div>';
+                    $product_name .= "<img src='https://danoori.s3.ap-south-1.amazonaws.com/$products->small_photo_path' width='50px' height='50px'>";
+                $product_name  .= '</div>';
+                return $product_name;
+            })
+            ->rawColumns(['photo'])
+            ->make();
     }
 }
