@@ -47,6 +47,11 @@ class DashboardController extends Controller
             ->where('orders.status', '!=', Order::IS_CANCELLED)
             ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
             ->sum('order_product.quantity');
+        
+        $pending_dresses = DB::table('orders')
+            ->where('orders.status', Order::IS_PENDING)
+            ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
+            ->sum('order_product.quantity');
 
             if($yesterday_ad_cost){
                 $yesterday_ad_cost = $yesterday_ad_cost->cost;
@@ -64,7 +69,8 @@ class DashboardController extends Controller
             'todays_dresses_sold',
             'yesterday_total_sale',
             'yesterday_ad_cost',
-            'yesterday_products_cost'
+            'yesterday_products_cost',
+            'pending_dresses'
         ));
     }
 }
