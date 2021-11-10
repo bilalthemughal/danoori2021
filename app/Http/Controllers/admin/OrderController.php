@@ -190,7 +190,7 @@ class OrderController extends Controller
     {
             $response = DB::table('order_product')
             ->join('products', 'order_product.product_id', 'products.id')
-            ->join('orders', 'order_product.order_id','orders.id')
+            ->leftJoin('orders', 'order_product.order_id','orders.id')
             ->where('orders.status', Order::IS_PENDING)
             ->select('products.small_photo_path','products.name', DB::raw('COUNT(product_id) * quantity as quantity'), 'product_id')
             ->orderBy('quantity', 'desc')
