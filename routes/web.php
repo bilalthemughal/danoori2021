@@ -78,3 +78,6 @@ Route::get('/{category_slug}/{product_slug}', [PagesController::class, 'product'
 
 Route::get('/pop-up', [PagesController::class, 'popup'])->name('pop-up');
 
+Route::get('/test', function(){
+    return DB::table('order_product')->selectRaw('product_id, SUM(quantity)')->groupBy('product_id');
+});
