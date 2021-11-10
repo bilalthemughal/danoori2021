@@ -54,6 +54,7 @@
             processing: true,
             serverSide: true,
             ajax: '{{ route('admin.pendingdressestable') }}',
+            "pageLength": 50,
             columns: [
                 {
                     data: 'photo',

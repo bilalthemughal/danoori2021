@@ -193,6 +193,7 @@ class OrderController extends Controller
             ->join('orders', 'order_product.order_id','orders.id')
             ->where('orders.status', Order::IS_PENDING)
             ->select('products.small_photo_path','products.name', DB::raw('COUNT(product_id) * quantity as quantity'), 'product_id')
+            ->orderBy('quantity', 'desc')
             ->groupBy('product_id');
 
         return DataTables::of($response)
