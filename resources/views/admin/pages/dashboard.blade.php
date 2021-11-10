@@ -155,7 +155,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{ $monthly_total_sale }}</h3>
+                            <h3>{{ number_format($monthly_total_sale) }}<sup style="font-size: 20px">PKR</sup></h3>
 
                             <p>Monthly Total Sale</p>
                         </div>
