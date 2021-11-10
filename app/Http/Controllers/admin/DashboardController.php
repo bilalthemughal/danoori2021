@@ -61,6 +61,12 @@ class DashboardController extends Controller
             ->sum(DB::raw('products.cost * order_product.quantity'));
         
         $monthly_profit = $monthly_total_sale - ($monthly_ad_cost + $monthly_product_cost);
+        
+        $monthly_dresses_sold = DB::table('orders')
+            ->whereMonth('orders.created_at',  Carbon::now()->month)
+            ->where('orders.status', '!=', Order::IS_CANCELLED)
+            ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
+            ->sum('order_product.quantity');
         //MONTHLY STATS END
 
         $todays_dresses_sold = DB::table('orders')
@@ -89,6 +95,7 @@ class DashboardController extends Controller
             'monthly_product_cost',
             'monthly_ad_cost',
             'monthly_total_sale',
+            'monthly_dresses_sold'
 
         ));
     }
