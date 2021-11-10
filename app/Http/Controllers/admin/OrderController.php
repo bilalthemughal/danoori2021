@@ -188,13 +188,14 @@ class OrderController extends Controller
 
     public function dt_ajax_pending_dresses()
     {
-        $query = DB::table('orders')
+            $response = DB::table('order_product')
+            ->join('products', 'order_product.product_id', 'products.id')
+            ->join('orders', 'order_product.order_id','orders.id')
             ->where('orders.status', Order::IS_PENDING)
-            ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
-            ->rightJoin('products', 'products.id', 'order_product.product_id')
-            ->select('products.name', 'order_product.quantity', 'products.small_photo_path');
+            ->select('products.small_photo_path','products.name', DB::raw('COUNT(product_id) as quantity'), 'product_id')
+            ->groupBy('product_id');
 
-        return DataTables::of($query)
+        return DataTables::of($response)
             ->addColumn('photo', function ($products) {
                 $product_name = '<div>';
                     $product_name .= "<img src='https://danoori.s3.ap-south-1.amazonaws.com/$products->small_photo_path' width='50px' height='50px'>";
