@@ -50,7 +50,7 @@ class DashboardController extends Controller
         
         $pending_dresses = DB::table('orders')
             ->where('orders.status', Order::IS_PENDING)
-            ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
+            ->join('order_product', 'orders.id', 'order_product.order_id')
             ->sum('order_product.quantity');
 
             if($yesterday_ad_cost){
