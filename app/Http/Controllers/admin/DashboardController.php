@@ -56,11 +56,6 @@ class DashboardController extends Controller
         ->whereMonth('created_at',   Carbon::now()->month)
         ->sum('cost');
 
-        if ($monthly_ad_cost) {
-            $monthly_ad_cost = $monthly_ad_cost->cost;
-        } else {
-            $monthly_ad_cost = 0;
-        }
 
         $monthly_product_cost = DB::table('orders')
             ->whereMonth('orders.created_at', Carbon::now()->month)
