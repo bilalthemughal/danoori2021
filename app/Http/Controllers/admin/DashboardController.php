@@ -20,7 +20,8 @@ class DashboardController extends Controller
         } else {
             $today_ad_cost = 0;
         }
-        
+       
+        // YESTERDAY STAT
         $yesterday_total_sale = Order::whereDate('created_at', Carbon::yesterday())
         ->where('status', '!=', Order::IS_CANCELLED)
         ->sum('total');
@@ -41,6 +42,35 @@ class DashboardController extends Controller
             ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
             ->rightJoin('products', 'products.id', 'order_product.product_id')
             ->sum(DB::raw('products.cost * order_product.quantity'));
+        
+        $yesterday_profit = $yesterday_total_sale - ($yesterday_ad_cost + $yesterday_products_cost);
+
+        // YESTERDAY STATS END
+
+        //MONTHLY STATS
+        $monthly_total_sale = Order::whereMonth('created_at', Carbon::now()->month)
+        ->where('status', '!=', Order::IS_CANCELLED)
+        ->sum('total');
+
+        $monthly_ad_cost = DB::table('ad_cost')
+        ->whereMonth('created_at',   Carbon::now()->month)
+        ->first();
+
+        if ($monthly_ad_cost) {
+            $monthly_ad_cost = $monthly_ad_cost->cost;
+        } else {
+            $monthly_ad_cost = 0;
+        }
+
+        $monthly_product_cost = DB::table('orders')
+            ->whereMonth('orders.created_at', Carbon::now()->month)
+            ->where('orders.status', '!=', Order::IS_CANCELLED)
+            ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
+            ->rightJoin('products', 'products.id', 'order_product.product_id')
+            ->sum(DB::raw('products.cost * order_product.quantity'));
+        
+        $monthly_profit = $monthly_total_sale - ($monthly_ad_cost + $monthly_product_cost);
+        //MONTHLY STATS END
 
         $todays_dresses_sold = DB::table('orders')
             ->where('orders.created_at', '>=', Carbon::today())
@@ -60,7 +90,6 @@ class DashboardController extends Controller
                 $yesterday_ad_cost = 0;
             }
             
-        $yesterday_profit = $yesterday_total_sale - ($yesterday_ad_cost + $yesterday_products_cost);
         
         return view('admin.pages.dashboard', compact(
             'newOrdersCount', 
@@ -70,7 +99,12 @@ class DashboardController extends Controller
             'yesterday_total_sale',
             'yesterday_ad_cost',
             'yesterday_products_cost',
-            'pending_dresses'
+            'pending_dresses',
+            'monthly_profit',
+            'monthly_product_cost',
+            'monthly_ad_cost',
+            'monthly_total_sale',
+
         ));
     }
 }
