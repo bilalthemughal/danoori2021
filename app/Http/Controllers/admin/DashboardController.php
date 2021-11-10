@@ -28,13 +28,9 @@ class DashboardController extends Controller
 
         $yesterday_ad_cost = DB::table('ad_cost')
         ->whereDate('created_at',   Carbon::yesterday())
-        ->first();
+        ->sum('cost');
 
-        if ($yesterday_ad_cost) {
-            $yesterady_ad_cost = $yesterday_ad_cost->cost;
-        } else {
-            $yesterday_ad_cost = 0;
-        }
+        // return $yesterday_ad_cost;
 
         $yesterday_products_cost = DB::table('orders')
             ->whereDate('orders.created_at', Carbon::yesterday())
@@ -78,12 +74,6 @@ class DashboardController extends Controller
             ->join('order_product', 'orders.id', 'order_product.order_id')
             ->sum('order_product.quantity');
 
-            if($yesterday_ad_cost){
-                $yesterday_ad_cost = $yesterday_ad_cost->cost;
-            }
-            else {
-                $yesterday_ad_cost = 0;
-            }
             
         
         return view('admin.pages.dashboard', compact(
