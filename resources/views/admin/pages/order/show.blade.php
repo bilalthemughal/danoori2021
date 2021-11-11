@@ -73,6 +73,7 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
+                                            <th>Image</th>
                                             <th>Product</th>
                                             <th>Qty</th>
                                             <th>Subtotal</th>
@@ -81,6 +82,7 @@
                                     <tbody>
                                         @foreach ($products as $product)
                                             <tr>
+                                                <td><img src="{{ get_image_path($product->small_photo_path) }}" width="80px" height="120px" alt=""></td>
                                                 <td><a target="_blank"
                                                         href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">{{ $product->name }}</a>
                                                 </td>
