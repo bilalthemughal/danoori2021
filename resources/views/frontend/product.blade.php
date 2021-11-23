@@ -133,7 +133,7 @@
                                     </div>
                                 </div>
                                 @livewire('add-to-cart', ['product_id' => $product->id])
-                                <div class="d-flex justify-content-between pt-2 pb-1">
+                                {{-- <div class="d-flex justify-content-between pt-2 pb-1">
 
                                     <a href="{{ 'https://wa.me/+923414455332?text=I am interested in buying *' . $product->name . ' - Rs: ' . ($product->discounted_price ?: $product->original_price) . '*. ' . Request::fullurl() }}"
                                         target="_blank" class="btn btn-success btn-shadow d-block w-100"
@@ -141,7 +141,7 @@
                                         <i class="fab fa-whatsapp"></i>
                                         &nbsp;Buy via whatsapp
                                     </a>
-                                </div>
+                                </div> --}}
                                 {{-- @livewire('quick-buy', ['product_id' => $product->id]) --}}
 
                             @else
