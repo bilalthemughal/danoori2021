@@ -36,6 +36,7 @@ class Cart
             'name' => $item->name,
             'price' =>  $price,
             'qty' => 0,
+            'label_tag' => $item->label_tag,
             'total_price' => $item->price,
             'image' => get_image_path($item->small_photo_path),
             'link' => route('category.product', [$item->category->slug, $item->slug])

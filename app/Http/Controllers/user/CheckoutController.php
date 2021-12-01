@@ -45,6 +45,11 @@ class CheckoutController extends Controller
         $params['total_products'] = $cart->totalQty;
 
         $products = $cart->items;
+        $params['label'] = '';
+
+        foreach($products as $product){
+            $params['label'] .= $product['qty'] . ' * ' . $product['label_tag'] . ', ';
+        }
 
         $order = Order::create($params);
 

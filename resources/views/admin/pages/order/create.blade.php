@@ -69,6 +69,12 @@
                     <input name="order_note" value="{{ old('order_note') }}" type="text" class="form-control"
                         id="order_note" placeholder="Enter Remarks">
                 </div>
+                
+                <div class="form-group">
+                    <label for="label">Label</label>
+                    <input name="label" value="{{ old('label') }}" type="text" class="form-control"
+                        id="label" placeholder="Enter Label">
+                </div>
                 <div>
                     <div id="product_div0" class="row product_div">
                         <div class="col-md-4">

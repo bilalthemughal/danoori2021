@@ -141,6 +141,7 @@ class OrderController extends Controller
         $params['order_note'] = $request->order_note;
         $params['order_id'] = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 1, 11);
         $params['source'] = 0;
+        $params['label'] = $request->label;
         // $products_id = $request['products_id'];
 
         if ($request->email) {
@@ -151,7 +152,7 @@ class OrderController extends Controller
             $params['email'] = $email;
         }
         $order = Order::create($params);
-
+        
         for ($i = 0; $i < count($request['product_id']); $i++) {
             $order->products()->attach(
                 $request->product_id[$i],
