@@ -36,6 +36,7 @@ class ProductCreateRequest extends FormRequest
             'stock' => ['required', 'integer'],
             'left_color' => 'required',
             'right_color' => 'required',
+            'label_tag' => 'required'
         ];
     }
 }

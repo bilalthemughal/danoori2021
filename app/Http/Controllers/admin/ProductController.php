@@ -128,7 +128,7 @@ class ProductController extends Controller
     public function dt_ajax_products_data()
     {
         $query = Product::query()
-            ->select(['id', 'name', 'slug', 'cost', 'small_photo_path', 'is_active', 'original_price', 'discounted_price', 'category_id'])
+            ->select(['id', 'name', 'slug', 'label_tag', 'small_photo_path', 'is_active', 'original_price', 'discounted_price', 'category_id'])
             ->with('category:id,name');
 
         return Datatables::of($query)

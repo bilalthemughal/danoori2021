@@ -41,7 +41,8 @@ class ProductUpdateRequest extends FormRequest
             'stock' => ['required', 'integer'],
             'left_color' => 'required',
             'right_color' => 'required',
-            'cost' => ['required', 'numeric']
+            'cost' => ['required', 'numeric'],
+            'label_tag' => 'required'
         ];
     }
 }

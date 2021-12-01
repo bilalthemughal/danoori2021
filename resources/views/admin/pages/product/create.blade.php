@@ -47,7 +47,8 @@
 
                 <div class="form-group">
                     <label for="is_active">Status</label>
-                    <select name="is_active" required value="{{ old('is_active') }}" class="form-control" id="is_active">
+                    <select name="is_active" required value="{{ old('is_active') }}" class="form-control"
+                        id="is_active">
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
                     </select>
@@ -73,8 +74,8 @@
 
                 <div class="form-group">
                     <label for="stock">Stock</label>
-                    <input name="stock" required value="{{ old('stock') }}" type="number" class="form-control" id="stock"
-                        placeholder="Enter Stock">
+                    <input name="stock" required value="{{ old('stock') }}" type="number" class="form-control"
+                        id="stock" placeholder="Enter Stock">
                 </div>
 
                 <div class="form-group">
@@ -87,6 +88,12 @@
                     <label for="discounted_price">Discounted Price</label>
                     <input name="discounted_price" value="{{ old('discounted_price') }}" type="text"
                         class="form-control" id="discounted_price" placeholder="Enter Discounted Price">
+                </div>
+
+                <div class="form-group">
+                    <label for="label_tag">Label Tag</label>
+                    <input name="label_tag" value="{{ old('label_tag') }}" type="text" class="form-control"
+                        id="label_tag" placeholder="Enter Label Tag">
                 </div>
 
                 <div class="form-group">
@@ -114,7 +121,7 @@
                             class="form-control" id="right_color" placeholder="Enter right color">
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="video">Video</label>
                     <input name="video_path" value="{{ old('video') }}" type="text" class="form-control" id="video"
@@ -136,20 +143,20 @@
 @endsection
 
 @section('extra-js')
-<script>
-    ClassicEditor
-        .create(document.querySelector('#product-info-editor'))
-        .catch(error => {
-            console.error(error);
-        });
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#product-info-editor'))
+            .catch(error => {
+                console.error(error);
+            });
 
-    $(function() {
-        $('#slug').on('keypress', function(e) {
-            if (e.which == 32) {
-                return false;
-            }
+        $(function() {
+            $('#slug').on('keypress', function(e) {
+                if (e.which == 32) {
+                    return false;
+                }
+            });
         });
-    });
-</script>
-<script src="{{ asset('page-level/dropzone-5.7.0/dist/dropzone.js') }}"></script>
+    </script>
+    <script src="{{ asset('page-level/dropzone-5.7.0/dist/dropzone.js') }}"></script>
 @endsection

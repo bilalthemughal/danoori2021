@@ -69,7 +69,7 @@
                 {data: 'status', title: 'Active'},
                 {data: 'original_price', title: 'Price'},
                 {data: 'discounted_price', title: 'Discounted Price'},
-                {data: 'cost', title: 'Cost'},
+                {data: 'label_tag', title: 'Product Label'},
                 {data: 'action', title: 'Action'},
             ]
         });
