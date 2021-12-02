@@ -52,7 +52,7 @@
                             <!-- /.col -->
                             <div class="col-sm-4 invoice-col">
                                 <br>
-                                <b>Order ID:</b> {{ $order->order_id }}<br>
+                                <b>Order ID:</b> <a class="btn btn-info" href="https://mnpcourier.com/mycod/ConsignmentTracking.aspx?d={{$order->order_id}}" target="_blank">{{ $order->order_id }}</a> <br>
                                 <br>
                                 @if ($order->status === App\Models\Order::IS_PENDING)
                                     <button class="btn btn-success" id="ship-button" onclick="shipIt({{ $order->id }})">Ship It</button>
