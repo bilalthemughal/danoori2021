@@ -144,6 +144,32 @@
 
 <script>
     function shipIt(id) {
+        
+        $.ajax({
+            url: "http://mnpcourier.com/mycodapi/api/Booking/InsertBookingData",
+            type: 'POST',
+            data: {
+                "user_name": "bilal_8d128",
+                "password": "M&Pis1234",
+                "consigneeName": "{{ $order->name }}",
+                "consigneeAddress": "{{ $order->address }}",
+                "consigneeMobNo": "{{ $order->phone_number}}",
+                "destinationCityName": "{{ $order->city }}",
+                "pieces": 1,
+                "weight": 0.49,
+                "codAmount": {{ $order->total }},
+                "custRefNo": "{{ $order->order_id }}",
+                "productDetails": "{{ $order->label }}",
+                "fragile": "No",
+                "service": "O",
+                "remarks": "{{ $order->order_note }}",
+                "insuranceValue": "0"
+
+            },
+            success: function(res) {
+                alert(res["isSuccess"]);
+            }
+        });
         $.ajax({
             url: "/admin/order/ship/"+id,
             type: 'GET',
