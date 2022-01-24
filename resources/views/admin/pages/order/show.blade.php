@@ -46,17 +46,22 @@
                                     {{ $order->email }}<br>
                                     {{ $order->address }}<br>
                                     {{ $order->city }}<br>
-                                    <a class="btn btn-info" href="tel:{{ $order->phone_number }}"> {{ $order->phone_number }} </a>
+                                    <a class="btn btn-info" href="tel:{{ $order->phone_number }}">
+                                        {{ $order->phone_number }} </a>
                                 </address>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-4 invoice-col">
                                 <br>
-                                <b>Order ID:</b> <a class="btn btn-info" href="https://mnpcourier.com/mycod/ConsignmentTracking.aspx?d={{$order->order_id}}" target="_blank">{{ $order->order_id }}</a> <br>
+                                <b>Order ID:</b> <a class="btn btn-info"
+                                    href="https://mnpcourier.com/mycod/ConsignmentTracking.aspx?d={{ $order->order_id }}"
+                                    target="_blank">{{ $order->order_id }}</a> <br>
                                 <br>
                                 @if ($order->status === App\Models\Order::IS_PENDING)
-                                    <button class="btn btn-success" id="ship-button" onclick="shipIt({{ $order->id }})">Ship It</button>
-                                    <button class="btn btn-danger" id="cancel-button" onclick="cancelIt({{ $order->id }})">Cancel It</button>
+                                    <button class="btn btn-success" id="ship-button"
+                                        onclick="shipIt({{ $order->id }})">Ship It</button>
+                                    <button class="btn btn-danger" id="cancel-button"
+                                        onclick="cancelIt({{ $order->id }})">Cancel It</button>
                                 @elseif ($order->status === App\Models\Order::IS_SHIPPED)
                                     <span class="badge badge-success">Shipped</span>
                                 @elseif ($order->status === App\Models\Order::IS_CANCELLED)
@@ -82,7 +87,8 @@
                                     <tbody>
                                         @foreach ($products as $product)
                                             <tr>
-                                                <td><img src="{{ get_image_path($product->small_photo_path) }}" width="80px" height="120px" alt=""></td>
+                                                <td><img src="{{ get_image_path($product->small_photo_path) }}"
+                                                        width="80px" height="120px" alt=""></td>
                                                 <td><a target="_blank"
                                                         href="{{ route('category.product', [$product->category->slug, $product->slug]) }}">{{ $product->name }}</a>
                                                 </td>
@@ -144,16 +150,13 @@
 
 <script>
     function shipIt(id) {
-        
-        $.ajax({
-            url: "http://mnpcourier.com/mycodapi/api/Booking/InsertBookingData",
-            type: 'POST',
-            data: {
-                "user_name": "bilal_8d128",
+
+        $.post("http://mnpcourier.com/mycodapi/api/Booking/InsertBookingData/", {
+                "username": "bilal_8d128",
                 "password": "M&Pis1234",
                 "consigneeName": "{{ $order->name }}",
                 "consigneeAddress": "{{ $order->address }}",
-                "consigneeMobNo": "{{ $order->phone_number}}",
+                "consigneeMobNo": "{{ $order->phone_number }}",
                 "destinationCityName": "{{ $order->city }}",
                 "pieces": 1,
                 "weight": 0.49,
@@ -166,23 +169,27 @@
                 "insuranceValue": "0"
 
             },
-            success: function(res) {
-                alert(res["isSuccess"]);
+            function(res) {
+                if (res[0]["isSuccess"] == "true") {
+                    $.ajax({
+                        url: "/admin/order/ship/" + id,
+                        type: 'GET',
+                        success: function(res) {
+                            document.getElementById('ship-button').innerHTML = 'Shipped';
+                            document.getElementById('cancel-button').style.visibility = 'hidden';
+                        }
+                    });
+                };
+                alert(res[0]["message"]);
             }
-        });
-        $.ajax({
-            url: "/admin/order/ship/"+id,
-            type: 'GET',
-            success: function(res) {
-                document.getElementById('ship-button').innerHTML = 'Shipped';
-                document.getElementById('cancel-button').style.visibility = 'hidden';
-            }
-        });
+        );
+
+
     }
 
     function cancelIt(id) {
         $.ajax({
-            url: "/admin/order/cancel/"+id,
+            url: "/admin/order/cancel/" + id,
             type: 'GET',
             success: function(res) {
                 document.getElementById('cancel-button').innerHTML = 'Cancelled';
