@@ -58,6 +58,8 @@
                                     target="_blank">{{ $order->order_id }}</a> <br>
                                 <br>
                                 @if ($order->status === App\Models\Order::IS_PENDING)
+                                    <button class="btn btn-success" id="book-button"
+                                        onclick="bookIt({{ $order->id }})">Book It</button>
                                     <button class="btn btn-success" id="ship-button"
                                         onclick="shipIt({{ $order->id }})">Ship It</button>
                                     <button class="btn btn-danger" id="cancel-button"
@@ -149,7 +151,7 @@
 @endsection
 
 <script>
-    function shipIt(id) {
+    function bookIt(id) {
 
         $.post("http://mnpcourier.com/mycodapi/api/Booking/InsertBookingData/", {
                 "username": "bilal_8d128",
@@ -177,6 +179,7 @@
                         success: function(res) {
                             document.getElementById('ship-button').innerHTML = 'Shipped';
                             document.getElementById('cancel-button').style.visibility = 'hidden';
+                            document.getElementById('book-button').style.visibility = 'hidden';
                         }
                     });
                 };
@@ -184,6 +187,19 @@
             }
         );
 
+
+    }
+
+    function shipIt(id) {
+        $.ajax({
+            url: "/admin/order/ship/" + id,
+            type: 'GET',
+            success: function(res) {
+                document.getElementById('ship-button').innerHTML = 'Shipped';
+                document.getElementById('cancel-button').style.visibility = 'hidden';
+                document.getElementById('book-button').style.visibility = 'hidden';
+            }
+        });
 
     }
 
