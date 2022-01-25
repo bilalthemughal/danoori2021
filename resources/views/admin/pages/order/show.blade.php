@@ -157,7 +157,7 @@
                 "username": "bilal_8d128",
                 "password": "M&Pis1234",
                 "consigneeName": "{{ $order->name }}",
-                "consigneeAddress": "{{ $order->address }}",
+                "consigneeAddress": `{{ $order->address }}`,
                 "consigneeMobNo": "{{ $order->phone_number }}",
                 "destinationCityName": "{{ $order->city }}",
                 "pieces": 1,
