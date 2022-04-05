@@ -156,18 +156,18 @@
         $.post("http://mnpcourier.com/mycodapi/api/Booking/InsertBookingData/", {
                 "username": "bilal_8d128",
                 "password": "M&Pis1234",
-                "consigneeName": "{{ $order->name }}",
+                "consigneeName": `{{ $order->name }}`,
                 "consigneeAddress": `{{ $order->address }}`,
-                "consigneeMobNo": "{{ $order->phone_number }}",
-                "destinationCityName": "{{ $order->city }}",
+                "consigneeMobNo": `{{ $order->phone_number }}`,
+                "destinationCityName": `{{ $order->city }}`,
                 "pieces": 1,
                 "weight": 0.49,
                 "codAmount": {{ $order->total }},
                 "custRefNo": "{{ $order->order_id }}",
-                "productDetails": "{{ $order->label }}",
+                "productDetails": `{{ $order->label }}`,
                 "fragile": "No",
                 "service": "O",
-                "remarks": "{{ $order->order_note }}",
+                "remarks": `{{ $order->order_note }}`,
                 "insuranceValue": "0"
 
             },
