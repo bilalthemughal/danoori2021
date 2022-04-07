@@ -8,28 +8,29 @@ use Livewire\Component;
 class CategoryProducts extends Component
 {
     public $totalRecords;
-    public $loadAmount = 12;
+    public $loadAmount = 0;
     public $loadedProducts = [];
     public $products;
     public $mounted_count = 0;
     public $category;
 
-
     public function render()
     {
-        return view('livewire.category-products');
+        return view('livewire.products');
     }
 
     public function mount()
     {
         $this->products = Product::query()
-            ->inRandomOrder()
             ->where('category_id', $this->category->id)
+            ->inRandomOrder()
             ->limit(12)
             ->with('category:id,slug')
             ->get();
 
-        $this->totalRecords = Product::count();
+        $this->totalRecords = Product::where('category_id', $this->category->id)->count();
+
+        $this->loadAmount += $this->products->count();
 
         $this->mounted_count++;
 
@@ -39,8 +40,8 @@ class CategoryProducts extends Component
     public function loadMore()
     {
         $newProducts = Product::query()
-            ->whereNotIn('id', $this->loadedProducts)
             ->where('category_id', $this->category->id)
+            ->whereNotIn('id', $this->loadedProducts)
             ->inRandomOrder()
             ->limit(12)
             ->with('category:id,slug')
@@ -48,10 +49,8 @@ class CategoryProducts extends Component
 
         $this->products = $this->products->merge($newProducts);
         $this->loadedProducts = $this->products->pluck('id')->toArray();
-        $this->loadAmount += 12;
+        $this->loadAmount += $newProducts->count();
 
         $this->emit('productsAppended');
     }
-
-
 }
