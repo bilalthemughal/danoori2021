@@ -40,7 +40,7 @@
                     <p class="fs-sm mb-2">Your order has been placed and will be processed as soon as possible.</p>
                     <p class="fs-sm">We will call you shortly or confirm your order via Whatsapp.</p>
                     <a class="btn btn-success mt-3 me-3"
-                        href="{{ 'https://wa.me/+923098456120?text=Confirm my order: ' . $order_id }}"><i
+                        href="{{ 'https://wa.me/+923414455332?text=Confirm my order: ' . $order_id }}"><i
                             class="ci-message"></i>&nbsp;&nbsp;Confirm via Whatsapp</a> @auth
                         <a class="btn btn-primary mt-3" href="{{ route('dashboard') }}"><i
                             class="ci-location"></i>&nbsp;Track order</a> @endauth
