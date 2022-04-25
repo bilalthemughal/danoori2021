@@ -6,7 +6,8 @@
             <div class="topbar-text text-nowrap d-sm-block d-md-none">
                 <i class="ci-rocket"></i>
                 {{-- <span class="text-muted me-1">Free Shipping:</span> --}}
-                <a class="topbar-link">Free shipping on all orders</a>
+                {{-- <a class="topbar-link">Free shipping on all orders</a> --}}
+                <a class="topbar-link">Orders placed after 12PM will be delivered after Eid. Resuming delivery after Eid IN SHA ALLAH</a>
             </div>
             <div class="tns-carousel tns-controls-static d-none d-md-block">
                 <div class="tns-carousel-inner"
