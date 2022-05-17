@@ -5,17 +5,17 @@
         <div class="container" style="display: flex; justify-content: center;">
             <div class="topbar-text text-nowrap d-sm-block d-md-none">
                 <i class="ci-rocket"></i>
-                {{-- <span class="text-muted me-1">Free Shipping:</span> --}}
-                {{-- <a class="topbar-link">Free shipping on all orders</a> --}}
-                <a class="topbar-link">Orders placed after 26-April will be delivered after Eid.</a>
+                <span class="text-muted me-1">Free Shipping:</span>
+                <a class="topbar-link">Free shipping on all orders</a>
+                {{-- <a class="topbar-link">Orders placed after 26-April will be delivered after Eid.</a> --}}
             </div>
             <div class="tns-carousel tns-controls-static d-none d-md-block">
                 <div class="tns-carousel-inner"
                     data-carousel-options="{&quot;mode&quot;: &quot;gallery&quot;, &quot;nav&quot;: false, &quot;autoplay&quot;: true}">
-                    {{-- <div class="topbar-text">Free shipping on all orders</div> --}}
-                    {{-- <div class="topbar-text">We return money within 30 days</div> --}}
-                    {{-- <div class="topbar-text">Friendly 24/7 customer support</div> --}}
-                    <div class="topbar-text">Orders placed after 26-April will be delivered after Eid. Resuming delivery after Eid IN SHA ALLAH</div>
+                    <div class="topbar-text">Free shipping on all orders</div>
+                    <div class="topbar-text">We return money within 30 days</div>
+                    <div class="topbar-text">Friendly 24/7 customer support</div>
+                    {{-- <div class="topbar-text">Orders placed after 26-April will be delivered after Eid. Resuming delivery after Eid IN SHA ALLAH</div> --}}
                 </div>
             </div>
         </div>
