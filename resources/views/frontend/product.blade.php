@@ -135,7 +135,7 @@
                                 @livewire('add-to-cart', ['product_id' => $product->id])
                                 <div class="d-flex justify-content-between pt-2 pb-1">
 
-                                    <a href="{{ 'https://wa.me/+923264294050?text=I am interested in buying *' . $product->name . ' - Rs: ' . ($product->discounted_price ?: $product->original_price) . '*. ' . Request::fullurl() }}"
+                                    <a href="{{ 'https://wa.me/+923414455332?text=I am interested in buying *' . $product->name . ' - Rs: ' . ($product->discounted_price ?: $product->original_price) . '*. ' . Request::fullurl() }}"
                                         target="_blank" class="btn btn-success btn-shadow d-block w-100"
                                         id="whatsapp-button" type="button">
                                         <i class="fab fa-whatsapp"></i>
@@ -159,7 +159,7 @@
                                 </div>
                                 <div class="d-flex align-items-center pt-2 pb-4">
 
-                                    <a href="{{ 'https://wa.me/+923264294050?text=When this dress will be back in stock? *' . $product->name . ' - Rs: ' . ($product->discounted_price ?: $product->original_price) . '*. ' . Request::fullUrl() }}"
+                                    <a href="{{ 'https://wa.me/+923414455332?text=When this dress will be back in stock? *' . $product->name . ' - Rs: ' . ($product->discounted_price ?: $product->original_price) . '*. ' . Request::fullUrl() }}"
                                         target="_blank" class="btn btn-success btn-shadow d-block w-100"
                                         id="whatsapp-button" type="button">
                                         <i class="fab fa-whatsapp"></i>
@@ -282,7 +282,7 @@
                             <!-- Sharing-->
                             <label class="form-label d-inline-block align-middle my-2 me-3">Share:</label>
                             <a class="btn-share btn-twitter me-2 my-2" target="_blank"
-                                href="{{ 'https://wa.me/+923264294050?text=Checkout this dress. ' . Request::fullUrl() }}">
+                                href="{{ 'https://wa.me/+923414455332?text=Checkout this dress. ' . Request::fullUrl() }}">
                                 <i class="fab fa-whatsapp"></i>Whatsapp</a>
                             {{-- <a class="btn-share btn-instagram me-2 my-2" href="#">
                                 <i class="ci-instagram"></i>Instagram</a> --}}
