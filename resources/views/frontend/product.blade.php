@@ -129,7 +129,7 @@
                                 <div class="position-relative me-n4 mb-5">
                                     <div class="product-badge product-available mt-n1">
                                         <i class="ci-security-check"></i>
-                                        Product available
+                                       Free Delivery
                                     </div>
                                 </div>
                                 @livewire('add-to-cart', ['product_id' => $product->id])
