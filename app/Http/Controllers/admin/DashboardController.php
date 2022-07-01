@@ -45,16 +45,19 @@ class DashboardController extends Controller
 
         //MONTHLY STATS
         $monthly_total_sale = Order::whereMonth('created_at', Carbon::now()->month)
+        ->whereYear('created_at', Carbon::now()->year)
         ->where('status', '!=', Order::IS_CANCELLED)
         ->sum('total');
 
         $monthly_ad_cost = DB::table('ad_cost')
         ->whereMonth('created_at',   Carbon::now()->month)
+        ->whereYear('created_at', Carbon::now()->year)
         ->sum('cost');
 
 
         $monthly_product_cost = DB::table('orders')
             ->whereMonth('orders.created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)
             ->where('orders.status', '!=', Order::IS_CANCELLED)
             ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
             ->rightJoin('products', 'products.id', 'order_product.product_id')
@@ -64,6 +67,7 @@ class DashboardController extends Controller
         
         $monthly_dresses_sold = DB::table('orders')
             ->whereMonth('orders.created_at',  Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)
             ->where('orders.status', '!=', Order::IS_CANCELLED)
             ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
             ->sum('order_product.quantity');
