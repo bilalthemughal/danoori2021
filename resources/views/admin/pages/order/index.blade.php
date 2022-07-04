@@ -15,7 +15,8 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">
-                        {{ $status === App\Models\Order::IS_PENDING ? 'Pending Orders' : ($status === App\Models\Order::IS_SHIPPED ? 'Completed Orders' : 'Cancelled Orders') }}
+                        {{ $status === App\Models\Order::IS_PENDING ? 'Pending Orders' : ($status === App\Models\Order::IS_SHIPPED ? 'Completed Orders' : ($status === App\Models\Order::IS_RETURNED ? 'Returned Orders' : 'Cancelled Orders')) }}
+
                     </h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
@@ -42,6 +43,9 @@
                     @endif
                     @if ($status != App\Models\Order::IS_CANCELLED)
                         <a class="btn btn-danger" href="{{ route('admin.order.cancelled') }}">Cancelled Orders</a>
+                    @endif
+                    @if($status !== App\Models\Order::IS_RETURNED)
+                        <a class="btn btn-danger" href="{{ route('admin.order.returned') }}">Returned Orders</a>
                     @endif
                     @if ($status === App\Models\Order::IS_PENDING)
                         <a class="btn btn-info" href="{{ route('admin.order.export') }}">Export</a>

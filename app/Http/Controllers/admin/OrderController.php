@@ -39,6 +39,11 @@ class OrderController extends Controller
         return view('admin.pages.order.index', ['status' => Order::IS_CANCELLED]);
     }
 
+    public function returned()
+    {
+        return view('admin.pages.order.index', ['status' => Order::IS_RETURNED]);
+    }
+
     public function show(Order $order)
     {
         $products = $order->products->load('category');
@@ -116,6 +121,15 @@ class OrderController extends Controller
 
         return response()->json(['success' => 'Changed status successfully']);
     }
+    public function return($id)
+    {
+        $order = Order::where('id', $id)->first();
+
+        $order->status = Order::IS_RETURNED;
+        $order->save();
+
+        return response()->json(['success' => 'Changed status successfully']);
+    }
 
     public function export()
     {
@@ -152,7 +166,7 @@ class OrderController extends Controller
             $params['email'] = $email;
         }
         $order = Order::create($params);
-        
+
         for ($i = 0; $i < count($request['product_id']); $i++) {
             $order->products()->attach(
                 $request->product_id[$i],
@@ -189,18 +203,18 @@ class OrderController extends Controller
 
     public function dt_ajax_pending_dresses()
     {
-            $response = DB::table('order_product')
+        $response = DB::table('order_product')
             ->join('products', 'order_product.product_id', 'products.id')
-            ->leftJoin('orders', 'order_product.order_id','orders.id')
+            ->leftJoin('orders', 'order_product.order_id', 'orders.id')
             ->where('orders.status', Order::IS_PENDING)
-            ->select('products.small_photo_path','products.name', DB::raw('sum(quantity) as quantity'), 'product_id')
+            ->select('products.small_photo_path', 'products.name', DB::raw('sum(quantity) as quantity'), 'product_id')
             ->orderBy('quantity', 'desc')
             ->groupBy('product_id');
 
         return DataTables::of($response)
             ->addColumn('photo', function ($products) {
                 $product_name = '<div>';
-                    $product_name .= "<img src='https://danoori.s3.ap-south-1.amazonaws.com/$products->small_photo_path' width='50px' height='50px'>";
+                $product_name .= "<img src='https://danoori.s3.ap-south-1.amazonaws.com/$products->small_photo_path' width='50px' height='50px'>";
                 $product_name  .= '</div>';
                 return $product_name;
             })

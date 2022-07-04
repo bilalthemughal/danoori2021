@@ -24,6 +24,7 @@ class DashboardController extends Controller
         // YESTERDAY STAT
         $yesterday_total_sale = Order::whereDate('created_at', Carbon::yesterday())
         ->where('status', '!=', Order::IS_CANCELLED)
+        ->where('status', '!=', Order::IS_RETURNED)
         ->sum('total');
 
         $yesterday_ad_cost = DB::table('ad_cost')
@@ -35,6 +36,7 @@ class DashboardController extends Controller
         $yesterday_products_cost = DB::table('orders')
             ->whereDate('orders.created_at', Carbon::yesterday())
             ->where('orders.status', '!=', Order::IS_CANCELLED)
+            ->where('orders.status', '!=', Order::IS_RETURNED)
             ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
             ->rightJoin('products', 'products.id', 'order_product.product_id')
             ->sum(DB::raw('products.cost * order_product.quantity'));
@@ -47,6 +49,7 @@ class DashboardController extends Controller
         $monthly_total_sale = Order::whereMonth('created_at', Carbon::now()->month)
         ->whereYear('created_at', Carbon::now()->year)
         ->where('status', '!=', Order::IS_CANCELLED)
+        ->where('status', '!=', Order::IS_RETURNED)
         ->sum('total');
 
         $monthly_ad_cost = DB::table('ad_cost')
@@ -59,6 +62,7 @@ class DashboardController extends Controller
             ->whereMonth('orders.created_at', Carbon::now()->month)
             ->whereYear('orders.created_at', Carbon::now()->year)
             ->where('orders.status', '!=', Order::IS_CANCELLED)
+            ->where('orders.status', '!=', Order::IS_RETURNED)
             ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
             ->rightJoin('products', 'products.id', 'order_product.product_id')
             ->sum(DB::raw('products.cost * order_product.quantity'));
@@ -69,6 +73,7 @@ class DashboardController extends Controller
             ->whereMonth('orders.created_at',  Carbon::now()->month)
             ->whereYear('orders.created_at', Carbon::now()->year)
             ->where('orders.status', '!=', Order::IS_CANCELLED)
+            ->where('orders.status', '!=', Order::IS_RETURNED)
             ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
             ->sum('order_product.quantity');
         //MONTHLY STATS END
@@ -76,6 +81,7 @@ class DashboardController extends Controller
         $todays_dresses_sold = DB::table('orders')
             ->where('orders.created_at', '>=', Carbon::today())
             ->where('orders.status', '!=', Order::IS_CANCELLED)
+            ->where('orders.status', '!=', Order::IS_RETURNED)
             ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
             ->sum('order_product.quantity');
         

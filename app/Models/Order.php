@@ -13,6 +13,7 @@ class Order extends Model
     public const IS_SHIPPED = 1;
     public const IS_DELIVERED = 2;
     public const IS_CANCELLED = -1;
+    public const IS_RETURNED = -2;
 
     protected $fillable = [
         'name',

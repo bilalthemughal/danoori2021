@@ -42,8 +42,10 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'a
     Route::get('order/table/data', [OrderController::class, 'dt_ajax_orders_data'])->name('order.table.data');
     Route::get('order/ship/{id}', [OrderController::class, 'ship'])->name('order.ship');
     Route::get('order/cancel/{id}', [OrderController::class, 'cancel'])->name('order.ship');
+    Route::get('order/return/{id}', [OrderController::class, 'return'])->name('order.return');
     Route::get('completed-orders', [OrderController::class, 'completed'])->name('order.completed');
     Route::get('cancelled-orders', [OrderController::class, 'cancelled'])->name('order.cancelled');
+    Route::get('returned-orders', [OrderController::class, 'returned'])->name('order.returned');
     Route::get('budget/index/{product}', [BudgetController::class, 'index'])->name('budget.show');
     Route::get('budget/create/{product}', [BudgetController::class, 'create'])->name('budget.create');
     Route::post('budget/store/{product}', [BudgetController::class, 'store'])->name('budget.store');

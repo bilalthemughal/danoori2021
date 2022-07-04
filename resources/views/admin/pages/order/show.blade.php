@@ -1,7 +1,6 @@
 @extends('admin.layout')
 
 @section('content')
-
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -65,9 +64,13 @@
                                     <button class="btn btn-danger" id="cancel-button"
                                         onclick="cancelIt({{ $order->id }})">Cancel It</button>
                                 @elseif ($order->status === App\Models\Order::IS_SHIPPED)
+                                    <button class="btn btn-danger" id="return-button"
+                                        onclick="returnIt({{ $order->id }})">Return It</button>
                                     <span class="badge badge-success">Shipped</span>
                                 @elseif ($order->status === App\Models\Order::IS_CANCELLED)
                                     <span class="badge badge-danger">Cancelled</span>
+                                @elseif ($order->status === App\Models\Order::IS_RETURNED)
+                                    <span class="badge badge-danger">Returned</span>
                                 @endif
                             </div>
                             <!-- /.col -->
@@ -147,7 +150,6 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-
 @endsection
 
 <script>
@@ -198,6 +200,18 @@
                 document.getElementById('ship-button').innerHTML = 'Shipped';
                 document.getElementById('cancel-button').style.visibility = 'hidden';
                 document.getElementById('book-button').style.visibility = 'hidden';
+            }
+        });
+
+    }
+
+    function returnIt(id) {
+        $.ajax({
+            url: "/admin/order/return/" + id,
+            type: 'GET',
+            success: function(res) {
+                document.getElementById('return-button').innerHTML = 'Returned';
+                document.getElementById('return-button').style.visibility = 'hidden';
             }
         });
 
