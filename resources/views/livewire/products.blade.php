@@ -5,7 +5,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4" onmouseenter="show_function({{ $product->id }})"
                 onmouseleave="show_function({{ $product->id }})">
                 <div class="card product-card card-static">
-                    @if ($product->stock === 0)
+                    @if ($product->stock <= 0)
                         <span class="badge bg-accent badge-shadow">Sold Out</span>
                     @elseif ($product->discounted_price)
                         <span class="badge bg-danger badge-shadow">Sale</span>
