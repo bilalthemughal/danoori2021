@@ -139,7 +139,7 @@
                                         target="_blank" class="btn btn-success btn-shadow d-block w-100"
                                         id="whatsapp-button" type="button">
                                         <i class="fab fa-whatsapp"></i>
-                                        &nbsp;Buy via whatsapp
+                                        &nbsp;Buy Stitch 
                                     </a>
                                 </div>
                                 {{-- @livewire('quick-buy', ['product_id' => $product->id]) --}}
