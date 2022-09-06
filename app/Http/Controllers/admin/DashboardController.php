@@ -86,7 +86,7 @@ class DashboardController extends Controller
             ->sum('order_product.quantity');
 
         $yesterday_dresses_sold = DB::table('orders')
-            ->where('orders.created_at', Carbon::yesterday())
+            ->whereDate('orders.created_at', Carbon::yesterday())
             ->where('orders.status', '!=', Order::IS_CANCELLED)
             ->where('orders.status', '!=', Order::IS_RETURNED)
             ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
