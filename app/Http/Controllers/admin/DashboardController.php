@@ -77,6 +77,35 @@ class DashboardController extends Controller
             ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
             ->sum('order_product.quantity');
         //MONTHLY STATS END
+        
+        //YEARLY STATS
+        $yearly_total_sale = Order::whereYear('created_at', Carbon::now()->year)
+            ->where('status', '!=', Order::IS_CANCELLED)
+            ->where('status', '!=', Order::IS_RETURNED)
+            ->sum('total');
+
+        $yearly_ad_cost = DB::table('ad_cost')
+            ->whereYear('created_at', Carbon::now()->year)
+            ->sum('cost');
+
+
+        $yearly_product_cost = DB::table('orders')
+            ->whereYear('orders.created_at', Carbon::now()->year)
+            ->where('orders.status', '!=', Order::IS_CANCELLED)
+            ->where('orders.status', '!=', Order::IS_RETURNED)
+            ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
+            ->rightJoin('products', 'products.id', 'order_product.product_id')
+            ->sum(DB::raw('products.cost * order_product.quantity'));
+
+        $yearly_profit = $yearly_total_sale - ($yearly_ad_cost + $yearly_product_cost);
+
+        $yearly_dresses_sold = DB::table('orders')
+            ->whereYear('orders.created_at', Carbon::now()->year)
+            ->where('orders.status', '!=', Order::IS_CANCELLED)
+            ->where('orders.status', '!=', Order::IS_RETURNED)
+            ->leftJoin('order_product', 'orders.id', 'order_product.order_id')
+            ->sum('order_product.quantity');
+        //YEARLY STATS END
 
         $todays_dresses_sold = DB::table('orders')
             ->where('orders.created_at', '>=', Carbon::today())
@@ -108,10 +137,17 @@ class DashboardController extends Controller
             'yesterday_ad_cost',
             'yesterday_products_cost',
             'pending_dresses',
+
             'monthly_profit',
             'monthly_product_cost',
             'monthly_ad_cost',
             'monthly_total_sale',
+
+            'yearly_profit',
+            'yearly_product_cost',
+            'yearly_ad_cost',
+            'yearly_total_sale',
+
             'monthly_dresses_sold',
             'yesterday_dresses_sold'
 
