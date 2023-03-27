@@ -62,3 +62,7 @@
         </div>
     </aside>
 </div>
+
+<script>
+    alert({{$product_id}})
+</script>

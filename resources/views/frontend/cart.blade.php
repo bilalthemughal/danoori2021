@@ -98,10 +98,7 @@
             if (!historyTraversal) {
                 if ({{ Session::get('added') }}) {
                     //fbq('track', 'AddToCart');
-                    fbq('track', 'AddToCart', {
-                        content_ids: [$product->id],
-                        content_type: 'product'
-                    });
+                    fbq('track', 'AddToCart');
                 }
             }
         });
