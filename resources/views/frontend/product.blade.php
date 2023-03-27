@@ -1,7 +1,6 @@
 @extends('frontend.layout')
 
 @section('extra-css')
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/3c40f56017.js" crossorigin="anonymous"></script>
@@ -9,7 +8,17 @@
     <link rel="stylesheet" media="screen" href="{{ asset('vendor/lightgallery.js/dist/css/lightgallery.min.css') }}">
     <link rel="stylesheet" media="screen" href="{{ asset('vendor/simplebar/dist/simplebar.min.css') }}">
     <link rel="stylesheet" media="screen" href="{{ asset('vendor/drift-zoom/dist/drift-basic.min.css') }}">
-
+    <meta property="og:title" content="{{ $product->name }}">
+    <meta property="og:description" content="DANOORI FULLY EMBROIDERED 3PC">
+    <meta property="og:url" content="https://danoori.pk/{{$product->category->slug}}/{{$product->slug}}">
+    <meta property="og:image" content="{{ get_image_path($product->large_photo_path) }}">
+    <meta property="product:brand" content="Danoori">
+    <meta property="product:availability" content="in stock">
+    <meta property="product:condition" content="new">
+    <meta property="product:price:amount" content="{{ $product->discounted_price }}">
+    <meta property="product:price:currency" content="PKR">
+    <meta property="product:retailer_item_id" content="{{ $product->id }}">
+    <meta property="product:item_group_id" content="{{ $product->category->id }}">
 @endsection
 
 @section('title')
@@ -59,19 +68,16 @@
                                 <div class="product-gallery-preview-item" id="second">
                                     <img class="image-zoom d-none d-md-block"
                                         src="{{ get_image_path($product->second_photo_path) }}"
-                                        data-zoom="{{ get_image_path($product->second_photo_path) }}"
-                                        alt="Product image">
+                                        data-zoom="{{ get_image_path($product->second_photo_path) }}" alt="Product image">
                                     <div class="image-zoom-pane d-none d-md-block"></div>
 
                                     <img class="d-sm-block d-md-none"
                                         src="{{ get_image_path($product->second_photo_path) }}"
-                                        data-zoom="{{ get_image_path($product->second_photo_path) }}"
-                                        alt="Product image">
+                                        data-zoom="{{ get_image_path($product->second_photo_path) }}" alt="Product image">
                                 </div>
                                 @foreach ($product->images as $image)
                                     <div class="product-gallery-preview-item" id="pic{{ $image->id }}">
-                                        <img class="image-zoom d-none d-md-block"
-                                            src="{{ get_image_path($image->path) }}"
+                                        <img class="image-zoom d-none d-md-block" src="{{ get_image_path($image->path) }}"
                                             data-zoom="{{ get_image_path($image->path) }}" alt="Product image">
                                         <div class="image-zoom-pane d-none d-md-block"></div>
 
@@ -129,7 +135,7 @@
                                 <div class="position-relative me-n4 mb-5">
                                     <div class="product-badge product-available mt-n1">
                                         <i class="ci-security-check"></i>
-                                       Free Delivery
+                                        Free Delivery
                                     </div>
                                 </div>
                                 @livewire('add-to-cart', ['product_id' => $product->id])
@@ -139,11 +145,10 @@
                                         target="_blank" class="btn btn-success btn-shadow d-block w-100"
                                         id="whatsapp-button" type="button">
                                         <i class="fab fa-whatsapp"></i>
-                                        &nbsp;Buy Stitch 
+                                        &nbsp;Buy Stitch
                                     </a>
                                 </div>
                                 {{-- @livewire('quick-buy', ['product_id' => $product->id]) --}}
-
                             @else
                                 <div class="position-relative me-n4 mb-5">
                                     <div class="product-badge product-not-available mt-n1">
@@ -213,8 +218,8 @@
                                                 class="ci-loudspeaker
                                                                                                                     text-muted lead align-middle mt-n1 me-2"></i>Disclaimer</a>
                                     </h3>
-                                    <div class="accordion-collapse collapse" id="disclaimer" data-bs-parent="#productPanels"
-                                        style="">
+                                    <div class="accordion-collapse collapse" id="disclaimer"
+                                        data-bs-parent="#productPanels" style="">
                                         <div class="accordion-body fs-sm">
                                             <div class="d-flex justify-content-between pb-2">
                                                 <div>
@@ -229,9 +234,9 @@
                                     </div>
                                 </div>
                                 <div class="accordion-item">
-                                    <h3 class="accordion-header"><a class="accordion-button collapsed" href="#instructions"
-                                            role="button" data-bs-toggle="collapse" aria-expanded="false"
-                                            aria-controls="shippingOptions"><i
+                                    <h3 class="accordion-header"><a class="accordion-button collapsed"
+                                            href="#instructions" role="button" data-bs-toggle="collapse"
+                                            aria-expanded="false" aria-controls="shippingOptions"><i
                                                 class="ci-basket
                                                                                                                     text-muted lead align-middle mt-n1 me-2"></i>Washing
                                             Instructions</a>
@@ -258,10 +263,12 @@
                                                                 class="ci-dry-clean fs-xl"></i></a></li>
                                                 </ul>
                                                 <div class="tab-content text-muted fs-sm">
-                                                    <div class="tab-pane fade active show" id="wash" role="tabpanel">30°
+                                                    <div class="tab-pane fade active show" id="wash"
+                                                        role="tabpanel">30°
                                                         mild machine washing
                                                     </div>
-                                                    <div class="tab-pane fade" id="bleach" role="tabpanel">Do not use any
+                                                    <div class="tab-pane fade" id="bleach" role="tabpanel">Do not use
+                                                        any
                                                         bleach</div>
                                                     <div class="tab-pane fade" id="hand-wash" role="tabpanel">Hand wash
                                                         normal (30°)</div>
@@ -376,7 +383,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('extra-js')
