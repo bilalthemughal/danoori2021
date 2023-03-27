@@ -9,7 +9,7 @@
     <link rel="stylesheet" media="screen" href="{{ asset('vendor/simplebar/dist/simplebar.min.css') }}">
     <link rel="stylesheet" media="screen" href="{{ asset('vendor/drift-zoom/dist/drift-basic.min.css') }}">
     <meta property="og:title" content="{{ $product->name }}">
-    <meta property="og:description" content="DANOORI FULLY EMBROIDERED 3PC">
+    <meta property="og:description" content="Danoori fully embroidered 3pc">
     <meta property="og:url" content="https://danoori.pk/{{$product->category->slug}}/{{$product->slug}}">
     <meta property="og:image" content="{{ get_image_path($product->large_photo_path) }}">
     <meta property="product:brand" content="Danoori">
