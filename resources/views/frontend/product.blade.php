@@ -8,7 +8,7 @@
     <link rel="stylesheet" media="screen" href="{{ asset('vendor/lightgallery.js/dist/css/lightgallery.min.css') }}">
     <link rel="stylesheet" media="screen" href="{{ asset('vendor/simplebar/dist/simplebar.min.css') }}">
     <link rel="stylesheet" media="screen" href="{{ asset('vendor/drift-zoom/dist/drift-basic.min.css') }}">
-    <meta property="og:title" content="{{ $product->name }}">
+    <meta property="og:title" content="{{ ucfirst(strtolower($product->name)) }}">
     <meta property="og:description" content="Danoori fully embroidered 3pc">
     <meta property="og:url" content="https://danoori.pk/{{$product->category->slug}}/{{$product->slug}}">
     <meta property="og:image" content="{{ get_image_path($product->large_photo_path) }}">
@@ -18,7 +18,8 @@
     <meta property="product:price:amount" content="{{ $product->discounted_price }}">
     <meta property="product:price:currency" content="PKR">
     <meta property="product:retailer_item_id" content="{{ $product->id }}">
-    <meta property="product:item_group_id" content="{{ $product->category->id }}">
+    <meta property="product:item_group_id" content="{{ $product->category->id }}">I
+    <meta property="product:category" content="Apparel &amp; Accessories &gt; Clothing &gt; Dresses"/>
 @endsection
 
 @section('title')
