@@ -3,7 +3,6 @@
     Danoori | Clothing Store
 @endsection
 @section('content')
-
     <!-- Hero slider-->
     <section class="tns-carousel tns-controls-lg mb-4 mb-lg-5">
         <div class="tns-carousel-inner"
@@ -84,7 +83,7 @@
                 (typeof window.performance != "undefined" &&
                     window.performance.navigation.type === 2);
             if (!historyTraversal) {
-                fbq('track', 'PageView');
+                fbq('track', 'PageView');;
             }
         });
     </script>

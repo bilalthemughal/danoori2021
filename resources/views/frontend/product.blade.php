@@ -399,7 +399,10 @@
             if (!historyTraversal) {
                 let view = {{ Session::get('view') }};
                 if (view) {
-                    fbq('track', 'ViewContent');
+                    fbq('track', 'ViewContent',{
+                        content_ids: [{{ $product->id }}] ,
+                        content_type: 'product'
+                    });
                 }
             }
         });

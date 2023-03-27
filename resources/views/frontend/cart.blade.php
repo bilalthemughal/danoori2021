@@ -5,12 +5,11 @@
 @endsection
 
 @section('extra-css')
-
     <!-- <link rel="stylesheet" media="screen" href="{{ asset('vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" />
-    <link rel="stylesheet" media="screen" href="{{ asset('vendor/simplebar/dist/simplebar.min.css') }}" />
-    <link rel="stylesheet" media="screen" href="{{ asset('vendor/tiny-slider/dist/tiny-slider.css') }}" />
-    <link rel="stylesheet" media="screen" href="{{ asset('vendor/drift-zoom/dist/drift-basic.min.css') }}" />
-    <link rel="stylesheet" media="screen" href="{{ asset('vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" /> -->
+        <link rel="stylesheet" media="screen" href="{{ asset('vendor/simplebar/dist/simplebar.min.css') }}" />
+        <link rel="stylesheet" media="screen" href="{{ asset('vendor/tiny-slider/dist/tiny-slider.css') }}" />
+        <link rel="stylesheet" media="screen" href="{{ asset('vendor/drift-zoom/dist/drift-basic.min.css') }}" />
+        <link rel="stylesheet" media="screen" href="{{ asset('vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" /> -->
     <style>
         .quantity {
             display: flex;
@@ -62,7 +61,6 @@
             background: #fff;
             color: #8184a1;
         }
-
     </style>
 @endsection
 @section('content')
@@ -88,8 +86,6 @@
     <div class="container pb-5 mb-2 mb-md-4">
         @livewire('cart-page')
     </div>
-
-
 @endsection
 
 @section('extra-js')
@@ -101,7 +97,11 @@
                     window.performance.navigation.type === 2);
             if (!historyTraversal) {
                 if ({{ Session::get('added') }}) {
-                    fbq('track', 'AddToCart');
+                    //fbq('track', 'AddToCart');
+                    fbq('track', 'AddToCart', {
+                        content_ids: [$product->id],
+                        content_type: 'product'
+                    });
                 }
             }
         });
