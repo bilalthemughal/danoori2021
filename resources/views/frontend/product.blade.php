@@ -18,7 +18,7 @@
     <meta property="product:price:amount" content="{{ $product->discounted_price }}">
     <meta property="product:price:currency" content="PKR">
     <meta property="product:retailer_item_id" content="{{ $product->id }}">
-    <meta property="product:item_group_id" content="{{ $product->category->id }}">I
+    {{-- <meta property="product:item_group_id" content="{{ $product->category->id }}">I --}}
     <meta property="product:category" content="Apparel &amp; Accessories &gt; Clothing &gt; Dresses"/>
 @endsection
 
