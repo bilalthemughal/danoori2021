@@ -8,7 +8,7 @@
                 {{-- <span class="text-muted me-1">Free Shipping:</span> --}}
                 {{-- <a class="topbar-link">Free shipping on all orders</a> --}}
                 <i class="ci-loudspeaker"></i>
-                <span class="text-muted me-1">Free Shipping:</span>
+                {{-- <span class="text-muted me-1">Free Shipping:</span> --}}
                 <a class="topbar-link">Orders placed after 26-April will be delivered after Eid.</a>
             </div>
             <div class="tns-carousel tns-controls-static d-none d-md-block">
