@@ -4,10 +4,12 @@
     <div class="topbar topbar-dark bg-dark">
         <div class="container" style="display: flex; justify-content: center;">
             <div class="topbar-text text-nowrap d-sm-block d-md-none">
-                <i class="ci-rocket"></i>
+                {{-- <i class="ci-rocket"></i> --}}
+                {{-- <span class="text-muted me-1">Free Shipping:</span> --}}
+                {{-- <a class="topbar-link">Free shipping on all orders</a> --}}
+                <i class="ci-loudspeaker"></i>
                 <span class="text-muted me-1">Free Shipping:</span>
-                <a class="topbar-link">Free shipping on all orders</a>
-                {{-- <a class="topbar-link">Orders placed after 26-April will be delivered after Eid.</a> --}}
+                <a class="topbar-link">Orders placed after 26-April will be delivered after Eid.</a>
             </div>
             <div class="tns-carousel tns-controls-static d-none d-md-block">
                 <div class="tns-carousel-inner"
